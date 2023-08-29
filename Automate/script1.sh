@@ -20,7 +20,7 @@ EOF
 
 # Update and install Docker
 sudo apt-get update
-sudo apt-get install docker.io make -y
+sudo apt-get install docker.io make openssl openssh python3 -y
 sudo systemctl enable docker
 sudo systemctl start docker
 
@@ -69,4 +69,4 @@ echo 'deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.
 sudo apt-get update
 
 # Reboot for changes to take effect
-sudo reboot
+#sudo reboot
