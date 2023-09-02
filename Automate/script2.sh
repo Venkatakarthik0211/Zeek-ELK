@@ -48,3 +48,7 @@ helm install cilium cilium/cilium --version 1.14.1 --namespace kube-system
 # Get the join command for worker nodes
 join_command=$(kubeadm token create --print-join-command)
 echo "Join command: $join_command" > /home/vagrant/shared/k8_join_token.txt
+
+
+kubeadm join 192.168.121.7:6443 --token b86b11.wqr3mli7f6hiyv5a \
+	--discovery-token-ca-cert-hash sha256:90e6de5cbafe351e9fe002f415f2e293fa3e7c35ea0a318483b76ba8ea19c2b2 --cri-socket "unix:///var/run/cri-dockerd.sock"

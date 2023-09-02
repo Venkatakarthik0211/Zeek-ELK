@@ -22,3 +22,5 @@ openssl req -new -x509 -sha256 -days 365 -key ca.key -out ca.crt
 2) Get the base64 encoded and copy it
 cat ca.crt | base64 -w 0
 cat ca.key | base64 -w 0
+
+
