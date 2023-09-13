@@ -89,7 +89,7 @@ spec:
 apiVersion: networking.istio.io/v1beta1
 kind: VirtualService
 metadata:
-  name: helloworld-tls
+  name: nginx-tls
 spec:
   hosts:
   - "nginx-tls.example.com"
