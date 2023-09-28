@@ -39,3 +39,6 @@ sudo apt-get install helm
 helm repo add cilium https://helm.cilium.io/
 helm install cilium cilium/cilium --version 1.14.1 --namespace kube-system
 
+kubeadm token create --print-join-command > join.sh
+echo "$(cat join.sh) --cri-socket \"unix:///var/run/cri-dockerd.sock\"" > join.sh
+mv join.sh /New/Kubernetes/

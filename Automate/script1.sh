@@ -78,4 +78,4 @@ echo 'deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.
 sudo apt-get update
 
 # Reboot for changes to take effect
-sudo reboot
+# sudo reboot

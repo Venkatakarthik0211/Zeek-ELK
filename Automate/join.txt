@@ -1,0 +1,2 @@
+kubeadm join 172.28.128.145:6443 --token 8dhoyt.9852qxhs41ftwx5b \
+	--discovery-token-ca-cert-hash sha256:60bd394d8d063faa27bca00cbd197aa2319cfa483bc5385b5adbea1ee6348537 --cri-socket "unix:///var/run/cri-dockerd.sock"
