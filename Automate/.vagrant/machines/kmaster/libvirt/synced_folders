@@ -1,1 +1,1 @@
-{}
+{"rsync":{"/home/vagrant/nfs":{"guestpath":"/home/vagrant/nfs","hostpath":"/home/ss360/Kubernetes/Automate","disabled":false,"__vagrantfile":true,"owner":"vagrant","group":"vagrant"}}}
