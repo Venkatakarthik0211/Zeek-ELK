@@ -10,8 +10,8 @@ Working Deployments
    ```
 
 
-   - Install ansible and nfs-common
-   sudo apt-get install ansible nfs-common
+   2. Install ansible and nfs-common
+   ```sh sudo apt-get install ansible nfs-common ```
 
    - Install necessary plugins
    sudo vagrant plugin install vagrant-libvirt vagrant-mutate
