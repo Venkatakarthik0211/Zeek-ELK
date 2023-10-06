@@ -1,7 +1,20 @@
 # Kubernetes
 Working Deployments
 
-1) Requirements:
+Starting with a new Virtual Machine?, No-problem, here is a complete walkthrough.
+
+   Optional(Connect to git)
+   ```sh
+   ssh-keygen -t ed25519 -C "newk8"
+   ```
+   Add necessary Details to ssh key and Paste it in git. 
+   Clone the repository, for making changes anytime. 
+   ```sh
+   git config --global user.name "VenkataKarthik0211"
+   git config --global user.email "sacredspirits47@gmail.com"
+   ```
+
+
    1. Install Vagrant
    ```sh
    wget -O- https://apt.releases.hashicorp.com/gpg | sudo gpg --dearmor -o /usr/share/keyrings/hashicorp-archive-keyring.gpg
