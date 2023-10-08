@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: zeek-nfs-claim
+spec:
+  accessModes:
+    - ReadWriteMany
+  storageClassName: zeek-nfs
+  resources:
+    requests:
+      storage: 3Gi
+

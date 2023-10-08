@@ -23,22 +23,22 @@ Vagrant.configure(2) do |config|
     node.vm.network "forwarded_port", guest: 2049, host: 2049
     node.vm.network "forwarded_port", guest: 81, host: 81
     node.vm.network "forwarded_port", guest: 9902, host: 9902
-    node.vm.synced_folder ".", "/vagrant", disabled: true
-    node.vm.synced_folder ".", "/home/vagrant/nfs"
-    node.vm.provider :libvirt do |v|
-      v.memory  = MEMORY_MASTER_NODE
-      v.cpus    = CPUS_MASTER_NODE
-    end
-    node.vm.provision "shell", path: "script1.sh" #, args: "> /dev/null 2>&1"
-    node.vm.provision "ansible" do |ansible|
-      ansible.playbook = "nfs/nfs.yaml"
-      ansible.extra_vars = {
-        nfs_config: "/etc/exports",
-        nfs_config_backup: "/mnt/backups"
-      }
-    end
-    node.vm.provision "shell", path: "kmaster-script-2.sh" #, args: "> /dev/null 2>&1"
-    node.vm.provision "shell", inline: "sudo reboot" #, args: "> /dev/null 2>&1"
+    #node.vm.synced_folder ".", "/vagrant", disabled: true
+    #node.vm.synced_folder ".", "/home/vagrant/nfs"
+    #node.vm.provider :libvirt do |v|
+    #  v.memory  = MEMORY_MASTER_NODE
+    #  v.cpus    = CPUS_MASTER_NODE
+    #end
+    #node.vm.provision "shell", path: "script1.sh" #, args: "> /dev/null 2>&1"
+    #node.vm.provision "ansible" do |ansible|
+    #  ansible.playbook = "nfs/nfs.yaml"
+    #  ansible.extra_vars = {
+    #    nfs_config: "/etc/exports",
+    #    nfs_config_backup: "/mnt/backups"
+    #  }
+    #end
+    #node.vm.provision "shell", path: "kmaster-script-2.sh" #, args: "> /dev/null 2>&1"
+    #node.vm.provision "shell", inline: "sudo reboot" #, args: "> /dev/null 2>&1"
   end
 
   # Kubernetes Worker Node 1
@@ -56,9 +56,9 @@ Vagrant.configure(2) do |config|
       v.memory  = MEMORY_WORKER_NODE
       v.cpus    = CPUS_WORKER_NODE
     end
-    node.vm.provision "shell", path: "script1.sh" #, args: "> /dev/null 2>&1"
-    node.vm.provision "shell", path: "kworker-scrip2.sh" #, args: "> /dev/null 2>&1"
-    node.vm.provision "shell", path: "/var/tmp/Kubernetes/join.sh"
+    #node.vm.provision "shell", path: "script1.sh" #, args: "> /dev/null 2>&1"
+    #node.vm.provision "shell", path: "kworker-scrip2.sh" #, args: "> /dev/null 2>&1"
+    #node.vm.provision "shell", path: "/var/tmp/Kubernetes/join.sh"
     #node.vm.provision "shell", inline: "sudo reboot"
   end
 end

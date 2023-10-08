@@ -20,7 +20,7 @@ EOF
 
 # Update and install Docker
 sudo apt-get update
-sudo apt-get install ca-certificates curl gnupg
+sudo apt-get install ca-certificates curl gnupg nfs-common
 sudo install -m 0755 -d /etc/apt/keyrings
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
 sudo chmod a+r /etc/apt/keyrings/docker.gpg
@@ -67,8 +67,7 @@ sudo systemctl enable --now cri-docker.socket
 sudo systemctl status cri-docker 
 
 # Disable swap
-sed -i '/^.*swap.*$/ s/^/#/' /etc/fstab
-swapoff -a
+sudo sed -i '/^.*swap.*$/ s/^/#/' /etc/fstab && sudo swapoff -a
 
 # Set up Kubernetes repositories
 sudo apt-get update
