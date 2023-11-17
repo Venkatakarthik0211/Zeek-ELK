@@ -4,3 +4,6 @@ kubeadm join 172.28.128.145:6443 --token 8dhoyt.9852qxhs41ftwx5b \
 
 kubeadm join 172.18.120.145:6443 --token s9yytu.fp6pdqcupf14ut9t \
 	--discovery-token-ca-cert-hash sha256:24167aadec6198a7011925b8e5bcf81ee28fe415b484de7a39f81f77c1b1ea95 --cri-socket "unix:///var/run/cri-dockerd.sock"
+
+echo "172.18.120.142:/nfs/k8 /home/dame-tu-cosita/127.0.0.1 nfs defaults 0 0" | sudo tee -a /etc/fstab
+sudo mount -t nfs4 172.18.120.142:/nfs/k8 /home/dame-tu-cosita/127.0.0.1 nfs
