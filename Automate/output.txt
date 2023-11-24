@@ -1,2 +1,0 @@
-kubeadm join 192.168.121.22:6443 --token sm4vfb.9itglhbprex7i8a6 \
-	--discovery-token-ca-cert-hash sha256:0bb0d670540154434bf42687a313066411579eaff919505185c4a3ad1e0e30ce  --cri-socket "unix:///var/run/cri-dockerd.sock"
