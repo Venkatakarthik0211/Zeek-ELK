@@ -26,12 +26,6 @@ verify deployment with Testinfra.
 terraform plan -out=libreddit
 ```
 
-2. Apply deployment plan
-
-```bash
-terraform apply "libreddit"
-```
-
 ### 2. Verify VMs are reachable from host
 
 ```bash
@@ -60,19 +54,5 @@ terraform destroy
 
 Utility scripts exist for the following operations:
 
-```bash
-19:46 atm@lab iac ±|master ✗|→ make help
-configure                      Configure whole deployment
-configure.ping                 Ping all VMs
-configure.base                 Configure all VMs to base production configuration
-configure.libreddit            Configure libreddit
-configure.loadbalance          Configure loadbalancer
-lint                           Lint source code
-on                             Boot VMs
-shutdown                       Shutdown VMs
-test                           Run all tests
-test.base                      Test base configuration on all VMs
-test.loadbalance               Test loadbalancer installation
-test.libreddit                 Test libreddit installation
-help                           Prints help for targets with comments
+
 ```
