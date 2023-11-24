@@ -1,4 +1,1 @@
-references:
 
-https://github.com/srinisbook/kubernetes-elastic-stack/blob/master/manifests/01elasticsearch-statefulset.yaml
-https://blog.whysdomain.com/blog/229/
