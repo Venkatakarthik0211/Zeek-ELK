@@ -1,0 +1,28 @@
+---
+- hosts: all #for all servers
+  become: true #root-privilage
+  tasks:
+  - name: Create a file
+    file:    #file module helps to create a file
+      path: /home/vagrant/test.txt
+      #state: touch #use this when when you want to create file, whereas file mod>
+
+  - name: Create a directory if not exists
+    file:
+      path: /home/vagrant/shared_folder
+      state: directory
+
+  - name: Add text into test.txt if it does not exist
+    blockinfile:
+      path: /home/vagrant/test.txt
+      block: |
+        Some fools never change
+        Hope they go down
+      backup: yes
+
+  - name: Disable swap
+    lineinfile:
+      path: /etc/fstab
+      regexp: '^([^#].*?\sswap\s+sw\s+.*)$'
+      line: '# \1'
+      backrefs: yes

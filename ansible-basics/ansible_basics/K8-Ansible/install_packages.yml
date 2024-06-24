@@ -1,0 +1,15 @@
+---
+- hosts: all #To all servers
+  become: true #for sudo privilages
+  tasks:
+
+  - name: install apache package #Description
+    ansible.builtin.apt:
+      name: apache2
+      state: present
+  - name: install required packages #sudo apt instakl git,wget ....
+    ansible.builtin.apt:
+      pkg:
+      - wget
+      - python3
+      - net-tools

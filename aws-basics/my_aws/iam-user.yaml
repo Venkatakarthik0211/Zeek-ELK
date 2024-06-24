@@ -1,0 +1,74 @@
+# Sandy, a new tester, joins the tech company and needs access to AWS resources. 
+# The company uses a CloudFormation template to create an IAM user for Sandy and adds her to the 'Prod' group. 
+# The template provisions three S3 buckets for storing pictures related to developers, testers, and sysadmins. 
+# Sandy is given the ability to change her own password and is required to do so at her first login. The 'Prod' group, 
+# including Sandy, is granted access to the tester pictures bucket.
+
+AWSTemplateFormatVersion: '2010-09-09'
+Description: |
+  This template implements an IAM user 'sandy' An S3 bucket for developer pictures An S3 bucket for tester pictures An S3 bucket for sysadmin pictures And permissions appropriate for users in the 'Prod' group
+
+Parameters:
+  sandypassword:
+    NoEcho: true
+    Description: IAM User Sandy Password
+    Type: String
+
+Resources:
+  prod:
+    Type: AWS::IAM::Group
+    Properties:
+      GroupName: Prod
+      Path: /
+
+  sandy:
+    Type: AWS::IAM::User
+    Properties:
+      Groups:
+        - !Ref prod
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/IAMUserChangePassword
+      LoginProfile:
+        Password: !Ref sandypassword
+        PasswordResetRequired: true
+
+  prodGroupPolicy:
+    Type: AWS::IAM::Policy
+    Properties:
+      PolicyName: AllowAccessToTesterBucket
+      PolicyDocument:
+        Version: 2012-10-17
+        Statement:
+          - Effect: Allow
+            Action: s3:*
+            Resource:
+              - !Sub arn:aws:s3:::${tester}
+              - !Sub arn:aws:s3:::${tester}/*
+      Groups:
+        - !Ref prod
+
+  tester:
+    Type: AWS::S3::Bucket
+
+  developer:
+    Type: AWS::S3::Bucket
+
+  sysadmin:
+    Type: AWS::S3::Bucket
+
+Outputs:
+  developerbucketname:
+    Description: Bucket name for developer pictures
+    Value: !Ref developer
+
+  testerbucketname:
+    Description: Bucket name for tester pictures
+    Value: !Ref tester
+
+  sysadminbucketname:
+    Description: Bucket name for sysadmin pictures
+    Value: !Ref sysadmin
+
+  sandytusername:
+    Description: IAM Username for Sandy
+    Value: !Ref sandy

@@ -1,0 +1,75 @@
+---
+- name: Update repo, install Docker, and enable service
+  hosts: all
+  become: yes
+  tasks:
+    - name: Delete /etc/apt/sources.list
+      ignore_errors: yes
+      file:
+        state: absent
+        path: /etc/apt/sources.list
+
+    - name: Create /etc/apt/sources.list if it doesn't exist
+      ignore_errors: yes
+      file:
+        path: /etc/apt/sources.list
+        state: touch
+
+    - name: Add custom repository lines
+      blockinfile:
+        path: /etc/apt/sources.list
+        block: |
+          deb http://archive.ubuntu.com/ubuntu/ jammy main restricted universe multiverse
+          # deb-src http://archive.ubuntu.com/ubuntu/ jammy main restricted universe multiverse
+
+          deb http://archive.ubuntu.com/ubuntu/ jammy-updates main restricted universe multiverse
+          # deb-src http://archive.ubuntu.com/ubuntu/ jammy-updates main restricted universe multiverse
+
+          deb http://archive.ubuntu.com/ubuntu/ jammy-security main restricted universe multiverse
+          # deb-src http://archive.ubuntu.com/ubuntu/ jammy-security main restricted universe multiverse
+
+          deb http://archive.ubuntu.com/ubuntu/ jammy-backports main restricted universe multiverse
+          # deb-src http://archive.ubuntu.com/ubuntu/ jammy-backports main restricted universe multiverse
+
+          deb http://archive.canonical.com/ubuntu/ jammy partner
+          # deb-src http://archive.canonical.com/ubuntu/ jammy partner
+
+    - name: Update all repositories
+      apt:
+        update_cache: yes  # Ensure the cache is updated
+        cache_valid_time: 3600  # Cache valid for 1 hour
+
+    - name: Install Docker
+      apt:
+        name:
+          - docker.io  # For Ubuntu, it's 'docker.io'
+        state: latest
+
+    - name: Enable service docker, and not touch the state
+      ansible.builtin.service:
+        name: docker
+        enabled: yes
+
+    - name: Start service docker, if not started
+      ansible.builtin.service:
+        name: docker
+        state: started
+
+    - name: Add hosts of cluster in /etc/hosts
+      blockinfile:
+        path: /etc/hosts
+        block: |
+          192.168.33.11 kmaster
+          192.168.33.12 kworker1
+          192.168.33.13 kworker2
+
+    - name: Load Overlay module
+      community.general.modprobe:
+        name: overlay
+        state: present
+
+    - name: Load br_netfilter module
+      community.general.modprobe:
+        name: br_netfilter
+        state: present
+

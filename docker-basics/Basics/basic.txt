@@ -1,0 +1,99 @@
+
+# YAML Lint for checking syntax of YAML files
+
+--- Basic installation of docker with docker, docker-compse ---
+
+# Add Ubuntu repositories
+cat <<EOF | sudo tee /etc/apt/sources.list
+deb http://archive.ubuntu.com/ubuntu/ jammy main restricted universe multiverse
+# deb-src http://archive.ubuntu.com/ubuntu/ jammy main restricted universe multiverse
+
+deb http://archive.ubuntu.com/ubuntu/ jammy-updates main restricted universe multiverse
+# deb-src http://archive.ubuntu.com/ubuntu/ jammy-updates main restricted universe multiverse
+
+deb http://archive.ubuntu.com/ubuntu/ jammy-security main restricted universe multiverse
+# deb-src http://archive.ubuntu.com/ubuntu/ jammy-security main restricted universe multiverse
+
+deb http://archive.ubuntu.com/ubuntu/ jammy-backports main restricted universe multiverse
+# deb-src http://archive.ubuntu.com/ubuntu/ jammy-backports main restricted universe multiverse
+
+deb http://archive.canonical.com/ubuntu/ jammy partner
+# deb-src http://archive.canonical.com/ubuntu/ jammy partner
+EOF
+
+# Update and install Docker
+sudo apt-get update
+sudo apt-get install ca-certificates curl gnupg
+sudo install -m 0755 -d /etc/apt/keyrings
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+sudo chmod a+r /etc/apt/keyrings/docker.gpg
+echo \
+  "deb [arch="$(dpkg --print-architecture)" signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
+  "$(. /etc/os-release && echo "$VERSION_CODENAME")" stable" | \
+  sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+sudo apt-get update
+sudo apt-get install docker docker.io make openssl openssh-server python3 docker-compose -y
+sudo systemctl enable docker
+sudo systemctl start docker
+sudo systemctl status docker
+
+------------------------------------------------------------------------------------------------------------------
+
+
+# Layers of CNCF: 
+Clean code -> Domain driver design -> Micorservices -> K
+
+# Roadmap
+Containerization -> CI/CD -> Orchestration -> Monitoring -> ServiceProxy discovery and Service Mesh -> Networks and Security Policies
+Example: Docker -> Jenkins -> K8 -> Promotheus/Grafana -> envoyproxy -> RBAC
+
+# What is a container? A) A container is a unit of software or deployment whiich contains code, runtime, system tools and system packages
+# Why containers? A) Faster deployment, Portability, Isoolation, FIt more into same host, less resources abd faster automation
+# what are layers of containers? A) Base OS -> Containerization -> Application
+
+-- Basic commands -- (-d = detached, -it = interactive. -a = all)
+
+docker pull/run/image inspect/run -d/rmi [Imagename]
+docker stop/start/kill/rm [containername]
+docker ps 
+docker ps -a
+docker run --memory="256m" [Imagename]
+docker run --cpus=".5" [Imagename]
+docker run -it [Imagename] -- /bin/sh (Attach shell/powershell)
+docker container exec -it [containername] -- bin/sh (For acive containers)
+docker rm $(docker ps -a -q) (removes all stopped containers)
+docker system prune -a  (removes all unused images)
+
+sudo docker run -d -p 443:10000 envoyproxy/envoy:distroless-dev (basic port forwarding to 443)
+
+--- Build Docker Commands ---
+
+docker build -t [name:tag] (to build an image using Dockerfile at same folder)
+docker build -t [name:tag] -f [filename] (when in different file)
+docker tag [imagename] [name:tag] (to tag an existing image)
+Note: Use "." when it is on same folder
+
+--- For Creating Volumes to have a persistent Volume --- 
+
+docker create volume [volumename]
+docker volume ls
+docker volume inspect [volumename]
+docker volume rm [volumename]
+docker volume prone (to delete all existing volumes)
+docker run --name nginx -v [volumename]:/app nginx:latest (mount volume to container)
+
+# why docker compose? 
+
+# A) If we have multiple conrainers to be deployed, its exhausting to deploy single container each time, therefore docker compose can be used to write YAML files to build our own applications(front end-> back-end -> elastic caches)
+
+--- COmpose commands ---(up -d = Build and run, down = stop and remove)
+
+docker compose build/start/stop/up -d/ps/rm/down/logs/ls (ls will lists the projects)
+docker compose exec [container name] (to run a command in a container)
+docker compose --project-name test1 up -d (Run as instance of project)
+docker compose  cp [containerID]:souce_path destination_path (copy files from container)
+docker compose cp soruce_path [containerID]:destination_path (copy files to container)
+
+
+
+

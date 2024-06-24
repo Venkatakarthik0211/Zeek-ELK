@@ -1,0 +1,62 @@
+------ Prerequisites -------
+
+#install openssh-server on all machines
+sudo apt-get install openssh-server
+
+#Check the directory of ssh if keys are added -- for workstaton 
+ls -la .ssh
+cat .ssh/id_ed25519 (Gives private key)
+cat .ssh/id_ed25519.pub (Guves public key)
+
+#copy the public key and papste it in all servers or VM's
+
+#Generate an SSH key on host machine - Filepathe -> Home(default) passphrade-password
+ssh-keygen -t ed25519 -C "Ansible" 
+cat ~/ansible.pub
+#copy the publiic key to each server
+
+#Create a repository -> Add the public ssh key in git -> Copy SSH link of repo
+#clone the repository on host machine
+#COnfigure github info 
+git config --global user.name "ss360"
+git config --global user.email "ss360@gmail.com"
+
+#verify the configurations were added or not
+cat ~/.gitconfig
+
+#Add, remove or make changes to files in directory
+nano 2nd_time.txt or rm 2nd_time.txt
+
+#to see the changes
+git status
+
+#commit the changes with respective simple message for easy identification
+git commit -m "2nd time Ansible"
+
+#push the changes to the respective branch
+git push origin main
+
+--- Successfully made changes in repo from host machine --- 
+
+#install Ansible 
+sudo apt install ansible
+
+#create a inventory file for adding IP addresses of servers/VM's to manage
+#check the connectivity of VM'using this command 
+#-m = modules -i=interactive
+ansible all --key-file ~/.ssh/ansible -i inventory -m ping
+#to shorten command, add ansible.cfg file with  below code:
+
+[defaults]
+inventory = inventory
+private_key_file = ~/.ssh/Master
+
+#now by default it will look for ansible.cfg, so command will be 
+ansible all -m ping (According to docs, this command doesnt work if i am using Vagrant)
+
+#To provision a multiple-VM's enabling parallel execution
+https://developer.hashicorp.com/vagrant/docs/provisioning/ansible
+
+#For Manual execution, 
+ansible-playbook -i .vagrant/provisioners/ansible/inventory/vagrant_ansible_inventory master_playbook.yaml 
+

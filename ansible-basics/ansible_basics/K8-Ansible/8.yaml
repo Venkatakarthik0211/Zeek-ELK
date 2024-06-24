@@ -1,0 +1,11 @@
+
+---
+- hosts: all #for all servers
+  become: true #root-privilage
+  tasks:
+  - name: Disable swap
+    lineinfile:
+      path: /etc/fstab
+      regexp: '^([^#].*?\sswap\s+sw\s+.*)$'
+      line: '# \1'
+      backrefs: yes

@@ -1,0 +1,37 @@
+---
+- name: Install Kubernetes components
+  hosts: all
+  become: yes  # To execute tasks as root using sudo
+
+  tasks:
+    - name: Update apt cache
+      apt:
+        update_cache: yes
+      become: yes
+
+    - name: Install kubelet, kubeadm, and kubectl
+      apt:
+        name: "{{ item }}"
+        state: present
+      become: yes
+      loop:
+        - kubelet
+        - kubeadm
+        - kubectl
+
+    - name: Check if kubelet, kubeadm, and kubectl are on hold
+      shell: apt-mark showhold | grep "{{ item }}"
+      become: yes
+      loop:
+        - kubelet
+        - kubeadm
+        - kubectl
+      register: hold_check_results
+      changed_when: false
+      ignore_errors: yes
+
+    - name: Mark kubelet, kubeadm, and kubectl on hold
+      shell: apt-mark hold {{ item }}
+      become: yes
+      loop: "{{ hold_check_results.results | rejectattr('rc', 'defined') | list }}"
+      when: hold_check_results is defined and hold_check_results.results | rejectattr('rc', 'defined') | list | length > 0

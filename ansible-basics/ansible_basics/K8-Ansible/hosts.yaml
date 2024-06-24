@@ -1,0 +1,12 @@
+---
+- hosts: all #for all servers
+  become: true #root-privilage
+  tasks:
+  - name: Add hosts of cluster in /etc/hosts
+    blockinfile:
+      path: /etc/hosts
+      block: |
+        192.168.33.11 kmaster
+        192.168.33.12 kworker1
+        192.168.33.13 kworker2
+      backup: yes

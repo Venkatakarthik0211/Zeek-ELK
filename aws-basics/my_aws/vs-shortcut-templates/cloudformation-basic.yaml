@@ -1,0 +1,14 @@
+# shortcut to create
+AWSTemplateFormatVersion: "2010-09-09"
+Description: >
+  SOME RDESCRIPTION
+Resources:
+  resourcename1: 
+    #format of type: AWS::ProductName::ServiceName
+    type: ''
+  resourcename2: 
+   #format of type: AWS::ProductName::ServiceName
+    type: ''
+Parameters:
+  parameter1:
+  # Respective resource attribute for example, EC2Instancetype will have attributes such as type, AllowedValues:, Default .....

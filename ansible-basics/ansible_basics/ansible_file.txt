@@ -1,0 +1,11 @@
+#backrefs? - spawn the entire line if a regex matches(Generally with modifications)
+For example: 
+
+  - name: Disable swap
+    lineinfile:
+      path: /etc/fstab
+      regexp: '^([^#].*?\sswap\s+sw\s+.*)$'
+      line: '# \1'
+      backrefs: yes
+
+Here i am commenting out swap if it matches the regex expression
