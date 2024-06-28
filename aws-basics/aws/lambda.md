@@ -1,14 +1,14 @@
-# AWS Lambda Explained
+# AWS Lambda
 
 AWS Lambda is a **serverless** compute service provided by AWS. It allows you to run code without provisioning or managing servers, paying only for the compute time consumed. It is a **Function as a Service(FaaS)**. Here’s an overview of AWS Lambda: 
 
-## What is AWS Lambda?
+### What is AWS Lambda?
 
 AWS Lambda lets you execute code in response to events such as changes to data in Amazon S3 buckets, updates to Amazon DynamoDB tables, or HTTP requests via Amazon API Gateway. It automatically scales your application by running code in response to each trigger, ensuring high availability and scalability.
 
 `Note:` Docker is not same as aws lambda, lambda uses docker images of runtime, but it is not docker and not even related to AWS ECS.
 
-# Types of lambda
+### Types of lambda
 
 Public Lambda: A public lambda function is accessible and can be invoked by any external entity or service.
 
@@ -16,7 +16,7 @@ Private Lambda: A private lambda function is restricted and can only be invoked 
 
 - In new private lambda functions, every lambda function is connected to a single network interface, avoiding to spawn different network interfaces for different lambda functions
 
-# Types of lambda function based on Invocation
+### Types of lambda function based on Invocation
 
 There are three types of invocations for AWS Lambda functions:
 
