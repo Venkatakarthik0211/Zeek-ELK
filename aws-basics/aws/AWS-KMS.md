@@ -74,3 +74,62 @@ AWS KMS uses HSMs that are validated at FIPS 140-2 Level 2. This means:
 
 - **Aliases**:
   - Aliases are user-friendly names that can be associated with CMKs. They provide an easy way to reference keys without using their complex key IDs.
+
+## AWS KMS Key Policies
+
+### What are Key Policies in AWS KMS?
+Key policies in AWS KMS (Key Management Service) are JSON-based policies that define who can use and manage KMS keys and under what conditions.
+
+### How IAM and KMS Policies Work Together
+IAM policies and KMS key policies work together to grant permissions: IAM policies can allow access to KMS actions, but the KMS key policy must also permit the action for it to be effective. Both policies need to grant the required permissions for access.
+
+### Properties of AWS KMS Policies
+- **Fine-Grained Access Control**: Define detailed permissions at a granular level.
+- **Integration with IAM**: Work in conjunction with IAM policies for robust access control.
+- **Policy Structure**: JSON format, similar to IAM policies, including statements, actions, resources, and conditions.
+
+```json 
+{
+  "Sid": "Enable IAM User Permissions",
+  "Effect": "Allow",
+  "Principal": {
+    "AWS": "arn:aws:iam::111122223333:root"
+  },
+  "Action": "kms:*",
+  "Resource": "*"
+}
+```
+
+```json 
+{
+  "Version": "2012-10-17",
+  "Statement": {
+    "Effect": "Allow",
+    "Action": [
+      "kms:Encrypt",
+      "kms:Decrypt"
+    ],
+    "Resource": [
+      "arn:aws:kms:*:111122223333:key/*"
+    ]
+  }
+}
+
+```
+
+```sh
+echo "I want to complete sysops Administrator" > battleplans.txt
+
+echo "These commands are to encrypt "
+aws kms encrypt \
+    --key-id alias/s3keys \
+    --plaintext fileb://battleplans.txt \
+    --output text \
+    --query CiphertextBlob \
+    | base64 --decode > not_battleplans.enc 
+
+aws kms decrypt \
+    --ciphertext-blob fileb://not_battleplans.enc \
+    --output text \
+    --query Plaintext | base64 --decode > decryptedplans.txt
+```
