@@ -1,0 +1,50 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: |
+  This template implements an IAM user 'sandy', An S3 bucket for tester  An S3 bucket for dog pictures An S3 bucket for other animals And permissions appropriate for sandy.
+Parameters:
+  sandypassword:
+    Description: IAM User sandys Password
+    Default: 4n1m4l54L1f3
+    Type: String
+Resources:
+  tester:
+    Type: AWS::S3::Bucket
+  prod:
+    Type: AWS::S3::Bucket
+  sandy:
+    Type: AWS::IAM::User
+    Properties:
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/IAMUserChangePassword
+      LoginProfile:
+        Password: !Ref sandypassword
+        PasswordResetRequired: 'false'
+# Allow all S3 actions except on the tester bucket
+  AllowAllS3ExceptTester:
+    Type: AWS::IAM::ManagedPolicy
+    Properties:
+      Description: Allow access to all S3 buckets, except tester
+      PolicyDocument:
+        Version: 2012-10-17
+        Statement:
+          - Effect: Allow
+            Action: s3:*
+            Resource: '*'
+          - Effect: Deny
+            Action: s3:*
+            Resource:
+              - !GetAtt tester.Arn
+              - !Join
+                - ''
+                - - !GetAtt tester.Arn
+                  - /*
+Outputs:
+  testerbucketname:
+    Description: Bucketname for testers
+    Value: !Ref tester
+  prodbucketname:
+    Description: Bucketname for prod
+    Value: !Ref prod
+  sandyusername:
+    Description: IAM Username for sandy
+    Value: !Ref sandy

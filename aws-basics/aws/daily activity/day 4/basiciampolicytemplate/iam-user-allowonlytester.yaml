@@ -2,7 +2,7 @@
 # The company uses a CloudFormation template to create an IAM user for Sandy and adds her to the 'Prod' group. 
 # The template provisions three S3 buckets for storing pictures related to developers, testers, and sysadmins. 
 # Sandy is given the ability to change her own password and is required to do so at her first login. The 'Prod' group, 
-# including Sandy, is granted access to the tester pictures bucket.
+# including Sandy, is granted access to the tester pictures bucket only.
 
 AWSTemplateFormatVersion: '2010-09-09'
 Description: |

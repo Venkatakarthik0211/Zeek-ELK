@@ -68,19 +68,9 @@ Serve backend functionalities such as user authentication, database operations, 
 
 Handle incoming data streams from IoT devices, perform real-time analytics, and trigger actions based on sensor data.
 
-## Getting Started
+## Lambda Layers
 
-To create a Lambda function, you define your code in AWS Lambda console, CLI, or SDK. You specify the event source (trigger), configure runtime settings, and set up permissions using AWS Identity and Access Management (IAM).
+- A Lambda layer is a .zip file archive that contains supplementary code or data. Layers usually contain library dependencies, a custom runtime, or configuration files. 
 
-## Benefits
-
-- **Scalability**: Automatically scales with the size of your workload.
-- **Cost Efficiency**: Pay only for the compute time you consume.
-- **Operational Simplicity**: No need to manage servers or infrastructure.
-- **Integration**: Easily integrates with other AWS services for building complex architectures.
-
-## Conclusion
-
-AWS Lambda simplifies application development by allowing you to focus on writing code and responding to events, without the complexity of managing servers. It is ideal for building scalable, event-driven applications and microservices in a cost-effective manner.
 
 
