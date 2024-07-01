@@ -23,7 +23,7 @@
 
 ## IAM with CloudFormation
 
-#### Prerequisite Terms:
+### Prerequisite Terms:
 - **AWSTemplateFormatVersion:** The version that the template conforms to.
 - **Description:** Optional text string describing the template.
 - **Parameters:** Input custom values to your template each time you create or update a stack.
@@ -38,7 +38,7 @@
 - **!Sub:** Substitutes variables within a string with their resolved values.
 - **NoEcho:** If true, CloudFormation doesn't return the parameter value when describing the stack.
 
-#### CloudFormation Intrinsic Functions:
+### CloudFormation Intrinsic Functions:
 - **!Base64 valueToEncode:** Encodes binary data to ensure data integrity during transmission.
 - **!Cidr [ipBlock, count, cidrBits]:**
   - **ipBlock:** Starting IP address block (e.g., "192.168.0.0/16").
@@ -46,7 +46,7 @@
   - **cidrBits:** Number of bits for the smaller CIDR blocks (e.g., /24 for 256 addresses).
 
 ## IAM User vs IAM Role 
-## Differences Between IAM User and IAM Role
+### Differences Between IAM User and IAM Role
 
 | Aspect                | IAM User                                                                 | IAM Role                                                                                     |
 |-----------------------|--------------------------------------------------------------------------|----------------------------------------------------------------------------------------------|
@@ -54,4 +54,32 @@
 | **Use Cases**         | Ideal for individuals or applications that require long-term access to AWS resources, such as developers, administrators, or specific applications. | Suitable for granting temporary permissions to AWS services, users from other AWS accounts, or federated users. Used for cross-account access, EC2 instance roles, and temporary access for users. |
 | **Credential Management** | Long-term credentials (password and access keys) that need to be managed by the user, including regular rotation and secure storage. | Provides temporary security credentials through AWS STS (Security Token Service), which are automatically rotated and managed by AWS, reducing the risk associated with long-term credentials. |
 
+## IAM Role Policies
 
+### Trust Policy
+A trust policy defines which entities (users, services, or accounts) are allowed to assume the IAM role. It specifies the `Principal` that can use the role.
+
+### Permissions Policy
+A permissions policy defines what actions the IAM role can perform and on which resources. It specifies the permissions granted to anyone who assumes the role.
+
+### When to Use IAM Roles
+
+**1. For External Identities such as ID Federation**
+Use IAM roles to provide temporary access to AWS resources for users authenticated by an external identity provider (e.g., Google, Facebook, or corporate directory) without creating IAM users.
+
+**2. Execution of Services**
+Grant AWS services (like EC2 or Lambda) the permissions they need to interact with other AWS resources securely, ensuring service-specific access.
+
+**### 3. Providing Emergency Roles for Users When Needed**
+Create roles with elevated privileges that can be assumed by users during emergencies, providing temporary access to critical resources without permanent permissions.
+
+**4. Breaking IAM Users Limit of 5000**
+Use IAM roles to delegate access and manage permissions for a large number of users via federated access, effectively bypassing the IAM users limit.
+
+**5. No AWS Credentials Required on App and Uses Existing Customer Credentials**
+Enable applications to assume roles and obtain temporary security credentials based on existing user authentication, avoiding the need to embed AWS credentials within the application.
+
+**6. Cross-Account Access**
+Facilitate secure access to resources in different AWS accounts by creating roles that other accounts can assume, eliminating the need for long-term access keys.
+
+## Service Based IAM Role Policies
