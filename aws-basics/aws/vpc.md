@@ -60,3 +60,34 @@
 | **Scope**                       | Operates at the subnet level                       | Operates at the instance level                       |
 | **Evaluation Order**            | Rules are evaluated in order (numbered)            | All rules are evaluated collectively                  |
 | **Default Behavior**            | Automatically applies to all subnets in a VPC      | Must be explicitly assigned to instances              |
+
+## NAT Gateway
+
+- Runs in public subnet, provides public access to private subnet (Only outbound). 
+- NAT gateway uses elastic ip
+- NAT gateway is used for **High Availability and AZ resillient** , for region resilliency we require **1 NAT gateway in each AZ**
+
+## NAT Gateway vs NAT Instance
+
+| Attribute           | NAT Gateway                                                                 | NAT Instance                                                                |
+|---------------------|-----------------------------------------------------------------------------|----------------------------------------------------------------------------|
+| **Availability**    | Highly available. NAT gateways in each Availability Zone are implemented with redundancy. Create a NAT gateway in each Availability Zone to ensure zone-independent architecture. | Use a script to manage failover between instances.                         |
+| **Bandwidth**       | Can scale up to 45 Gbps.                                                    | Depends on the bandwidth of the instance type.                             |
+| **Maintenance**     | Managed by AWS. You do not need to perform any maintenance.                 | Managed by you, for example, by installing software updates or operating system patches on the instance. |
+| **Performance**     | Software is optimized for handling NAT traffic.                             | A generic Amazon Linux AMI that's configured to perform NAT.               |
+| **Cost**            | Charged depending on the number of NAT gateways you use, duration of usage, and amount of data that you send through the NAT gateways. | Charged depending on the number of NAT instances that you use, duration of usage, and instance type and size. |
+| **Type and size**   | Uniform offering; you don’t need to decide on the type or size.             | Choose a suitable instance type and size, according to your predicted workload. |
+
+| Feature             | NAT Gateway                                                                 | NAT Instance                                                                |
+|---------------------|-----------------------------------------------------------------------------|----------------------------------------------------------------------------|
+| **Security groups** | Cannot be associated with a NAT gateway. You can associate security groups with your resources behind the NAT gateway to control inbound and outbound traffic. | Associate with your NAT instance and the resources behind your NAT instance to control inbound and outbound traffic. |
+| **Network ACLs**    | Use a network ACL to control the traffic to and from the subnet in which your NAT gateway resides. | Use a network ACL to control the traffic to and from the subnet in which your NAT instance resides. |
+| **Flow logs**       | Use flow logs to capture the traffic.                                       | Use flow logs to capture the traffic.                                       |
+| **Port forwarding** | Not supported.                                                              | Manually customize the configuration to support port forwarding.           |
+| **Bastion servers** | Not supported.                                                              | Use as a bastion server.                                                    |
+
+`Note:` 
+- To make NAT instance to work as NAT gateway we should *Disable Source/Destination checks* 
+- NAT gateway doesn't work with IPv6 
+- ::/0 + IGW gives bi directional connectivity 
+- Egress only IGW works with only *IPv6 and outbound only*
