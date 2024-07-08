@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+
 {% block title %}Home{% endblock %}
 
 {% block body %}
@@ -10,18 +11,19 @@
                 <th>Name</th>
                 <th>Distance</th>
                 <th>Radius</th>
+                <th>Actions</th>  <!-- Added a header for the actions column -->
             </tr>
         </thead>
         <tbody>
-            {% for planet in planetss %}
+            {% for planet in planets %}  <!-- Corrected variable name from 'planetss' to 'planets' -->
             <tr>
-                <td>{{ product.id }}</td>
-                <td>{{ product.name }}</td>
-                <td>{{ product.distance }}</td>
-                <td>{{ product.radius }}</td>
+                <td>{{ planet.id }}</td>  <!-- Corrected variable name from 'product.id' to 'planet.id' -->
+                <td>{{ planet.name }}</td>  <!-- Corrected variable name from 'product.name' to 'planet.name' -->
+                <td>{{ planet.distance }}</td>  <!-- Corrected variable name from 'product.distance' to 'planet.distance' -->
+                <td>{{ planet.radius }}</td>  <!-- Corrected variable name from 'product.radius' to 'planet.radius' -->
                 <td>
-                    <a href="" class="btn btn-primary">Edit</a>
-                    <a href="" class="btn btn-danger">Delete</a>
+                    <a href="#" class="btn btn-primary">Edit</a>
+                    <a href="#" class="btn btn-danger">Delete</a>
                 </td>
             </tr>
             {% endfor %}
