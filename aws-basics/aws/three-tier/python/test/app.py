@@ -1,9 +1,10 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, flash
 from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://master:master1234@172.17.0.2/pdb'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.secret_key = 'mysecretkey'
 
 db = SQLAlchemy(app)
 
@@ -20,6 +21,21 @@ class Planet(db.Model):
         self.radius = radius
         self.mass = mass
 
+# Route to handle adding a new planet
+@app.route("/add", methods=["POST"])
+def add_planet():
+    if request.method == "POST":
+        name = request.form['name']
+        distance = int(request.form['distance'])
+        radius = int(request.form['radius'])
+        mass = int(request.form['mass'])
+
+        new_planet = Planet(name=name, distance=distance, radius=radius, mass=mass)
+        db.session.add(new_planet)
+        db.session.commit()
+        flash('Planet added successfully')
+    return redirect(url_for('index'))
+
 # Route to handle editing a planet
 @app.route("/edit/<int:planet_id>", methods=["GET", "POST"])
 def edit_planet(planet_id):
@@ -31,6 +47,7 @@ def edit_planet(planet_id):
         planet.radius = request.form['radius']
         planet.mass = request.form['mass']
         db.session.commit()
+        flash('Planet updated successfully')
         return redirect(url_for('index'))
     
     return render_template('edit.html', planet=planet)
@@ -41,6 +58,7 @@ def delete_planet(planet_id):
     planet = Planet.query.get_or_404(planet_id)
     db.session.delete(planet)
     db.session.commit()
+    flash('Planet deleted successfully')
     return redirect(url_for('index'))
 
 # Route to display all planets

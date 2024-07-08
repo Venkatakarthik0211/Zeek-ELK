@@ -3,6 +3,34 @@
 {% block title %}Home{% endblock %}
 
 {% block body %}
+
+<div class="container-mt-4"> 
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+        {% for message in messages %}
+        {% if message == 'Planet added successfully' %}
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        {% elif message == 'Planet updated successfully' %}
+        <div class="alert alert-primary alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        {% elif message == 'Planet deleted successfully' %}
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        {% endif %}
+        {% endfor %}
+    {% endif %}
+
+    {% endwith %}
+
+</div>
+
 <div class="container">
     <h1>List of Planets</h1>
     <table class="table table-success table-striped table-hover">
