@@ -91,3 +91,134 @@
 - NAT gateway doesn't work with IPv6 
 - ::/0 + IGW gives bi directional connectivity 
 - Egress only IGW works with only *IPv6 and outbound only*
+
+## Gateway Endpoints
+
+- It uses **Routing**
+- Provide **private** access to s3 or dynamoDB, which are maintained by **Prefix List** added to a route table.
+- It is **Highly Available across all AZ's in a Regions By default**
+- **Endpoint Policy** can be written what can be accessed and what not! 
+- Prevent **Leaky S3 Buckets** and make them private. 
+- It is **Regional** But not **Cross Regional**
+- These are not accessible from **Outside of VPC**
+
+## Interface Endpoints
+
+- It works primarly on **DNS**
+- Provide **Private Access** for AWS Public Services
+- Not Available for **DynamoDB**
+- Not **Highly Available**, These are **ENI** for a AZ. For **Highly Available Architecture** we require a endpoint in different AZ. 
+- Network Access Controlled via **SG**, Additionally with **Endpoint Policies**
+- Only **TCP and IPv4** are supported.
+- Interfaces uses **PrivateLink** (`Adviciable:` When **3rd Connection Required for VPC**)
+- It has **Private, Zonal and Regional DNS** which are enabled by Default.
+
+## VPC Peering
+
+- It enables us to connect **TWO VPC** in **Direct Encrypted Network Line** only.
+- `Public Hostnames` are converted to `private`.
+- Works Everywhere(Cross/Same Region or AZ).
+- **Same Region**, then One VPC SG can refer peer SG. 
+- **Different Region**, we should refer private IP Addresses
+- VPC is not **Transitive**. 
+- **Routing Configuration** is Needed, SG's and NACL are filtered. 
+
+## Border Gateway Protocol (BGP)
+
+- **Autonomous System (AS)**: Routers controlled by one entity, forming a network in BGP.
+- **ASN**: Autonomous System Numbers are unique and allocated by IANA (0-65535); 64512 - 65534 are private.
+- **BGP Operates over tcp/179**: It uses TCP port 179, making it a reliable protocol.
+- **Not automatic**: Peering in BGP is manually configured.
+- **Path-vector protocol**: BGP exchanges the best path to a destination between peers, with the path known as ASPATH.
+- **iBGP**: Internal BGP is used for routing within an AS.
+- **eBGP**: External BGP is used for routing between ASes.
+
+## Border Gateway Protocol (BGP) Working
+
+        (Connectivity: ASN200 - ASN201 - ASN202)
+              |                 |
+              |                 |
+              |                 |
+              --Satellite Link---
+
+- **AS Path**: BGP exchanges the shortest ASPATH between peers. In this example, Brisbane (ASN 200) prefers the satellite link to Alice Springs (ASN 202) due to a shorter ASPATH, even though the fiber link would provide better performance.
+
+- **AS Path Prepending**: This technique can be used to make a path look artificially longer. This makes other paths more preferable, such as choosing the fiber link over the satellite link.
+
+- **Routing Table**: 
+  - **Destination**: The network address of the destination.
+  - **Next Hop**: The next hop IP address to reach the destination.
+  - **ASPATH**: The AS path indicates the sequence of AS numbers a route has traversed.
+
+- **Route Origin**: The `i` denotes the route is from an internal or locally connected network.
+
+- **Link Types**:
+  - **1 Gbps Fiber**: Represented by a red solid line.
+  - **5 Mbps Satellite**: Represented by an orange dotted line.
+
+- **Example Routes**:
+  - **10.16.0.0/16**: Next hop 0.0.0.0, ASPATH `i`.
+  - **10.17.0.0/16**: Next hop 10.17.0.1, ASPATH `201,i`.
+  - **10.18.0.0/16**: Next hop 10.18.0.1, ASPATH `202,i`.
+  - **10.16.0.0/16**: Next hop 10.17.0.1, ASPATH `201,200,i`.
+
+- **BGP Decision Making**: 
+  - Brisbane (ASN 200) routes traffic to Alice Springs (ASN 202) using the satellite link as the ASPATH is shorter.
+  - AS Path Prepending can be used to prefer the fiber link by making the satellite path appear longer.
+
+## AWS Site-to-Site VPN
+
+- **Logical Connection**: Establishes a secure connection between a VPC and an on-premises network over the public internet using IPSec encryption.
+- **Full HA**: Achieves full high availability if designed and implemented correctly.
+- **Quick Provisioning**: The setup process is swift, typically taking less than an hour.
+- **Virtual Private Gateway (VGW)**: An endpoint on the VPC side that manages the VPN connections.
+- **Customer Gateway (CGW)**: Represents the on-premises gateway device or software application that you use to connect your network to the AWS VPN.
+- **VPN Connection**: The link established between the VGW and the CGW, allowing secure communication over the internet.
+## AWS Site-to-Site VPN Infrastructure
+
+```plaintext
+                    On-Premises Network
+                           |
+                        CGW (Customer Gateway)
+                           |
+                -------------------------
+                |       Public Internet     |
+                -------------------------
+                           |
+                       VPN Endpoints
+                           |
+                       VGW (Virtual Private Gateway) - Highly Available Across AZ
+                           |
+                       AWS VPC Router
+                           |
+                        AWS VPC
+```
+
+- Since it's only one Router Configured at CGW, Combining the overall Solution Makes it `Partially HA`
+- We can Add routers at on-prem, adding the CGW, makes it `Higly Available Solution`
+
+## Staic vs Dynamic VPN(BGP) 
+
+| Feature | Static VPN | Dynamic VPN |
+|---------|------------|-------------|
+| **Route Configuration** | Routes for remote side added to route tables as static routes. | Border Gateway Protocol (BGP) is configured on both the customer and AWS side using Autonomous System Numbers (ASN). |
+| **Route Propagation** | No automatic route propagation; routes must be manually added to route tables. | Route propagation (if enabled) means routes are added to route tables automatically. |
+| **Configuration of Remote Networks** | Networks for the remote side are statically configured on the VPN connection. | Networks are exchanged via BGP. |
+| **Load Balancing and Failover** | No load balancing and multi-connection failover. | Multiple VPN connections provide high availability (HA) and traffic distribution. |
+| **Example CIDR** | - | 192.168.10.0/24 |
+
+### Summary:
+- **Static VPN** requires manual configuration of routes and does not support automatic route propagation or failover.
+- **Dynamic VPN** leverages BGP for automatic route exchange and supports multiple connections for better availability and traffic management.
+
+## VPN Limitations
+
+- **Speed Limit** in AWS Side - 1.25Gbps (Should consider, soft limits of customer side)
+- **Latency** is inconstent public internet. 
+- **Setup Time** are quick to setup (Hrs, All Software Configurations)
+- **Can be Backup** to DX. 
+- **Can work with DX** for HA and reducing the Latency issues. 
+
+## AWS Global Accelerator
+
+
