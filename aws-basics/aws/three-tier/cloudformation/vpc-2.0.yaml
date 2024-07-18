@@ -19,6 +19,9 @@ Resources:
       AvailabilityZone: !Select
         - 0
         - !GetAZs ''
+      Tags:
+        - Key: Name
+          Value: snreservedA
 
   sndatabaseA:
     Type: AWS::EC2::Subnet
@@ -28,6 +31,9 @@ Resources:
       AvailabilityZone: !Select
         - 0
         - !GetAZs ''
+      Tags:
+        - Key: Name
+          Value: sndatabaseA
 
   snappA:
     Type: AWS::EC2::Subnet
@@ -37,6 +43,9 @@ Resources:
       AvailabilityZone: !Select
         - 0
         - !GetAZs ''
+      Tags:
+        - Key: Name
+          Value: snappA
 
   snwebA:
     Type: AWS::EC2::Subnet
@@ -47,6 +56,9 @@ Resources:
         - 0
         - !GetAZs ''
       MapPublicIpOnLaunch: true
+      Tags:
+        - Key: Name
+          Value: snwebA
 
   snreservedB:
     Type: AWS::EC2::Subnet
@@ -56,6 +68,9 @@ Resources:
       AvailabilityZone: !Select
         - 1
         - !GetAZs ''
+      Tags:
+        - Key: Name
+          Value: snreservedB
 
   sndatabaseB:
     Type: AWS::EC2::Subnet
@@ -65,6 +80,9 @@ Resources:
       AvailabilityZone: !Select
         - 1
         - !GetAZs ''
+      Tags:
+        - Key: Name
+          Value: sndatabaseB
 
   snappB:
     Type: AWS::EC2::Subnet
@@ -74,6 +92,9 @@ Resources:
       AvailabilityZone: !Select
         - 1
         - !GetAZs ''
+      Tags:
+        - Key: Name
+          Value: snappB
 
   snwebB:
     Type: AWS::EC2::Subnet
@@ -84,6 +105,9 @@ Resources:
         - 1
         - !GetAZs ''
       MapPublicIpOnLaunch: true
+      Tags:
+        - Key: Name
+          Value: snwebB
 
   snreservedC:
     Type: AWS::EC2::Subnet
@@ -93,6 +117,9 @@ Resources:
       AvailabilityZone: !Select
         - 2
         - !GetAZs ''
+      Tags:
+        - Key: Name
+          Value: snreservedC
 
   sndatabaseC:
     Type: AWS::EC2::Subnet
@@ -102,6 +129,9 @@ Resources:
       AvailabilityZone: !Select
         - 2
         - !GetAZs ''
+      Tags:
+        - Key: Name
+          Value: sndatabaseC
 
   snappC:
     Type: AWS::EC2::Subnet
@@ -111,6 +141,9 @@ Resources:
       AvailabilityZone: !Select
         - 2
         - !GetAZs ''
+      Tags:
+        - Key: Name
+          Value: snappC
 
   snwebC:
     Type: AWS::EC2::Subnet
@@ -121,6 +154,9 @@ Resources:
         - 2
         - !GetAZs ''
       MapPublicIpOnLaunch: true
+      Tags:
+        - Key: Name
+          Value: snwebC
 
   PIGW:
     Type: AWS::EC2::InternetGateway
@@ -200,3 +236,112 @@ Resources:
       Tags:
         - Key: Name
           Value: InstanceSecurityGroup
+
+  # Route Table to route traffic to NAT instance
+  RouteTableDatabasePrivate:
+    Type: AWS::EC2::RouteTable
+    Properties:
+      VpcId: !Ref PythonVPC
+      Tags:
+        - Key: Name
+          Value: RouteTablePrivate
+
+  RouteTableDatabasePrivateRoute:
+    Type: AWS::EC2::Route
+    Properties:
+      RouteTableId: !Ref RouteTableDatabasePrivate
+      DestinationCidrBlock: 0.0.0.0/0
+      InstanceId: !Ref EC2Instance
+      Tags:
+        - Key: Name
+          Value: RouteDatabasePrivate
+
+  RouteTableAssociationDatabaseA:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      SubnetId: !Ref sndatabaseA
+      RouteTableId: !Ref RouteTableDatabasePrivate
+
+  RouteTableAssociationDatabaseB:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      SubnetId: !Ref sndatabaseB
+      RouteTableId: !Ref RouteTableDatabasePrivate
+
+  RouteTableAssociationDatabaseC:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      SubnetId: !Ref sndatabaseC
+      RouteTableId: !Ref RouteTableDatabasePrivate
+
+  RouteTableAppPrivate:
+    Type: AWS::EC2::RouteTable
+    Properties:
+      VpcId: !Ref PythonVPC
+      Tags:
+        - Key: Name
+          Value: RouteTableAppPrivate
+
+  RouteTableAppPrivateRoute:
+    Type: AWS::EC2::Route
+    Properties:
+      RouteTableId: !Ref RouteTableAppPrivate
+      DestinationCidrBlock: 0.0.0.0/0
+      InstanceId: !Ref EC2Instance
+      Tags:
+        - Key: Name
+          Value: RouteAppPrivate
+
+  RouteTableAssociationAppA:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      SubnetId: !Ref snappA
+      RouteTableId: !Ref RouteTableAppPrivate
+
+  RouteTableAssociationAppB:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      SubnetId: !Ref snappB
+      RouteTableId: !Ref RouteTableAppPrivate
+
+  RouteTableAssociationAppC:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      SubnetId: !Ref snappC
+      RouteTableId: !Ref RouteTableAppPrivate
+
+  RouteTableReservedPrivate:
+    Type: AWS::EC2::RouteTable
+    Properties:
+      VpcId: !Ref PythonVPC
+      Tags:
+        - Key: Name
+          Value: RouteTableReservedPrivate
+
+  RouteTableReservedPrivateRoute:
+    Type: AWS::EC2::Route
+    Properties:
+      RouteTableId: !Ref RouteTableReservedPrivate
+      DestinationCidrBlock: 0.0.0.0/0
+      InstanceId: !Ref EC2Instance
+      Tags:
+        - Key: Name
+          Value: RouteReservedPrivate
+
+  RouteTableAssociationReservedA:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      SubnetId: !Ref snreservedA
+      RouteTableId: !Ref RouteTableReservedPrivate
+
+  RouteTableAssociationReservedB:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      SubnetId: !Ref snreservedB
+      RouteTableId: !Ref RouteTableReservedPrivate
+
+  RouteTableAssociationReservedC:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      SubnetId: !Ref snreservedC
+      RouteTableId: !Ref RouteTableReservedPrivate
