@@ -285,6 +285,40 @@ Resources:
         - Key: Name
           Value: InstanceSecurityGroup
 
+  EC2InstanceInPrivateSubnet:
+    Type: AWS::EC2::Instance
+    Properties:
+      InstanceType: t2.micro
+      ImageId: !Ref PrivateInstanceAMI
+      SubnetId: !Ref sndatabaseA # Choose one of your private subnets
+      SecurityGroupIds:
+        - !Ref PrivateInstanceSecurityGroup
+      Tags:
+        - Key: Name
+          Value: EC2InstanceInPrivateSubnet
+
+  PrivateInstanceSecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: Enable SSH and HTTP access
+      VpcId: !Ref PythonVPC
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: 22
+          ToPort: 22
+          CidrIp: !Ref snwebACidr
+        - IpProtocol: icmp
+          FromPort: -1
+          ToPort: -1
+          CidrIp: !Ref snwebACidr
+        - IpProtocol: tcp
+          FromPort: 80
+          ToPort: 80
+          CidrIp: 0.0.0.0/0
+      Tags:
+        - Key: Name
+          Value: PrivateInstanceSecurityGroup
+
   PrivateRouteTable:
     Type: AWS::EC2::RouteTable
     Properties:
@@ -300,58 +334,10 @@ Resources:
       DestinationCidrBlock: 0.0.0.0/0
       InstanceId: !Ref EC2Instance # Route traffic to the NAT instance
 
-  PrivateRouteTableDatabaseAAssociation:
+  PrivateRouteTableAssociation:
     Type: AWS::EC2::SubnetRouteTableAssociation
     Properties:
       SubnetId: !Ref sndatabaseA # Associate private subnet with private route table
-      RouteTableId: !Ref PrivateRouteTable
-
-  PrivateRouteTableDatabaseBAssociation:
-    Type: AWS::EC2::SubnetRouteTableAssociation
-    Properties:
-      SubnetId: !Ref sndatabaseB # Associate private subnet with private route table
-      RouteTableId: !Ref PrivateRouteTable
-
-  PrivateRouteTableDatabaseCAssociation:
-    Type: AWS::EC2::SubnetRouteTableAssociation
-    Properties:
-      SubnetId: !Ref sndatabaseC # Associate private subnet with private route table
-      RouteTableId: !Ref PrivateRouteTable
-
-  PrivateRouteTableAppAAssociation:
-    Type: AWS::EC2::SubnetRouteTableAssociation
-    Properties:
-      SubnetId: !Ref snappA # Associate private subnet with private route table
-      RouteTableId: !Ref PrivateRouteTable
-
-  PrivateRouteTableAppBAssociation:
-    Type: AWS::EC2::SubnetRouteTableAssociation
-    Properties:
-      SubnetId: !Ref snappB # Associate private subnet with private route table
-      RouteTableId: !Ref PrivateRouteTable
-
-  PrivateRouteTableAppCAssociation:
-    Type: AWS::EC2::SubnetRouteTableAssociation
-    Properties:
-      SubnetId: !Ref snappC # Associate private subnet with private route table
-      RouteTableId: !Ref PrivateRouteTable
-
-  PrivateRouteTableReservedAAssociation:
-    Type: AWS::EC2::SubnetRouteTableAssociation
-    Properties:
-      SubnetId: !Ref snreservedA # Associate private subnet with private route table
-      RouteTableId: !Ref PrivateRouteTable
-
-  PrivateRouteTableReservedBAssociation:
-    Type: AWS::EC2::SubnetRouteTableAssociation
-    Properties:
-      SubnetId: !Ref snreservedB # Associate private subnet with private route table
-      RouteTableId: !Ref PrivateRouteTable
-
-  PrivateRouteTableReservedCAssociation:
-    Type: AWS::EC2::SubnetRouteTableAssociation
-    Properties:
-      SubnetId: !Ref snreservedC # Associate private subnet with private route table
       RouteTableId: !Ref PrivateRouteTable
 
 Outputs:
