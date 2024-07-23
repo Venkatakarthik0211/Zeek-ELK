@@ -1,12 +1,14 @@
 #!/bin/bash -xe
 
-# Update package lists
+# For Debugging purposes, use the following command to view the logs: cat /var/log/cloud-init-output.log
+# For Debugging the apache logs, use the following command: cat /var/log/apache2/error.log 
 sudo apt-get update -y
 
 # Install necessary packages
 sudo DEBIAN_FRONTEND=noninteractive apt-get install -y \
     python3 \
     python3-venv \
+    python3-pip \
     git \
     python3-dev \
     default-libmysqlclient-dev \
@@ -34,15 +36,15 @@ export CURRENT_DIR=$(pwd)
 # Change directory to the project folder
 cd $CURRENT_DIR/testrepo/three-tier/python/test
 
-# Install Requirements for WSIG
+# Install the required packages for the WSGI application
 pip3 install -r requirements.txt
 
 # Fetch parameters from AWS SSM Parameter Store
-DBPassword=$(aws ssm get-parameters --region us-east-1 --names /P4L/Python/DBPassword --with-decryption --query 'Parameters[0].Value' --output text)
-DBRootPassword=$(aws ssm get-parameters --region us-east-1 --names /P4L/Python/DBRootPassword --with-decryption --query 'Parameters[0].Value' --output text)
-DBUser=$(aws ssm get-parameters --region us-east-1 --names /P4L/Python/DBUser --query 'Parameters[0].Value' --output text)
-DBName=$(aws ssm get-parameters --region us-east-1 --names /P4L/Python/DBName --query 'Parameters[0].Value' --output text)
-DBEndpoint=$(aws ssm get-parameters --region us-east-1 --names /P4L/Python/DBEndpoint --query 'Parameters[0].Value' --output text)
+export DBPassword=$(aws ssm get-parameters --region us-east-1 --names /P4L/Python/DBPassword --with-decryption --query 'Parameters[0].Value' --output text)
+export DBRootPassword=$(aws ssm get-parameters --region us-east-1 --names /P4L/Python/DBRootPassword --with-decryption --query 'Parameters[0].Value' --output text)
+export DBUser=$(aws ssm get-parameters --region us-east-1 --names /P4L/Python/DBUser --query 'Parameters[0].Value' --output text)
+export DBName=$(aws ssm get-parameters --region us-east-1 --names /P4L/Python/DBName --query 'Parameters[0].Value' --output text)
+export DBEndpoint=$(aws ssm get-parameters --region us-east-1 --names /P4L/Python/DBEndpoint --query 'Parameters[0].Value' --output text)
 
 # Get the public IP of the server
 TOKEN=$(curl -X PUT "http://169.254.169.254/latest/api/token" -H "X-aws-ec2-metadata-token-ttl-seconds: 21600")
@@ -53,6 +55,8 @@ echo "CREATE DATABASE $DBName;" | sudo mysql -u root --password=$DBRootPassword
 echo "CREATE USER '$DBUser'@'localhost' IDENTIFIED BY '$DBPassword';" | sudo mysql -u root --password=$DBRootPassword
 echo "GRANT ALL ON $DBName.* TO '$DBUser'@'localhost';" | sudo mysql -u root --password=$DBRootPassword
 echo "FLUSH PRIVILEGES;" | sudo mysql -u root --password=$DBRootPassword
+echo "USE $DBName; CREATE TABLE IF NOT EXISTS planet (id INT AUTO_INCREMENT PRIMARY KEY, name VARCHAR(50) NOT NULL UNIQUE, distance INT NOT NULL, radius INT NOT NULL, mass INT NOT NULL);" | sudo mysql -u root --password=$DBRootPassword
+echo "USE $DBName; INSERT INTO planet (name, distance, radius, mass) SELECT * FROM (SELECT 'Earth', 149600000, 6371, 5972) AS tmp WHERE NOT EXISTS (SELECT name FROM planet WHERE name = 'Earth') LIMIT 1;" | sudo mysql -u root --password=$DBRootPassword
 
 # Setup Python virtual environment and install requirements
 python3 -m venv venv
@@ -90,21 +94,20 @@ EOF
 sudo tee $CURRENT_DIR/testrepo/three-tier/python/test/flaskapp.wsgi > /dev/null <<EOF
 import sys
 import logging
-import os
 
 DBPassword = "$DBPassword"
 DBUser = "$DBUser"
 DBName = "$DBName"
 DBEndpoint = "$DBEndpoint"
 
-# Add environment variables to WSGI script
+# Set the Environment variable for WSIG 
 os.environ['DBPassword'] = DBPassword
 os.environ['DBUser'] = DBUser
 os.environ['DBName'] = DBName
 os.environ['DBEndpoint'] = DBEndpoint
 
 logging.basicConfig(stream=sys.stderr)
-sys.path.insert(0, "~/testrepo/three-tier/python/test")
+sys.path.insert(0, "$CURRENT_DIR/testrepo/three-tier/python/test")
 from app import app as application
 EOF
 
