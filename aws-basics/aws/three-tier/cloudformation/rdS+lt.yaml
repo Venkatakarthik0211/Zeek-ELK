@@ -86,6 +86,41 @@ Parameters:
     Default: ami-04a81a99f5ec58529
     Description: Enter the AMI ID for the private instance. Default is ami-04a81a99f5ec58529
 
+  PrivateInstanceType:
+    Type: String
+    Default: t2.micro
+    Description: Enter the instance type for the private instance. Default is t2.micro
+
+  RDSType:
+    Type: String
+    Default: db.t3.micro
+    Description: Enter the instance type for the RDS instance. Default is db.t2.micro
+
+  RDSUsername:
+    Type: String
+    Default: P4LUser
+    Description: Enter the username for the RDS instance. Default is OP4LUser
+
+  RDSPassword:
+    Type: String
+    Default: Admin1234
+    Description: Enter the password for the RDS instance. Default is Admin1234
+
+  RDSEngine:
+    Type: String
+    Default: mysql
+    Description: Enter the engine for the RDS instance. Default is mysql
+
+  RDSEngineVersion:
+    Type: String
+    Default: 8.0.35
+    Description: Enter the engine version for the RDS instance. Default is 8.0.35
+
+  RDSAllocatedStorage:
+    Type: Number
+    Default: 20
+    Description: Enter the allocated storage for the RDS instance. Default is 20
+
 Resources:
   PythonVPC:
     Type: AWS::EC2::VPC
@@ -274,50 +309,16 @@ Resources:
       VpcId: !Ref PythonVPC
       SecurityGroupIngress:
         - IpProtocol: tcp
-          FromPort: 22
-          ToPort: 22
-          CidrIp: 0.0.0.0/0 # Allow SSH from NAT EC2 instance (adjust as needed)
-        - IpProtocol: tcp
           FromPort: 80
           ToPort: 80
           CidrIp: 0.0.0.0/0 # Allow HTTP from anywhere (adjust as needed)
+        - IpProtocol: tcp
+          FromPort: 3306
+          ToPort: 3306
+          CidrIp: !Ref PythonVPCCidr # Allow MySQL from within the VPC
       Tags:
         - Key: Name
           Value: InstanceSecurityGroup
-
-  EC2InstanceInPrivateSubnet:
-    Type: AWS::EC2::Instance
-    Properties:
-      InstanceType: t2.micro
-      ImageId: !Ref PrivateInstanceAMI
-      SubnetId: !Ref sndatabaseA # Choose one of your private subnets
-      SecurityGroupIds:
-        - !Ref PrivateInstanceSecurityGroup
-      Tags:
-        - Key: Name
-          Value: EC2InstanceInPrivateSubnet
-
-  PrivateInstanceSecurityGroup:
-    Type: AWS::EC2::SecurityGroup
-    Properties:
-      GroupDescription: Enable SSH and HTTP access
-      VpcId: !Ref PythonVPC
-      SecurityGroupIngress:
-        - IpProtocol: tcp
-          FromPort: 22
-          ToPort: 22
-          CidrIp: !Ref snwebACidr
-        - IpProtocol: icmp
-          FromPort: -1
-          ToPort: -1
-          CidrIp: !Ref snwebACidr
-        - IpProtocol: tcp
-          FromPort: 80
-          ToPort: 80
-          CidrIp: 0.0.0.0/0
-      Tags:
-        - Key: Name
-          Value: PrivateInstanceSecurityGroup
 
   PrivateRouteTable:
     Type: AWS::EC2::RouteTable
@@ -334,13 +335,134 @@ Resources:
       DestinationCidrBlock: 0.0.0.0/0
       InstanceId: !Ref EC2Instance # Route traffic to the NAT instance
 
-  PrivateRouteTableAssociation:
+  PrivateRouteTableDatabaseAAssociation:
     Type: AWS::EC2::SubnetRouteTableAssociation
     Properties:
       SubnetId: !Ref sndatabaseA # Associate private subnet with private route table
       RouteTableId: !Ref PrivateRouteTable
 
+  PrivateRouteTableDatabaseBAssociation:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      SubnetId: !Ref sndatabaseB # Associate private subnet with private route table
+      RouteTableId: !Ref PrivateRouteTable
+
+  PrivateRouteTableDatabaseCAssociation:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      SubnetId: !Ref sndatabaseC # Associate private subnet with private route table
+      RouteTableId: !Ref PrivateRouteTable
+
+  PrivateRouteTableAppAAssociation:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      SubnetId: !Ref snappA # Associate private subnet with private route table
+      RouteTableId: !Ref PrivateRouteTable
+
+  PrivateRouteTableAppBAssociation:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      SubnetId: !Ref snappB # Associate private subnet with private route table
+      RouteTableId: !Ref PrivateRouteTable
+
+  PrivateRouteTableAppCAssociation:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      SubnetId: !Ref snappC # Associate private subnet with private route table
+      RouteTableId: !Ref PrivateRouteTable
+
+  PrivateRouteTableReservedAAssociation:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      SubnetId: !Ref snreservedA # Associate private subnet with private route table
+      RouteTableId: !Ref PrivateRouteTable
+
+  PrivateRouteTableReservedBAssociation:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      SubnetId: !Ref snreservedB # Associate private subnet with private route table
+      RouteTableId: !Ref PrivateRouteTable
+
+  PrivateRouteTableReservedCAssociation:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      SubnetId: !Ref snreservedC # Associate private subnet with private route table
+      RouteTableId: !Ref PrivateRouteTable
+
+  RDSSubnetGroup:
+    Type: AWS::RDS::DBSubnetGroup
+    Properties:
+      DBSubnetGroupDescription: Subnet group for RDS
+      SubnetIds:
+        - !Ref sndatabaseA
+        - !Ref sndatabaseB
+        - !Ref sndatabaseC
+      Tags:
+        - Key: Name
+          Value: RDSSubnetGroup
+
+  RDSInstance:
+    Type: AWS::RDS::DBInstance
+    Properties:
+      DBName: pdb
+      AllocatedStorage: !Ref RDSAllocatedStorage
+      DBInstanceClass: !Ref RDSType
+      Engine: !Ref RDSEngine
+      EngineVersion: !Ref RDSEngineVersion
+      MasterUsername: !Ref RDSUsername
+      MasterUserPassword: !Ref RDSPassword
+      DBSubnetGroupName: !Ref RDSSubnetGroup
+      VPCSecurityGroups:
+        - !Ref RDSSecurityGroup
+      Tags:
+        - Key: Name
+          Value: RDSInstance
+
+  RDSSecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: Enable MySQL access
+      VpcId: !Ref PythonVPC
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: 3306
+          ToPort: 3306
+          CidrIp: !Ref PythonVPCCidr # Allow MySQL from within the VPC
+      Tags:
+        - Key: Name
+          Value: RDSSecurityGroup
+
+  LaunchTemplateSecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: Enable SSH access
+      VpcId: !Ref PythonVPC
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: 80
+          ToPort: 80
+          CidrIp: 0.0.0.0/0
+        - IpProtocol: tcp
+          FromPort: 3306
+          ToPort: 3306
+          CidrIp: !Ref PythonVPCCidr
+        - IpProtocol: tcp
+          FromPort: 443
+          ToPort: 443
+          CidrIp: 0.0.0.0/0
+
+      Tags:
+        - Key: Name
+          Value: LaunchTemplateSecurityGroup
 Outputs:
   NatInstancePrivateIP:
     Description: The private IP address of the NAT instance
     Value: !GetAtt EC2Instance.PrivateIp
+
+  RDSInstanceEndpoint:
+    Description: The endpoint of the RDS instance
+    Value: !GetAtt RDSInstance.Endpoint.Address
+
+  RDSInstancePort:
+    Description: The port of the RDS instance
+    Value: !GetAtt RDSInstance.Endpoint.Port

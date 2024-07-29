@@ -1,0 +1,85 @@
+# Creaing a Launch Template for EC2 instances using Cloudformation
+AWSTemplateFormatVersion: '2010-09-09'
+Description: Launch Template for EC2 instances
+
+Parameters:
+  InstanceType:
+    Type: String
+    Default: t2.micro
+    Description: Enter the instance type for the EC2 instances
+
+  ImageId:
+    Type: String
+    Default: ami-04a81a99f5ec58529
+    Description: Enter the AMI ID for the EC2 instances
+
+  PythonVPCCidr:
+    Type: String
+    Default: 10.16.0.0/16
+    Description: Enter the CIDR block for the VPC. Default is 10.16.0.0/16
+
+  snwebACidr:
+    Type: String
+    Default: 10.16.48.0/20
+    Description: Enter the CIDR block for the web subnet in Availability Zone A. Default is
+
+  snwebBCidr:
+    Type: String
+    Default: 10.16.112.0/20
+    Description: Enter the CIDR block for the web subnet in Availability Zone B. Default is
+
+  snappACidr:
+    Type: String
+    Default: 10.16.176.0/20
+    Description: Enter the CIDR block for the app subnet in Availability Zone A. Default is
+
+Resources:
+  TestEC2Instance:
+    Type: AWS::EC2::Instance
+      Properties:
+        LaunchTemplate:
+          LaunchTemplateId: 
+          Version: 
+        VpcId: !Ref PythonVPC
+        InstanceType: !Ref InstanceType
+        SecurityGroupIds:
+          - !Ref InstanceSecurityGroup
+        SubnetId: !Ref snwebASubnet
+
+  InstanceSecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: Enable SSH and HTTP access
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: 80
+          ToPort: 80
+          CidrIp: 0.0.0.0/0
+        - IpProtocol: tcp
+          FromPort: 443
+          ToPort: 443
+          CidrIp: 0.0.0.0/0
+
+  InstanceRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service:
+                - ec2.amazonaws.com
+            Action:
+              - sts:AssumeRole
+      ManagedPolicyArns:
+        - arn:aws:iam::aws-policy/AmazonElasticFileSystemClientFullAccess
+        - arn:aws:iam::aws-policy/AmazonSSMFullAccess
+        - arn:aws:iam::aws-policy/CloudWatchAgentServerPolicy
+
+  InstanceProfile:
+    Type: AWS::IAM::InstanceProfile
+    DependsOn: InstanceRole
+    Properties:
+      Roles:
+        - !Ref InstanceRole

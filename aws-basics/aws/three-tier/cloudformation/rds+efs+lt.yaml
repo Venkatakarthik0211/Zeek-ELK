@@ -1,0 +1,561 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: Python Architecture - VPC-2.0
+
+Parameters:
+  PythonVPCCidr:
+    Type: String
+    Default: 10.16.0.0/16
+    Description: Enter the CIDR block for the VPC. Default is 10.16.0.0/16
+
+  snreservedACidr:
+    Type: String
+    Default: 10.16.0.0/20
+    Description: Enter the CIDR block for the reserved subnet in Availability Zone
+      A. Default is
+
+  sndatabaseACidr:
+    Type: String
+    Default: 10.16.16.0/20
+    Description: Enter the CIDR block for the database subnet in Availability Zone
+      A. Default is
+
+  snappACidr:
+    Type: String
+    Default: 10.16.32.0/20
+    Description: Enter the CIDR block for the application subnet in Availability
+      Zone A. Default is
+
+  snwebACidr:
+    Type: String
+    Default: 10.16.48.0/20
+    Description: Enter the CIDR block for the web subnet in Availability Zone A. Default is
+
+  snreservedBCidr:
+    Type: String
+    Default: 10.16.64.0/20
+    Description: Enter the CIDR block for the reserved subnet in Availability Zone
+      B. Default is
+
+  sndatabaseBCidr:
+    Type: String
+    Default: 10.16.80.0/20
+    Description: Enter the CIDR block for the database subnet in Availability Zone
+      B. Default is
+
+  snappBCidr:
+    Type: String
+    Default: 10.16.96.0/20
+    Description: Enter the CIDR block for the application subnet in Availability
+      Zone B. Default is
+
+  snwebBCidr:
+    Type: String
+    Default: 10.16.112.0/20
+    Description: Enter the CIDR block for the web subnet in Availability Zone B. Default is
+
+  snreservedCCidr:
+    Type: String
+    Default: 10.16.128.0/20
+    Description: Enter the CIDR block for the reserved subnet in Availability Zone
+      C. Default is
+
+  sndatabaseCCidr:
+    Type: String
+    Default: 10.16.144.0/20
+    Description: Enter the CIDR block for the database subnet in Availability Zone
+      C. Default is
+
+  snappCCidr:
+    Type: String
+    Default: 10.16.160.0/20
+    Description: Enter the CIDR block for the application subnet in Availability
+      Zone C. Default is
+
+  snwebCCidr:
+    Type: String
+    Default: 10.16.176.0/20
+    Description: Enter the CIDR block for the web subnet in Availability Zone C. Default is
+
+  NATInstanceAMI:
+    Type: AWS::EC2::Image::Id
+    Default: ami-0f5f51aa7a8ab4517
+    Description: Enter the AMI ID for the NAT instance. Default is ami-0f5f51aa7a8ab4517
+
+  PrivateInstanceAMI:
+    Type: AWS::EC2::Image::Id
+    Default: ami-04a81a99f5ec58529
+    Description: Enter the AMI ID for the private instance. Default is ami-04a81a99f5ec58529
+
+  PrivateInstanceType:
+    Type: String
+    Default: t2.micro
+    Description: Enter the instance type for the private instance. Default is t2.micro
+
+  RDSType:
+    Type: String
+    Default: db.t3.micro
+    Description: Enter the instance type for the RDS instance. Default is db.t2.micro
+
+  RDSUsername:
+    Type: String
+    Default: P4LUser
+    Description: Enter the username for the RDS instance. Default is OP4LUser
+
+  RDSPassword:
+    Type: String
+    Default: Admin1234
+    Description: Enter the password for the RDS instance. Default is Admin1234
+
+  RDSEngine:
+    Type: String
+    Default: mysql
+    Description: Enter the engine for the RDS instance. Default is mysql
+
+  RDSEngineVersion:
+    Type: String
+    Default: 8.0.35
+    Description: Enter the engine version for the RDS instance. Default is 8.0.35
+
+  RDSAllocatedStorage:
+    Type: Number
+    Default: 20
+    Description: Enter the allocated storage for the RDS instance. Default is 20
+
+Resources:
+  PythonVPC:
+    Type: AWS::EC2::VPC
+    Properties:
+      CidrBlock: !Ref PythonVPCCidr
+      EnableDnsSupport: true
+      EnableDnsHostnames: true
+      Tags:
+        - Key: Name
+          Value: PVPC
+
+  snreservedA:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: !Ref PythonVPC
+      CidrBlock: !Ref snreservedACidr
+      AvailabilityZone: !Select
+        - 0
+        - !GetAZs ''
+
+  sndatabaseA:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: !Ref PythonVPC
+      CidrBlock: !Ref sndatabaseACidr
+      AvailabilityZone: !Select
+        - 0
+        - !GetAZs ''
+
+  snappA:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: !Ref PythonVPC
+      CidrBlock: !Ref snappACidr
+      AvailabilityZone: !Select
+        - 0
+        - !GetAZs ''
+
+  snwebA:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: !Ref PythonVPC
+      CidrBlock: !Ref snwebACidr
+      AvailabilityZone: !Select
+        - 0
+        - !GetAZs ''
+      MapPublicIpOnLaunch: true
+
+  snreservedB:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: !Ref PythonVPC
+      CidrBlock: !Ref snreservedBCidr
+      AvailabilityZone: !Select
+        - 1
+        - !GetAZs ''
+
+  sndatabaseB:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: !Ref PythonVPC
+      CidrBlock: !Ref sndatabaseBCidr
+      AvailabilityZone: !Select
+        - 1
+        - !GetAZs ''
+
+  snappB:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: !Ref PythonVPC
+      CidrBlock: !Ref snappBCidr
+      AvailabilityZone: !Select
+        - 1
+        - !GetAZs ''
+
+  snwebB:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: !Ref PythonVPC
+      CidrBlock: !Ref snwebBCidr
+      AvailabilityZone: !Select
+        - 1
+        - !GetAZs ''
+      MapPublicIpOnLaunch: true
+
+  snreservedC:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: !Ref PythonVPC
+      CidrBlock: !Ref snreservedCCidr
+      AvailabilityZone: !Select
+        - 2
+        - !GetAZs ''
+
+  sndatabaseC:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: !Ref PythonVPC
+      CidrBlock: !Ref sndatabaseCCidr
+      AvailabilityZone: !Select
+        - 2
+        - !GetAZs ''
+
+  snappC:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: !Ref PythonVPC
+      CidrBlock: !Ref snappCCidr
+      AvailabilityZone: !Select
+        - 2
+        - !GetAZs ''
+
+  snwebC:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: !Ref PythonVPC
+      CidrBlock: !Ref snwebCCidr
+      AvailabilityZone: !Select
+        - 2
+        - !GetAZs ''
+      MapPublicIpOnLaunch: true
+
+  PIGW:
+    Type: AWS::EC2::InternetGateway
+    Properties:
+      Tags:
+        - Key: Name
+          Value: PIGW
+
+  AttachGateway:
+    Type: AWS::EC2::VPCGatewayAttachment
+    Properties:
+      VpcId: !Ref PythonVPC
+      InternetGatewayId: !Ref PIGW
+
+  RouteTablePublic:
+    Type: AWS::EC2::RouteTable
+    Properties:
+      VpcId: !Ref PythonVPC
+      Tags:
+        - Key: Name
+          Value: RouteTablePublic
+
+  RouteTablePublicRoute:
+    Type: AWS::EC2::Route
+    DependsOn: AttachGateway
+    Properties:
+      RouteTableId: !Ref RouteTablePublic
+      DestinationCidrBlock: 0.0.0.0/0
+      GatewayId: !Ref PIGW
+
+  RouteTableAssociationwebA:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      SubnetId: !Ref snwebA
+      RouteTableId: !Ref RouteTablePublic
+
+  RouteTableAssociationwebB:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      SubnetId: !Ref snwebB
+      RouteTableId: !Ref RouteTablePublic
+
+  RouteTableAssociationwebC:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      SubnetId: !Ref snwebC
+      RouteTableId: !Ref RouteTablePublic
+
+  EC2Instance:
+    Type: AWS::EC2::Instance
+    Properties:
+      InstanceType: t2.micro # Adjust instance type as needed
+      ImageId: !Ref NATInstanceAMI
+      SubnetId: !Ref snwebA # Place instance in the snwebA subnet
+      SecurityGroupIds:
+        - !Ref InstanceSecurityGroup # Reference to security group allowing ports 22 and 80
+      Tags:
+        - Key: Name
+          Value: EC2Instance
+
+  InstanceSecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: Enable SSH and HTTP access
+      VpcId: !Ref PythonVPC
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: 80
+          ToPort: 80
+          CidrIp: 0.0.0.0/0 # Allow HTTP from anywhere (adjust as needed)
+        - IpProtocol: tcp
+          FromPort: 3306
+          ToPort: 3306
+          CidrIp: !Ref PythonVPCCidr # Allow MySQL from within the VPC
+      Tags:
+        - Key: Name
+          Value: InstanceSecurityGroup
+
+  PrivateRouteTable:
+    Type: AWS::EC2::RouteTable
+    Properties:
+      VpcId: !Ref PythonVPC
+      Tags:
+        - Key: Name
+          Value: PrivateRouteTable
+
+  PrivateRoute:
+    Type: AWS::EC2::Route
+    Properties:
+      RouteTableId: !Ref PrivateRouteTable
+      DestinationCidrBlock: 0.0.0.0/0
+      InstanceId: !Ref EC2Instance # Route traffic to the NAT instance
+
+  PrivateRouteTableDatabaseAAssociation:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      SubnetId: !Ref sndatabaseA # Associate private subnet with private route table
+      RouteTableId: !Ref PrivateRouteTable
+
+  PrivateRouteTableDatabaseBAssociation:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      SubnetId: !Ref sndatabaseB # Associate private subnet with private route table
+      RouteTableId: !Ref PrivateRouteTable
+
+  PrivateRouteTableDatabaseCAssociation:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      SubnetId: !Ref sndatabaseC # Associate private subnet with private route table
+      RouteTableId: !Ref PrivateRouteTable
+
+  PrivateRouteTableAppAAssociation:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      SubnetId: !Ref snappA # Associate private subnet with private route table
+      RouteTableId: !Ref PrivateRouteTable
+
+  PrivateRouteTableAppBAssociation:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      SubnetId: !Ref snappB # Associate private subnet with private route table
+      RouteTableId: !Ref PrivateRouteTable
+
+  PrivateRouteTableAppCAssociation:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      SubnetId: !Ref snappC # Associate private subnet with private route table
+      RouteTableId: !Ref PrivateRouteTable
+
+  PrivateRouteTableReservedAAssociation:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      SubnetId: !Ref snreservedA # Associate private subnet with private route table
+      RouteTableId: !Ref PrivateRouteTable
+
+  PrivateRouteTableReservedBAssociation:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      SubnetId: !Ref snreservedB # Associate private subnet with private route table
+      RouteTableId: !Ref PrivateRouteTable
+
+  PrivateRouteTableReservedCAssociation:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      SubnetId: !Ref snreservedC # Associate private subnet with private route table
+      RouteTableId: !Ref PrivateRouteTable
+
+  RDSSubnetGroup:
+    Type: AWS::RDS::DBSubnetGroup
+    Properties:
+      DBSubnetGroupDescription: Subnet group for RDS
+      SubnetIds:
+        - !Ref sndatabaseA
+        - !Ref sndatabaseB
+        - !Ref sndatabaseC
+      Tags:
+        - Key: Name
+          Value: RDSSubnetGroup
+
+  RDSInstance:
+    Type: AWS::RDS::DBInstance
+    Properties:
+      DBName: pdb
+      AllocatedStorage: !Ref RDSAllocatedStorage
+      DBInstanceClass: !Ref RDSType
+      Engine: !Ref RDSEngine
+      EngineVersion: !Ref RDSEngineVersion
+      MasterUsername: !Ref RDSUsername
+      MasterUserPassword: !Ref RDSPassword
+      DBSubnetGroupName: !Ref RDSSubnetGroup
+      VPCSecurityGroups:
+        - !Ref RDSSecurityGroup
+      Tags:
+        - Key: Name
+          Value: RDSInstance
+
+  RDSSecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: Enable MySQL access
+      VpcId: !Ref PythonVPC
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: 3306
+          ToPort: 3306
+          CidrIp: !Ref PythonVPCCidr # Allow MySQL from within the VPC
+      Tags:
+        - Key: Name
+          Value: RDSSecurityGroup
+
+  # Create a EFS 
+  EFSFileSystem:
+    Type: AWS::EFS::FileSystem
+    Properties:
+      Encrypted: false
+      PerformanceMode: generalPurpose
+      ThroughputMode: bursting
+      backupPolicy:
+        Status: ENABLED
+      LifecyclePolicies:
+        - TransitionToIA: AFTER_30_DAYS
+
+      FileSystemTags:
+        - Key: Name
+          Value: EFSFileSystem
+
+  EFSMountTargetAppA:
+    Type: AWS::EFS::MountTarget
+    Properties:
+      FileSystemId: !Ref EFSFileSystem
+      SubnetId: !Ref snappA
+      SecurityGroups:
+        - !Ref EFSSecurityGroup
+
+  EFSMountTargetAppB:
+    Type: AWS::EFS::MountTarget
+    Properties:
+      FileSystemId: !Ref EFSFileSystem
+      SubnetId: !Ref snappB
+      SecurityGroups:
+        - !Ref EFSSecurityGroup
+
+  EFSMountTargetAppC:
+    Type: AWS::EFS::MountTarget
+    Properties:
+      FileSystemId: !Ref EFSFileSystem
+      SubnetId: !Ref snappC
+      SecurityGroups:
+        - !Ref EFSSecurityGroup
+
+  EFSSecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: Enable NFS access
+      VpcId: !Ref PythonVPC
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: 2049
+          ToPort: 2049
+          CidrIp: !Ref PythonVPCCidr
+      Tags:
+        - Key: Name
+          Value: EFSSecurityGroup
+
+  LaunchTemplateSecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: Enable SSH access
+      VpcId: !Ref PythonVPC
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: 80
+          ToPort: 80
+          CidrIp: 0.0.0.0/0
+        - IpProtocol: tcp
+          FromPort: 3306
+          ToPort: 3306
+          CidrIp: !Ref PythonVPCCidr
+        - IpProtocol: tcp
+          FromPort: 443
+          ToPort: 443
+          CidrIp: 0.0.0.0/0
+      Tags:
+        - Key: Name
+          Value: LaunchTemplateSecurityGroup
+
+  ApplicationLoadBalancerSecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: Enable HTTP access
+      VpcId: !Ref PythonVPC
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: 80
+          ToPort: 80
+          CidrIp: 0.0.0.0/0
+
+  InstanceRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: 2012-10-17
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service:
+                - ec2.amazonaws.com
+            Action:
+              - sts:AssumeRole
+      Path: /
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/AmazonElasticFileSystemClientFullAccess
+        - arn:aws:iam::aws:policy/CloudWatchAgentServerPolicy
+        - arn:aws:iam::aws:policy/AmazonSSMFullAccess
+  InstanceProfile:
+    Type: AWS::IAM::InstanceProfile
+    Properties:
+      Path: /
+      Roles:
+        - !Ref InstanceRole
+
+Outputs:
+  NatInstancePrivateIP:
+    Description: The private IP address of the NAT instance
+    Value: !GetAtt EC2Instance.PrivateIp
+
+  RDSInstanceEndpoint:
+    Description: The endpoint of the RDS instance
+    Value: !GetAtt RDSInstance.Endpoint.Address
+
+  EFSFileSystemId:
+    Description: The ID of the EFS file system
+    Value: !Ref EFSFileSystem
+
+  IAMInstanceProfile:
+    Description: The IAM instance profile
+    Value: !Ref InstanceProfile
