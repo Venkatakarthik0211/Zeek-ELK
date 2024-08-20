@@ -1,0 +1,27 @@
+# Pyenv Packages 
+
+sudo apt update
+sudo apt install -y \
+  libbz2-dev \
+  libncurses5-dev \
+  libncursesw5-dev \
+  libreadline-dev \
+  libsqlite3-dev \
+  libgdbm-dev \
+  libdb5.3-dev \
+  libpcap-dev \
+  libffi-dev \
+  zlib1g-dev \
+  liblzma-dev \
+  libssl-dev \
+  libsqlite3-dev \
+  tk-dev \
+  wget \
+  curl \
+  llvm \
+  build-essential \
+  libncurses5-dev \
+  libncursesw5-dev \
+  xz-utils \
+  zlib1g-dev
+ unnecessary packages

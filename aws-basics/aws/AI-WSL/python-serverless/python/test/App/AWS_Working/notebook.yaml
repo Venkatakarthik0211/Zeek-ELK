@@ -1,0 +1,87 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: Create a SageMaker Notebook Instance with a Jupyter Notebook from S3
+
+Parameters:
+  NotebookInstanceName:
+    Type: String
+    Description: Name of the SageMaker Notebook Instance
+    Default: NLPSageMakerNotebookInstance
+  NotebookLifecycleConfigName:
+    Type: String
+    Description: Name of the Notebook Instance Lifecycle Configuration
+    Default: NLPLifecycleConfig
+  S3Bucket:
+    Type: String
+    Description: S3 bucket name where the notebook is stored
+    Default: nlpapp2020
+  S3NotebookKey:
+    Type: String
+    Description: Key of the notebook file in S3
+    Default: nlp.ipynb
+  InstanceType:
+    Type: String
+    Description: SageMaker Notebook Instance Type
+    Default: ml.t2.medium
+
+Resources:
+  SageMakerNotebookInstanceRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: sagemaker.amazonaws.com
+            Action: sts:AssumeRole
+      Policies:
+        - PolicyName: SageMakerNotebookInstancePolicy
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Effect: Allow
+                Action:
+                  - s3:GetObject
+                Resource:
+                  - !Sub arn:aws:s3:::${S3Bucket}/${S3NotebookKey}
+              - Effect: Allow
+                Action:
+                  - s3:ListBucket
+                Resource:
+                  - !Sub arn:aws:s3:::${S3Bucket}
+
+  SageMakerNotebookInstanceLifecycleConfig:
+    Type: AWS::SageMaker::NotebookInstanceLifecycleConfig
+    Properties:
+      NotebookInstanceLifecycleConfigName: !Ref NotebookLifecycleConfigName
+      OnStart:
+        - Content: !Base64 |
+            #!/bin/bash
+            set -e
+            # Install Jupyter Notebook if not already installed
+            sudo -u ec2-user -i <<'EOF'
+            if ! command -v jupyter &> /dev/null
+            then
+              pip install notebook
+            fi
+            EOF
+            # Download the notebook from S3
+            aws s3 cp s3://${S3Bucket}/${S3NotebookKey} /home/ec2-user/SageMaker/your-notebook-file.ipynb
+
+  SageMakerNotebookInstance:
+    Type: AWS::SageMaker::NotebookInstance
+    Properties:
+      InstanceType: !Ref InstanceType
+      RoleArn: !GetAtt SageMakerNotebookInstanceRole.Arn
+      NotebookInstanceName: !Ref NotebookInstanceName
+      DirectInternetAccess: Enabled
+      VolumeSizeInGB: 5
+      LifecycleConfigName: !Ref NotebookLifecycleConfigName
+
+Outputs:
+  NotebookInstanceName:
+    Description: Name of the SageMaker Notebook Instance
+    Value: !Ref SageMakerNotebookInstance
+  NotebookInstanceRole:
+    Description: IAM Role for the SageMaker Notebook Instance
+    Value: !GetAtt SageMakerNotebookInstanceRole.Arn

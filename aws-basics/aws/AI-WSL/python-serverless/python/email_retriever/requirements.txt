@@ -1,0 +1,6 @@
+nltk
+boto3
+flask 
+pandas
+scikit-learn
+gspread

@@ -1,0 +1,5 @@
+nltk
+boto3
+pandas
+scikit-learn
+io

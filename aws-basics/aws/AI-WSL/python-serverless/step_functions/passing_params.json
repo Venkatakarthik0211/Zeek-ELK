@@ -1,0 +1,22 @@
+{
+    "Comment": "A simple AWS Step Functions state machine that invokes two Lambda functions.",
+    "StartAt": "InvokeFirstLambda",
+    "States": {
+      "InvokeFirstLambda": {
+        "Type": "Task",
+        "Resource": "arn:aws:lambda:us-east-1:058264339865:function:test_func_1",
+        "ResultPath": "$.FirstLambdaResult",
+        "Next": "InvokeSecondLambda"
+      },
+      "InvokeSecondLambda": {
+        "Type": "Task",
+        "Resource": "arn:aws:lambda:us-east-1:058264339865:function:test_func_2",
+        "Parameters": {
+          "message.$": "$.FirstLambdaResult.body.message",
+          "value.$": "$.FirstLambdaResult.body.value"
+        },
+        "End": true
+      }
+    }
+  }
+  

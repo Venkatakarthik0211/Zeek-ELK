@@ -1,0 +1,12 @@
+# Checking how many rows and columns are there in the dataset
+# print(f"Rows: {df.shape[0]}")
+# print(f"Columns: {df.shape[1]}")
+
+# # Checking how many are spam and ham
+# print(f"Spam: {df[df['Person'] == 'spam'].shape[0]}")
+# print(f"Ham: {df[df['Person'] == 'ham'].shape[0]}")
+
+# # Checking for missing values
+# print("Number of missing values in label: {}".format(df['Person'].isnull().sum()))
+# print("Number of missing values in text: {}".format(df['text'].isnull().sum()))
+
