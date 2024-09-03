@@ -29,9 +29,10 @@
     display: flex;
     align-items: flex-start; /* Align items at the top */
     margin-bottom: 20px; /* Adds space between sections */
+    width: 100%; /* Make sure container uses full width */
   }
   .image {
-    flex: 0 0 150px; /* Fixed width for images */
+    flex: 1; /* Take up half of the container width */
     margin-right: 20px; /* Space between image and content */
   }
   .image img {
@@ -39,7 +40,7 @@
     height: auto; /* Maintain aspect ratio */
   }
   .content {
-    flex: 1; /* Allow content to take up remaining space */
+    flex: 1; /* Take up the other half of the container width */
   }
   ul {
     list-style-type: none; /* Remove default list styling */
