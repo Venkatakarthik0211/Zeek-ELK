@@ -277,7 +277,6 @@
   </tr>
 </table>
 
-
 ## <a id="aws-storage-services"></a> $${\color{orange}AWS\ storage\ services}$$
 
 <table>
@@ -286,9 +285,25 @@
       <img src="https://raw.githubusercontent.com/sashee/aws-svg-icons/ddf2928b65d8f18c20c6a792740ec934804e7a25/docs/Architecture-Service-Icons_07302021/Arch_Compute/64/Arch_Amazon-EC2_64.svg" alt="">
     </td>
     <td class="content">
-      <h2></h2>
-      <ul>
-      </ul>
+      <h2>AWS EC2 Instance Store</h2>
+        <ul>
+        <li>Amazon EC2 Instance Store and Amazon Elastic Block Store (Amazon EBS)</li>
+        <li>Amazon EC2 Instance Store:
+            <ul>
+            <li>Provides temporary block-level storage for Amazon EC2 instances</li>
+            <li>Ideal for ephemeral or temporary data storage</li>
+            <li>Uses disks physically attached to the underlying host computer</li>
+            <li>Thousands of data centers worldwide, each with hundreds of thousands of physical server racks</li>
+            <li>One server can run a hypervisor that generates thousands of Amazon EC2 instances</li>
+            <li>Storage device physically connected under one server rack</li>
+            <li>Instance store can be a hard disk drive or a non-volatile memory express (NVMe) solid-state drive (SSD)</li>
+            <li>Provides low latency access to data, unlike network-based file systems</li>
+            <li>Used for storing temporary buffers, caches, or scratch data</li>
+            <li>Data is deleted when the EC2 instance is stopped or terminated, similar to random access memory (RAM)</li>
+            <li>Suitable for data replicated across a fleet of Amazon EC2 instances or a load-balanced pool of web servers</li>
+            </ul>
+        </li>
+        </ul>
     </td>
   </tr>
 
@@ -297,9 +312,32 @@
       <img src="https://raw.githubusercontent.com/sashee/aws-svg-icons/ddf2928b65d8f18c20c6a792740ec934804e7a25/docs/Architecture-Service-Icons_07302021/Arch_Storage/64/Arch_Amazon-Elastic-Block-Store_64.svg" alt="">
     </td>
     <td class="content">
-      <h2></h2>
-      <ul>
-      </ul>
+      <h2>AWS EBS</h2>
+        <ul>
+            <li>Amazon Elastic Block Store (Amazon EBS) is a persistent block level storage service used for Amazon EC2 instances.</li>
+            <li>Data in EBS is persistent, meaning it is not lost when instances are stopped, restarted, or terminated.</li>
+            <li>EBS volumes can be mounted or attached to EC2 instances within the same availability zone.</li>
+            <li>Data can be encrypted at rest using AWS Key Management Service (KMS).</li>
+            <li>Two kinds of EBS volumes:
+                <ul>
+                    <li>Solid State Drive (SSD) - Suitable for workloads with frequent read-write operations, providing high IOPS.</li>
+                    <li>Hard Disk Drive (HDD) - Offers high throughput (megabit per second performance).</li>
+                </ul>
+            </li>
+            <li>Four types of EBS volumes:
+                <ul>
+                    <li>General Purpose SSD</li>
+                    <li>Provisioned IOPS SSD</li>
+                    <li>Throughput Optimized HDD</li>
+                    <li>Cold HDD</li>
+                </ul>
+            </li>
+            <li>EBS volumes typically attach to one EC2 instance, providing low latency access to data.</li>
+            <li>SSD-based EBS volumes can be used as boot volumes for EC2 instances, unlike HDDs.</li>
+            <li>EBS Multi-Attach feature allows attaching two or more provisioned IOPS EBS volumes to a single EC2 instance.</li>
+            <li>Multi-Attach is only supported on provisioned IOPS volumes and requires Nitro-based EC2 instances.</li>
+            <li>Multiple EC2 instances using the same provisioned IOPS EBS volume cannot concurrently modify or access the same file; use Amazon EFS for this functionality.</li>
+        </ul>
     </td>
   </tr>
 
@@ -308,9 +346,46 @@
       <img src="https://raw.githubusercontent.com/sashee/aws-svg-icons/ddf2928b65d8f18c20c6a792740ec934804e7a25/docs/Architecture-Service-Icons_07302021/Arch_Storage/64/Arch_Amazon-Simple-Storage-Service_64.svg" alt="">
     </td>
     <td class="content">
-      <h2></h2>
-      <ul>
-      </ul>
+      <h2>AWS S3</h2>
+        <ul>
+        <li>Amazon Simple Storage Service (Amazon S3) is an object storage service in AWS.</li>
+        <li>It is highly durable and scalable with many features.</li>
+        <li>Data is stored in a resource called an Amazon S3 Bucket.</li>
+        <li>Files uploaded to a bucket are considered objects.</li>
+        <li>You can store large amounts of files, documents, videos, database backups, and snapshots.</li>
+        <li>Accessing objects from an S3 bucket is done via a REST API call.</li>
+        <li>Different storage classes available in Amazon S3:
+            <ul>
+            <li>S3 Standard: For frequently accessed data.</li>
+            <li>S3 Intelligent Tiering: For data with changing or unknown access patterns.</li>
+            <li>S3 Standard Infrequent Access: For long-lived yet less frequently accessed data.</li>
+            <li>S3 One Zone Infrequent Access: For less frequently accessed data in a single availability zone.</li>
+            <li>Amazon S3 Glacier: For low-cost long-term storage and data archiving.</li>
+            <li>Amazon S3 Glacier Deep Archive: For even lower cost long-term storage.</li>
+            </ul>
+        </li>
+        <li>Lifecycle Policy: Automatically transitions or moves data between storage classes.</li>
+        <li>Security features:
+            <ul>
+            <li>Amazon S3 Access Control List (ACL): Secures access to S3 Buckets and objects.</li>
+            <li>S3 Bucket Policy: Controls external access to the bucket.</li>
+            <li>S3 Versioning: Prevents accidental data deletion.</li>
+            <li>Multi-Factor Authentication (MFA): Provides additional security to prevent accidental data deletion.</li>
+            </ul>
+        </li>
+        <li>Replication features:
+            <ul>
+            <li>Cross-Region Replication (CRR): Replicates objects to different AWS regions.</li>
+            </ul>
+        </li>
+        <li>Data transfer features:
+            <ul>
+            <li>Amazon S3 Transfer Acceleration: Expedites data transfer.</li>
+            <li>S3 Multipart Upload: Allows uploading large files in parts.</li>
+            </ul>
+        </li>
+        <li>Amazon S3 Glacier is a storage class in Amazon S3 with its own web console and APIs.</li>
+        </ul>
     </td>
   </tr>
 
@@ -319,9 +394,24 @@
       <img src="https://raw.githubusercontent.com/sashee/aws-svg-icons/ddf2928b65d8f18c20c6a792740ec934804e7a25/docs/Architecture-Service-Icons_07302021/Arch_Storage/64/Arch_Amazon-Simple-Storage-Service-Glacier_64.svg" alt="">
     </td>
     <td class="content">
-      <h2></h2>
-      <ul>
-      </ul>
+      <h2>AWS S3 Glacier</h2>
+        <ul>
+        <li>Amazon S3 Glacier was previously known as Amazon Glacier and was separate from S3; the two services have since been merged into one.</li>
+        <li>The service name "Glacier" is derived from the concept of cold, large masses of ice, reflecting its purpose for cold data storage.</li>
+        <li>Cold data refers to data that is rarely accessed, while hot data is frequently accessed. This concept also applies to cold HDD volumes in Amazon EBS.</li>
+        <li>Amazon S3 Glacier provides low-cost storage for data archiving and long-term backup, suitable for files that are rarely accessed and need to be archived for several years to meet regulatory requirements.</li>
+        <li>Archive files are stored in a resource called Vaults.</li>
+        <li>The Amazon S3 Glacier Deep Archive class is the cheapest storage type in AWS for data archived for seven to ten years.</li>
+        <li>There is an additional fee for immediate retrieval of Glacier data.</li>
+        <li>The storage class is only the cheapest if data is archived for many years, not for a few hours or days.</li>
+        <li>Objects archived in S3 Glacier have a minimum storage duration of 90 days, and in S3 Glacier Deep Archive, 180 days.</li>
+        <li>Deleting objects before the minimum storage duration incurs a prorated charge equal to the storage charge for the remaining days.</li>
+        <li>If data is stored in Glacier for only 24 hours and then deleted, the charge is for the full 90 days.</li>
+        <li>Similarly, deleting data in Glacier Deep Archive within a day incurs the charge for the entire 180 days.</li>
+        <li>For temporary data, storing in S3 Standard class is cheaper than using Glacier.</li>
+        <li>The disadvantage of Glacier is the retrieval time for archive data, similar to thawing frozen meat.</li>
+        <li>Amazon Glacier offers three types of archive retrieval options: expedited, standard, and bulk.</li>
+        </ul>
     </td>
   </tr>
 
@@ -330,9 +420,22 @@
       <img src="https://raw.githubusercontent.com/sashee/aws-svg-icons/ddf2928b65d8f18c20c6a792740ec934804e7a25/docs/Architecture-Service-Icons_07302021/Arch_Storage/64/Arch_Amazon-Elastic-File-System_64.svg" alt="">
     </td>
     <td class="content">
-      <h2></h2>
-      <ul>
-      </ul>
+      <h2>AWS EFS</h2>
+        <ul>
+        <li>Amazon Elastic File System (Amazon EFS) is a scalable shared file storage solution.</li>
+        <li>Provides a POSIX-compliant shared file system accessible by multiple Amazon Linux EC2 instances in different availability zones.</li>
+        <li>Uses the Network File System (NFS) protocol.</li>
+        <li>Must be mounted to Linux EC2 instances or on-premises servers like a regular network file share.</li>
+        <li>Only supports Linux servers; Windows-based EC2 instances cannot use Amazon EFS.</li>
+        <li>For shared Windows file systems, use Amazon FSX for Windows Server instead.</li>
+        <li>Offers two storage classes:
+            <ul>
+            <li>Standard storage class: Best for active file system workloads.</li>
+            <li>Infrequent Access storage class: Cost-optimized for infrequently accessed files.</li>
+            </ul>
+        </li>
+        <li>Supports lifecycle policies to automatically move data from the standard class to the infrequent access storage class, similar to Amazon S3.</li>
+        </ul>
     </td>
   </tr>
 
@@ -341,9 +444,23 @@
       <img src="https://raw.githubusercontent.com/sashee/aws-svg-icons/ddf2928b65d8f18c20c6a792740ec934804e7a25/docs/Architecture-Service-Icons_07302021/Arch_Storage/64/Arch_Amazon-FSx-for-Lustre_64.svg" alt="">
     </td>
     <td class="content">
-      <h2></h2>
-      <ul>
-      </ul>
+      <h2>AWS FSx Lustre</h2>
+        <ul>
+        <li>Amazon FSX for Lustre and Amazon FSX for Windows Server are different services offered by AWS.</li>
+        <li>Amazon FSX for Lustre:
+            <ul>
+            <li>Similar to Amazon EFS but specifically for Linux servers.</li>
+            <li>Uses the open-source Lustre file system.</li>
+            <li>Lustre is a parallel file system used for large-scale cluster computing.</li>
+            <li>Derived from "Linux" and "cluster."</li>
+            <li>Designed for high-performance computing, machine learning, and HPC applications.</li>
+            <li>Supports high-performance parallel storage for frequently accessed hot data.</li>
+            <li>Provides throughput of hundreds of gigabytes per second and millions of IOPS.</li>
+            <li>Can be mounted to EC2 instances or containers.</li>
+            <li>Supports integration with Amazon EKS clusters via the Container Storage Interface (CSI).</li>
+            </ul>
+        </li>
+        </ul>
     </td>
   </tr>
 
@@ -352,9 +469,23 @@
       <img src="https://raw.githubusercontent.com/sashee/aws-svg-icons/ddf2928b65d8f18c20c6a792740ec934804e7a25/docs/Architecture-Service-Icons_07302021/Arch_Storage/64/Arch_Amazon-FSx-for-Windows-File-Server_64.svg" alt="">
     </td>
     <td class="content">
-      <h2></h2>
-      <ul>
-      </ul>
+      <h2>AWS FSx Windows File Server</h2>
+        <ul>
+            <li>Amazon FSX for Windows Server is a fully managed Microsoft Windows file server.</li>
+            <li>Unlike Lustre, which is Linux-based, this service uses a fully native Windows file system.</li>
+            <li>It integrates with various Microsoft-based technologies.</li>
+            <li>File shares can be accessed using the Server Message Block (SMB) protocol.</li>
+            <li>SMB is a protocol commonly used by Windows servers.</li>
+            <li>Amazon FSX for Windows Server supports integration with Microsoft Active Directory for file system access provisioning.</li>
+            <li>It can be used as shared file storage for applications such as:
+                <ul>
+                    <li>Microsoft SharePoint</li>
+                    <li>Microsoft SQL Server Database</li>
+                    <li>Windows containers</li>
+                    <li>Any other Windows-based applications</li>
+                </ul>
+            </li>
+        </ul>
     </td>
   </tr>
 
@@ -363,9 +494,14 @@
       <img src="https://raw.githubusercontent.com/sashee/aws-svg-icons/ddf2928b65d8f18c20c6a792740ec934804e7a25/docs/Architecture-Service-Icons_07302021/Arch_Storage/64/Arch_AWS-Backup_64.svg" alt="">
     </td>
     <td class="content">
-      <h2></h2>
-      <ul>
-      </ul>
+      <h2>AWS Backup</h2>
+        <ul>
+            <li><strong>AWS Backup</strong>: A fully managed backup service for automating server and database backups.</li>
+            <li><strong>Default RDS Backup Retention</strong>: Automated backups of RDS databases have a default retention period of seven days.</li>
+            <li><strong>Maximum RDS Backup Retention</strong>: The maximum retention period for RDS automated backups is 35 days.</li>
+            <li><strong>Extended Retention with AWS Backup</strong>: Allows for daily snapshots with retention periods of 90 days, a year, or even longer.</li>
+            <li><strong>Lifecycle Policy</strong>: Enables automatic movement of backups to cold storage.</li>
+        </ul>
     </td>
   </tr>
 
@@ -374,9 +510,45 @@
       <img src=https://raw.githubusercontent.com/sashee/aws-svg-icons/ddf2928b65d8f18c20c6a792740ec934804e7a25/docs/Architecture-Service-Icons_07302021/Arch_Storage/64/Arch_AWS-Storage-Gateway_64.svg"" alt="">
     </td>
     <td class="content">
-      <h2></h2>
-      <ul>
-      </ul>
+      <h2>AWS Storage Gateway</h2>
+        <ul>
+        <li><strong>AWS Storage Gateway</strong>: A hybrid cloud storage service that connects on-premises data storage to AWS Cloud.</li>
+        <li><strong>Gateway Types</strong>:
+            <ul>
+            <li><strong>File Gateway</strong>: 
+                <ul>
+                <li>Stores and retrieves objects in Amazon S3 using NFS and SMB protocols.</li>
+                <li>Works with Microsoft Active Directory (hosted on-premises or in AWS).</li>
+                <li>Access data using S3 APIs.</li>
+                <li>Can use a hardware appliance hosted on-premises if virtualization is not available.</li>
+                </ul>
+            </li>
+            <li><strong>Volume Gateway</strong>: 
+                <ul>
+                <li>Provides block storage to on-premises applications via iSCSI.</li>
+                <li>Uses Amazon S3 to store data by taking point-in-time snapshots.</li>
+                <li>Generates Amazon EBS snapshots for EC2 instances.</li>
+                <li>Runs in two modes:
+                    <ul>
+                    <li><strong>Cache Mode</strong>: Stores primary data in Amazon S3 with local copies of frequently accessed data.</li>
+                    <li><strong>Stored Mode</strong>: Stores the entire dataset on-premises and asynchronously backs up data to AWS.</li>
+                    </ul>
+                </li>
+                </ul>
+            </li>
+            <li><strong>Tape Gateway</strong>: 
+                <ul>
+                <li>Cloud-based virtual tape library (VTL) using Amazon S3.</li>
+                <li>Archive tapes can be stored in Amazon S3 Glacier or S3 Glacier Deep Archive.</li>
+                <li>Connects to on-premises backup applications as iSCSI devices.</li>
+                <li>Reduces cost by eliminating physical backup tapes while preserving existing backup applications and workflows.</li>
+                </ul>
+            </li>
+            </ul>
+        </li>
+        <li><strong>Use Case</strong>: Suitable for building a hybrid cloud storage infrastructure with active data transfer to AWS. For total migration and decommissioning of on-premises storage, consider using AWS DataSync Service instead.</li>
+        </ul>
+
     </td>
   </tr>
 
