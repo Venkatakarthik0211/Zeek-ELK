@@ -19,7 +19,6 @@
 
 ## <a id="aws-compute-services"></a> $${\color{blue}AWS\ compute\ services}$$
 
-# AWS Compute Services Overview
 <!DOCTYPE html>
 <html>
 <body>
@@ -31,15 +30,22 @@
     </td>
     <td class="content">
       <h2>Amazon EC2</h2>
-      <ul>
-        <li><strong>Type</strong>: Virtual Machines</li>
-        <li><strong>Key Features</strong>:</li>
-        <li><strong>Virtual Servers</strong>: Runs Linux or Windows virtual machines.</li>
-        <li><strong>Customization</strong>: Choose OS, storage, CPU type (Intel, AMD, Graviton).</li>
-        <li><strong>Elasticity</strong>: Resizable and customizable instances.</li>
-        <li><strong>Pricing</strong>: Pay-as-you-go or reserved instances.</li>
-        <li><strong>Management</strong>: Shared responsibility between AWS and the user.</li>
-      </ul>
+        <ul>
+        <li>Amazon EC2 is a computing service that runs virtual servers in the cloud.</li>
+        <li>It allows you to launch Linux or Windows virtual machines to host your application and manage them remotely from anywhere in the world.</li>
+        <li>Amazon EC2 is categorized as an Infrastructure as a Service (IaaS) and acts as a basic building block for cloud infrastructure.</li>
+        <li>Amazon EC2 is a building block for AWS, used by some AWS services for processing, database hosting, and serverless computing.</li>
+        <li>AWS and users share responsibility in managing EC2 virtual machines:</li>
+            <ul>
+            <li>AWS manages data centers, physical facilities, hardware components, the host operating system, and the virtualization layer.</li>
+            <li>Users are responsible for the guest operating system, applying OS patches, setting up security access controls, and managing data.</li>
+            </ul>
+        <li>EC2's elasticity allows it to be changed, resized, or customized at any point in time.</li>
+        <li>EC2 can automatically scale, increasing or decreasing the number of instances based on incoming traffic.</li>
+        <li>The term "C2" in Amazon EC2 refers to the two C's of "Compute Cloud."</li>
+        <li>Amazon EC2 integrates with various AWS services and features.</li>
+        </ul>
+
     </td>
   </tr>
   <tr>
@@ -48,14 +54,19 @@
     </td>
     <td class="content">
       <h2>AWS Lambda</h2>
-      <ul>
-        <li><strong>Type</strong>: Serverless</li>
-        <li><strong>Key Features</strong>:</li>
-        <li><strong>No Server Management</strong>: AWS handles server management.</li>
-        <li><strong>Programming Languages</strong>: Supports Java, Go, Ruby, Node.js, Python, etc.</li>
-        <li><strong>Scalability</strong>: Instantly supports thousands of requests.</li>
-        <li><strong>Billing</strong>: Pay only for the compute time used.</li>
-      </ul>
+        <ul>
+        <li>AWS Lambda is a serverless computing service that allows you to run code, functions, or entire applications without managing servers.</li>
+        <li>You only pay for the compute time that you actually consume.</li>
+        <li>Although serverless computing uses servers, all server management, scaling, and troubleshooting are handled by AWS.</li>
+        <li>Uploaded code in AWS Lambda is called a Lambda function.</li>
+        <li>Lambda functions can perform custom tasks that you control or program.</li>
+        <li>Lambda functions are highly scalable, supporting thousands of requests in seconds.</li>
+        <li>AWS Lambda provides high availability without additional effort on your part.</li>
+        <li>It is a fully managed service, meaning AWS manages the underlying servers, and you cannot access or manage these servers.</li>
+        <li>AWS Lambda supports multiple programming languages including Java, Go, Ruby, Node.js, Python, and others through the use of runtimes.</li>
+        <li>These runtimes are powered by Amazon Linux EC2 and other servers, which are managed by AWS.</li>
+        </ul>
+
     </td>
   </tr>
   <tr>
@@ -64,13 +75,25 @@
     </td>
     <td class="content">
       <h2>AWS Elastic Beanstalk</h2>
-      <ul>
-        <li><strong>Type</strong>: Orchestration</li>
-        <li><strong>Key Features</strong>:</li>
-        <li><strong>Automation</strong>: Handles deployment, management, scaling, and monitoring.</li>
-        <li><strong>Application Management</strong>: Manages capacity, load balancing, auto-scaling.</li>
-        <li><strong>Flexibility</strong>: Full control over underlying EC2 instances.</li>
-      </ul>
+        <ul>
+            <li>AWS Elastic Beanstalk automates the deployment, management, scaling, and monitoring of custom applications in AWS.</li>
+            <li>You can upload your application, and Elastic Beanstalk handles:
+                <ul>
+                    <li>Capacity provisioning</li>
+                    <li>Load balancing</li>
+                    <li>Database management</li>
+                    <li>Auto scaling</li>
+                    <li>Health monitoring</li>
+                </ul>
+            </li>
+            <li>Elastic Beanstalk allows developers to:
+                <ul>
+                    <li>Retain full control over the underlying EC2 instances.</li>
+                    <li>Access these servers at any time.</li>
+                </ul>
+            </li>
+            <li>This is in contrast to fully managed services like AWS Lambda, where you don’t have direct server access.</li>
+        </ul>
     </td>
   </tr>
   <tr>
@@ -79,13 +102,13 @@
     </td>
     <td class="content">
       <h2>AWS Batch</h2>
-      <ul>
-        <li><strong>Type</strong>: Orchestration</li>
-        <li><strong>Key Features</strong>:</li>
-        <li><strong>Batch Processing</strong>: Runs batch computing workloads.</li>
-        <li><strong>Dynamic Provisioning</strong>: Automatically provisions compute resources.</li>
-        <li><strong>Focus on Results</strong>: No need to manage batch computing software.</li>
-      </ul>
+        <ul>
+        <li>AWS Batch is a service for running batch computing workloads on the AWS Cloud.</li>
+        <li>The service dynamically provisions the optimal quantity and type of compute resources based on the volume and specific resource requirements.</li>
+        <li>With AWS Batch, there's no need to install or manage batch computing software or server clusters.</li>
+        <li>The service handles planning, scheduling, and execution of batch computing workloads using Amazon EC2 instances.</li>
+        <li>This allows users to focus on analyzing results and solving problems rather than managing infrastructure.</li>
+        </ul>
     </td>
   </tr>
   <tr>
@@ -94,13 +117,19 @@
     </td>
     <td class="content">
       <h2>Amazon LightSail</h2>
-      <ul>
-        <li><strong>Type</strong>: Virtual Machines</li>
-        <li><strong>Key Features</strong>:</li>
-        <li><strong>Predictable Pricing</strong>: Low and predictable monthly cost.</li>
-        <li><strong>Resources</strong>: Deploy VMs, databases, load balancers, DNS records.</li>
-        <li><strong>Ease of Use</strong>: Separate LightSail console for easy management.</li>
-      </ul>
+        <ul>
+        <li>Amazon LightSail is a virtual private server solution in AWS.</li>
+        <li>You can deploy a virtual machine for a low and predictable monthly price.</li>
+        <li>The service provides everything needed to launch projects quickly.</li>
+        <li>It has its own LightSail console, separate from the regular AWS Management console.</li>
+        <li>Aside from virtual machines, you can also launch different resources using Amazon LightSail, including:</li>
+        <ul>
+            <li>Databases</li>
+            <li>Load balancers</li>
+            <li>DNS records</li>
+            <li>And more</li>
+        </ul>
+        </ul>
     </td>
   </tr>
   <tr>
@@ -109,13 +138,15 @@
     </td>
     <td class="content">
       <h2>AWS Outposts</h2>
-      <ul>
-        <li><strong>Type</strong>: Hybrid</li>
-        <li><strong>Key Features</strong>:</li>
-        <li><strong>On-Premises AWS</strong>: Run AWS services in your data center.</li>
-        <li><strong>Physical Equipment</strong>: Delivered as a fully assembled server rack.</li>
-        <li><strong>Integration</strong>: Similar to public AWS EC2 servers.</li>
-      </ul>
+        <ul>
+            <li>AWS Outposts is a hybrid service that allows you to run AWS services, like Amazon EC2, in your on-premises data center.</li>
+            <li>AWS Outposts is a piece of physical equipment in an industry-standard server rack.</li>
+            <li>The outpost rack stands about six feet and six inches tall, similar to the average height of a regular NBA player in the U.S.</li>
+            <li>The outpost rack is two feet wide and four feet deep.</li>
+            <li>The server rack contains hosts, switches, another patch panel, and other components, similar to what AWS uses for its public Amazon EC2 servers that power your applications in the cloud.</li>
+            <li>AWS delivers the outpost rack to your preferred physical site fully assembled.</li>
+            <li>You just need to plug it in, configure it, and you're ready to go.</li>
+        </ul>
     </td>
   </tr>
 </table>
