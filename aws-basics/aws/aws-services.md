@@ -48,25 +48,137 @@
 </style>
 </head>
 <body>
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+  table {
+    width: 100%;
+    border-collapse: collapse; /* Collapse table borders */
+    margin-bottom: 20px; /* Space between sections */
+  }
+  td {
+    vertical-align: top; /* Align content at the top of each cell */
+    padding: 10px; /* Add padding inside cells */
+    border: 1px solid #ddd; /* Optional: Add border for better visual separation */
+  }
+  .image img {
+    max-width: 100%; /* Ensure images fit within their container */
+    height: auto; /* Maintain aspect ratio */
+  }
+  ul {
+    list-style-type: none; /* Remove default list styling */
+    padding: 0;
+  }
+  li {
+    margin-bottom: 10px; /* Add space between list items */
+  }
+  th, td {
+    text-align: left; /* Align text to the left */
+  }
+</style>
+</head>
+<body>
 
-<!-- Template for services -->
-<!-- <table>
+<table>
   <tr>
     <td class="image">
-      <img src="IMAGE_URL" alt="SERVICE_NAME">
+      <img src="https://raw.githubusercontent.com/sashee/aws-svg-icons/ddf2928b65d8f18c20c6a792740ec934804e7a25/docs/Architecture-Service-Icons_07302021/Arch_Compute/64/Arch_Amazon-EC2_64.svg" alt="Amazon EC2">
     </td>
     <td class="content">
-      <h2>SERVICE_NAME</h2>
+      <h2>Amazon EC2</h2>
       <ul>
-        <li><strong>Type</strong>: SERVICE_TYPE</li>
+        <li><strong>Type</strong>: Virtual Machines</li>
         <li><strong>Key Features</strong>:</li>
-        <li><strong>Feature 1</strong>: DESCRIPTION</li>
-        <li><strong>Feature 2</strong>: DESCRIPTION</li>
-        <li><strong>Feature 3</strong>: DESCRIPTION</li>
-      </ul> 
+        <li><strong>Virtual Servers</strong>: Runs Linux or Windows virtual machines.</li>
+        <li><strong>Customization</strong>: Choose OS, storage, CPU type (Intel, AMD, Graviton).</li>
+        <li><strong>Elasticity</strong>: Resizable and customizable instances.</li>
+        <li><strong>Pricing</strong>: Pay-as-you-go or reserved instances.</li>
+        <li><strong>Management</strong>: Shared responsibility between AWS and the user.</li>
+      </ul>
     </td>
   </tr>
-</table> -->
+  <tr>
+    <td class="image">
+      <img src="https://raw.githubusercontent.com/sashee/aws-svg-icons/ddf2928b65d8f18c20c6a792740ec934804e7a25/docs/Architecture-Service-Icons_07302021/Arch_Compute/64/Arch_AWS-Lambda_64.svg" alt="AWS Lambda">
+    </td>
+    <td class="content">
+      <h2>AWS Lambda</h2>
+      <ul>
+        <li><strong>Type</strong>: Serverless</li>
+        <li><strong>Key Features</strong>:</li>
+        <li><strong>No Server Management</strong>: AWS handles server management.</li>
+        <li><strong>Programming Languages</strong>: Supports Java, Go, Ruby, Node.js, Python, etc.</li>
+        <li><strong>Scalability</strong>: Instantly supports thousands of requests.</li>
+        <li><strong>Billing</strong>: Pay only for the compute time used.</li>
+      </ul>
+    </td>
+  </tr>
+  <tr>
+    <td class="image">
+      <img src="https://raw.githubusercontent.com/sashee/aws-svg-icons/ddf2928b65d8f18c20c6a792740ec934804e7a25/docs/Architecture-Service-Icons_07302021/Arch_Compute/64/Arch_AWS-Elastic-Beanstalk_64.svg" alt="AWS Elastic Beanstalk">
+    </td>
+    <td class="content">
+      <h2>AWS Elastic Beanstalk</h2>
+      <ul>
+        <li><strong>Type</strong>: Orchestration</li>
+        <li><strong>Key Features</strong>:</li>
+        <li><strong>Automation</strong>: Handles deployment, management, scaling, and monitoring.</li>
+        <li><strong>Application Management</strong>: Manages capacity, load balancing, auto-scaling.</li>
+        <li><strong>Flexibility</strong>: Full control over underlying EC2 instances.</li>
+      </ul>
+    </td>
+  </tr>
+  <tr>
+    <td class="image">
+      <img src="https://raw.githubusercontent.com/sashee/aws-svg-icons/ddf2928b65d8f18c20c6a792740ec934804e7a25/docs/Architecture-Service-Icons_07302021/Arch_Compute/64/Arch_AWS-Batch_64.svg" alt="AWS Batch">
+    </td>
+    <td class="content">
+      <h2>AWS Batch</h2>
+      <ul>
+        <li><strong>Type</strong>: Orchestration</li>
+        <li><strong>Key Features</strong>:</li>
+        <li><strong>Batch Processing</strong>: Runs batch computing workloads.</li>
+        <li><strong>Dynamic Provisioning</strong>: Automatically provisions compute resources.</li>
+        <li><strong>Focus on Results</strong>: No need to manage batch computing software.</li>
+      </ul>
+    </td>
+  </tr>
+  <tr>
+    <td class="image">
+      <img src="https://raw.githubusercontent.com/sashee/aws-svg-icons/ddf2928b65d8f18c20c6a792740ec934804e7a25/docs/Architecture-Service-Icons_07302021/Arch_Compute/64/Arch_Amazon-Lightsail_64.svg" alt="Amazon LightSail">
+    </td>
+    <td class="content">
+      <h2>Amazon LightSail</h2>
+      <ul>
+        <li><strong>Type</strong>: Virtual Machines</li>
+        <li><strong>Key Features</strong>:</li>
+        <li><strong>Predictable Pricing</strong>: Low and predictable monthly cost.</li>
+        <li><strong>Resources</strong>: Deploy VMs, databases, load balancers, DNS records.</li>
+        <li><strong>Ease of Use</strong>: Separate LightSail console for easy management.</li>
+      </ul>
+    </td>
+  </tr>
+  <tr>
+    <td class="image">
+      <img src="https://raw.githubusercontent.com/sashee/aws-svg-icons/ddf2928b65d8f18c20c6a792740ec934804e7a25/docs/Architecture-Service-Icons_07302021/Arch_Compute/64/Arch_AWS-Outposts_64.svg" alt="AWS Outposts">
+    </td>
+    <td class="content">
+      <h2>AWS Outposts</h2>
+      <ul>
+        <li><strong>Type</strong>: Hybrid</li>
+        <li><strong>Key Features</strong>:</li>
+        <li><strong>On-Premises AWS</strong>: Run AWS services in your data center.</li>
+        <li><strong>Physical Equipment</strong>: Delivered as a fully assembled server rack.</li>
+        <li><strong>Integration</strong>: Similar to public AWS EC2 servers.</li>
+      </ul>
+    </td>
+  </tr>
+</table>
+
+</body>
+</html>
+
 
 <!-- Instances of the template for each service -->
 <table>
