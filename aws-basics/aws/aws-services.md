@@ -27,17 +27,19 @@
 <style>
   .container {
     display: flex;
-    align-items: center;
+    align-items: flex-start; /* Align items at the top */
     margin-bottom: 20px; /* Adds space between sections */
   }
   .image {
-    flex: 1;
+    flex: 0 0 150px; /* Fixed width for images */
+    margin-right: 20px; /* Space between image and content */
+  }
+  .image img {
+    max-width: 100%; /* Ensure images fit within their container */
+    height: auto; /* Maintain aspect ratio */
   }
   .content {
-    flex: 2;
-  }
-  .container img {
-    max-width: 100%; /* Ensure images fit within the container */
+    flex: 1; /* Allow content to take up remaining space */
   }
   ul {
     list-style-type: none; /* Remove default list styling */
@@ -60,12 +62,10 @@
     <ul>
       <li><strong>Type</strong>: SERVICE_TYPE</li>
       <li><strong>Key Features</strong>:</li>
-      <ul>
-        <li><strong>Feature 1</strong>: DESCRIPTION</li>
-        <li><strong>Feature 2</strong>: DESCRIPTION</li>
-        <li><strong>Feature 3</strong>: DESCRIPTION</li>
-      </ul> 
-    </ul>
+      <li><strong>Feature 1</strong>: DESCRIPTION</li>
+      <li><strong>Feature 2</strong>: DESCRIPTION</li>
+      <li><strong>Feature 3</strong>: DESCRIPTION</li>
+    </ul> 
   </div>
 </div> -->
  
@@ -79,13 +79,11 @@
     <ul>
       <li><strong>Type</strong>: Virtual Machines</li>
       <li><strong>Key Features</strong>:</li>
-      <ul>
-        <li><strong>Virtual Servers</strong>: Runs Linux or Windows virtual machines.</li>
-        <li><strong>Customization</strong>: Choose OS, storage, CPU type (Intel, AMD, Graviton).</li>
-        <li><strong>Elasticity</strong>: Resizable and customizable instances.</li>
-        <li><strong>Pricing</strong>: Pay-as-you-go or reserved instances.</li>
-        <li><strong>Management</strong>: Shared responsibility between AWS and the user.</li>
-      </ul>
+      <li><strong>Virtual Servers</strong>: Runs Linux or Windows virtual machines.</li>
+      <li><strong>Customization</strong>: Choose OS, storage, CPU type (Intel, AMD, Graviton).</li>
+      <li><strong>Elasticity</strong>: Resizable and customizable instances.</li>
+      <li><strong>Pricing</strong>: Pay-as-you-go or reserved instances.</li>
+      <li><strong>Management</strong>: Shared responsibility between AWS and the user.</li>
     </ul>
   </div>
 </div>
@@ -99,12 +97,10 @@
     <ul>
       <li><strong>Type</strong>: Serverless</li>
       <li><strong>Key Features</strong>:</li>
-      <ul>
-        <li><strong>No Server Management</strong>: AWS handles server management.</li>
-        <li><strong>Programming Languages</strong>: Supports Java, Go, Ruby, Node.js, Python, etc.</li>
-        <li><strong>Scalability</strong>: Instantly supports thousands of requests.</li>
-        <li><strong>Billing</strong>: Pay only for the compute time used.</li>
-      </ul>
+      <li><strong>No Server Management</strong>: AWS handles server management.</li>
+      <li><strong>Programming Languages</strong>: Supports Java, Go, Ruby, Node.js, Python, etc.</li>
+      <li><strong>Scalability</strong>: Instantly supports thousands of requests.</li>
+      <li><strong>Billing</strong>: Pay only for the compute time used.</li>
     </ul>
   </div>
 </div>
@@ -118,11 +114,9 @@
     <ul>
       <li><strong>Type</strong>: Orchestration</li>
       <li><strong>Key Features</strong>:</li>
-      <ul>
-        <li><strong>Automation</strong>: Handles deployment, management, scaling, and monitoring.</li>
-        <li><strong>Application Management</strong>: Manages capacity, load balancing, auto-scaling.</li>
-        <li><strong>Flexibility</strong>: Full control over underlying EC2 instances.</li>
-      </ul>
+      <li><strong>Automation</strong>: Handles deployment, management, scaling, and monitoring.</li>
+      <li><strong>Application Management</strong>: Manages capacity, load balancing, auto-scaling.</li>
+      <li><strong>Flexibility</strong>: Full control over underlying EC2 instances.</li>
     </ul>
   </div>
 </div>
@@ -136,11 +130,9 @@
     <ul>
       <li><strong>Type</strong>: Orchestration</li>
       <li><strong>Key Features</strong>:</li>
-      <ul>
-        <li><strong>Batch Processing</strong>: Runs batch computing workloads.</li>
-        <li><strong>Dynamic Provisioning</strong>: Automatically provisions compute resources.</li>
-        <li><strong>Focus on Results</strong>: No need to manage batch computing software.</li>
-      </ul>
+      <li><strong>Batch Processing</strong>: Runs batch computing workloads.</li>
+      <li><strong>Dynamic Provisioning</strong>: Automatically provisions compute resources.</li>
+      <li><strong>Focus on Results</strong>: No need to manage batch computing software.</li>
     </ul>
   </div>
 </div>
@@ -154,11 +146,9 @@
     <ul>
       <li><strong>Type</strong>: Virtual Machines</li>
       <li><strong>Key Features</strong>:</li>
-      <ul>
-        <li><strong>Predictable Pricing</strong>: Low and predictable monthly cost.</li>
-        <li><strong>Resources</strong>: Deploy VMs, databases, load balancers, DNS records.</li>
-        <li><strong>Ease of Use</strong>: Separate LightSail console for easy management.</li>
-      </ul>
+      <li><strong>Predictable Pricing</strong>: Low and predictable monthly cost.</li>
+      <li><strong>Resources</strong>: Deploy VMs, databases, load balancers, DNS records.</li>
+      <li><strong>Ease of Use</strong>: Separate LightSail console for easy management.</li>
     </ul>
   </div>
 </div>
@@ -172,18 +162,15 @@
     <ul>
       <li><strong>Type</strong>: Hybrid</li>
       <li><strong>Key Features</strong>:</li>
-      <ul>
-        <li><strong>On-Premises AWS</strong>: Run AWS services in your data center.</li>
-        <li><strong>Physical Equipment</strong>: Delivered as a fully assembled server rack.</li>
-        <li><strong>Integration</strong>: Similar to public AWS EC2 servers.</li>
-      </ul>
+      <li><strong>On-Premises AWS</strong>: Run AWS services in your data center.</li>
+      <li><strong>Physical Equipment</strong>: Delivered as a fully assembled server rack.</li>
+      <li><strong>Integration</strong>: Similar to public AWS EC2 servers.</li>
     </ul>
   </div>
 </div>
 
 </body>
 </html>
-
 
 
 ## <a id="aws-container-services"></a> $${\color{green}AWS\ container\ services}$$
