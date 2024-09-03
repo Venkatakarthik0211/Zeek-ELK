@@ -22,34 +22,6 @@
 # AWS Compute Services Overview
 <!DOCTYPE html>
 <html>
-<head>
-<style>
-  table {
-    width: 100%;
-    border-collapse: collapse; /* Collapse table borders */
-    margin-bottom: 20px; /* Space between sections */
-  }
-  td {
-    vertical-align: top; /* Align content at the top of each cell */
-    padding: 10px; /* Add padding inside cells */
-    border: 1px solid #ddd; /* Optional: Add border for better visual separation */
-  }
-  .image img {
-    max-width: 100%; /* Ensure images fit within their container */
-    height: auto; /* Maintain aspect ratio */
-  }
-  ul {
-    list-style-type: none; /* Remove default list styling */
-    padding: 0;
-  }
-  li {
-    margin-bottom: 10px; /* Add space between list items */
-  }
-  th, td {
-    text-align: left; /* Align text to the left */
-  }
-</style>
-</head>
 <body>
 
 <table>
