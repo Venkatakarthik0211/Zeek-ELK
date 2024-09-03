@@ -548,7 +548,6 @@
         </li>
         <li><strong>Use Case</strong>: Suitable for building a hybrid cloud storage infrastructure with active data transfer to AWS. For total migration and decommissioning of on-premises storage, consider using AWS DataSync Service instead.</li>
         </ul>
-
     </td>
   </tr>
 
@@ -559,12 +558,71 @@
 <table>
   <tr>
     <td class="image">
+      <img src="" alt="">
+    </td>
+    <td class="content">
+      <h2>Types of In-Build Databses</h2>
+        <ol>
+        <li>Relational Databases(RDS, Aurora)</li>
+        <li>NoSQL Databases(DynamoDB, DocumentDB)</li>
+        <li>In-Memory Databases(AWS ElastiCache - Redis, Memcached)</li>
+        <li>Data Warehouses(RedShift)</li>
+        <li>Other Database Types(AWS KeySpaces, AWS Neptune, AWS TimeStream, AWS QuantamLedger)</li>
+        </ol>
+    </td>
+  </tr>
+  <tr>
+    <td class="image">
       <img src="https://raw.githubusercontent.com/sashee/aws-svg-icons/ddf2928b65d8f18c20c6a792740ec934804e7a25/docs/Architecture-Service-Icons_07302021/Arch_Database/64/Arch_Amazon-RDS_64.svg" alt="">
     </td>
     <td class="content">
-      <h2></h2>
-      <ul>
-      </ul>
+      <h2>AWS RDS</h2>
+        <ul>
+            <li>Managed relational database service by AWS</li>
+            <li>AWS handles hardware provisioning, patching, backups, and maintenance</li>
+            <li>Users have control over:
+                <ul>
+                <li>EC2 instance size</li>
+                <li>Storage instance type</li>
+                <li>Network access</li>
+                <li>DB patch application timing during maintenance window</li>
+                </ul>
+            </li>
+            <li>Supports various database engines:
+                <ul>
+                <li>Microsoft SQL Server</li>
+                <li>MySQL</li>
+                <li>MariaDB</li>
+                <li>Postgres</li>
+                <li>Oracle</li>
+                <li>Aurora</li>
+                <li>Others</li>
+                </ul>
+            </li>
+            <li>Deployment options:
+                <ul>
+                <li><strong>Single-AZ:</strong> 
+                    <ul>
+                    <li>One DB instance in a single availability zone</li>
+                    <li>Primary DB instance</li>
+                    </ul>
+                </li>
+                <li><strong>Multi-AZ:</strong> 
+                    <ul>
+                    <li>Primary instance in one AZ</li>
+                    <li>Standby instance in a different AZ within the same AWS region</li>
+                    <li>Standby instance (standby replica) replicates data from the primary instance</li>
+                    </ul>
+                </li>
+                </ul>
+            </li>
+            <li><strong>Read Replicas:</strong> 
+                <ul>
+                <li>Used to offload read requests from the primary DB instance</li>
+                <li>Can be deployed in a different AWS region from the primary instance</li>
+                </ul>
+            </li>
+        </ul>
     </td>
   </tr>
 
@@ -573,9 +631,30 @@
       <img src="https://raw.githubusercontent.com/sashee/aws-svg-icons/ddf2928b65d8f18c20c6a792740ec934804e7a25/docs/Architecture-Service-Icons_07302021/Arch_Database/64/Arch_Amazon-Aurora_64.svg" alt="">
     </td>
     <td class="content">
-      <h2></h2>
-      <ul>
-      </ul>
+      <h2>AWS Aurora</h2>
+        <ul>
+            <li>Aurora is both a database engine and a fully managed service owned by AWS.</li>
+            <li>Compatible with both MySQL and PostgreSQL engines.</li>
+            <li>Existing code, applications, and tools for MySQL and PostgreSQL can be used with Aurora with little or no change.</li>
+            <li>Scales automatically, performs faster, and costs lower than other databases.</li>
+            <li>Similar to Amazon RDS, but with additional features.</li>
+            <li>Can automatically grow or scale storage as needed.</li>
+            <li>Usually deployed as a database cluster.</li>
+            <li>A cluster consists of:
+                <ul>
+                <li>A primary DB instance</li>
+                <li>Multiple Aurora replicas or DB instances</li>
+                </ul>
+            </li>
+            <li>Clusters have a single-master configuration by default:
+                <ul>
+                <li>Applications can only write data to a single master DB instance.</li>
+                </ul>
+            </li>
+            <li>In a multi-master cluster, all DB instances have read and write capabilities.</li>
+            <li>Suitable for applications with constantly changing data, such as online transaction processing (OLTP) applications.</li>
+            <li>Example of an OLTP application: An e-commerce website that processes thousands of online transactions per hour.</li>
+        </ul>
     </td>
   </tr>
 
@@ -584,9 +663,19 @@
       <img src="https://raw.githubusercontent.com/sashee/aws-svg-icons/ddf2928b65d8f18c20c6a792740ec934804e7a25/docs/Architecture-Service-Icons_07302021/Arch_Database/64/Arch_Amazon-DynamoDB_64.svg" alt="">
     </td>
     <td class="content">
-      <h2></h2>
-      <ul>
-      </ul>
+      <h2>AWS DynamoDB</h2>
+        <ul>
+        <li>Amazon DynamoDB is a fully managed NoSQL database composed of tables, items, and attributes.</li>
+        <li>Items and attributes in DynamoDB are equivalent to records and columns in a relational database like Amazon RDS.</li>
+        <li>NoSQL databases, like DynamoDB, do not have a rigid schema or extensive table relationships.</li>
+        <li>In a relational database, a change in a single column may cause issues or violations in table constraints.</li>
+        <li>Two or more tables in a relational database have relationships, so changes in one table's schema can affect others.</li>
+        <li>In DynamoDB, you can easily add, remove, or modify attributes without affecting other tables.</li>
+        <li>DynamoDB tables do not have relationships with other DynamoDB tables.</li>
+        <li>There is no need to create table joins, foreign keys, or complex table relationships in DynamoDB.</li>
+        <li>You can safely update the schema at any time in DynamoDB.</li>
+        <li>DynamoDB allows you to store complex hierarchical data within a single item and store related items in the same table.</li>
+        </ul>
     </td>
   </tr>
 
@@ -595,9 +684,31 @@
       <img src="https://raw.githubusercontent.com/sashee/aws-svg-icons/ddf2928b65d8f18c20c6a792740ec934804e7a25/docs/Architecture-Service-Icons_07302021/Arch_Database/64/Arch_Amazon-DocumentDB_64.svg" alt="">
     </td>
     <td class="content">
-      <h2></h2>
-      <ul>
-      </ul>
+      <h2>AWS DocmentDB</h2>
+        <ul>
+            <li>Amazon DocumentDB:
+                <ul>
+                    <li>Fast, scalable, and highly available MongoDB compatible database service.</li>
+                    <li>Stores queries and indexes JSON documents.</li>
+                    <li>Named for its use of JSON document storage.</li>
+                </ul>
+            </li>
+            <li>MongoDB:
+                <ul>
+                    <li>Document-oriented database program.</li>
+                    <li>Cross-platform.</li>
+                    <li>Type of NoSQL database.</li>
+                    <li>Terminology:
+                        <ul>
+                            <li>Table = Collection</li>
+                            <li>Row = Document</li>
+                            <li>Column = Field</li>
+                        </ul>
+                    </li>
+                    <li>Stores data in JSON format with no rigid schema enforced.</li>
+                </ul>
+            </li>
+        </ul>
     </td>
   </tr>
 
@@ -606,9 +717,21 @@
       <img src="https://raw.githubusercontent.com/sashee/aws-svg-icons/ddf2928b65d8f18c20c6a792740ec934804e7a25/docs/Architecture-Service-Icons_07302021/Arch_Database/64/Arch_Amazon-ElastiCache_64.svg" alt="">
     </td>
     <td class="content">
-      <h2></h2>
-      <ul>
-      </ul>
+      <h2>AWS Elasticache</h2>
+        <ul>
+            <li>Amazon ElastiCache is a caching service that allows you to set up, run, and scale open source in-memory databases like Memcached or Redis.</li>
+            <li>By storing data in-memory, ElastiCache enables faster data retrieval compared to disk-based databases.</li>
+            <li>If your application experiences performance slowdowns due to frequent calls for identical datasets, you should apply database caching to eliminate this bottleneck.</li>
+            <li>Refactor your application to use Amazon ElastiCache to fetch data in-memory instead of repeatedly querying the same datasets.</li>
+            <li>In addition to caching, ElastiCache can be used for real-time analytics, distributed session management, geospatial services, and more.</li>
+            <li>ElastiCache offers two types of engines you can launch:
+                <ul>
+                    <li>Amazon ElastiCache for Memcached</li>
+                    <li>Amazon ElastiCache for Redis</li>
+                </ul>
+            </li>
+            <li>Both Memcached and Redis engines provide sub-millisecond latency, data partitioning, and require minimal code integration into your application.</li>
+        </ul>
     </td>
   </tr>
   <tr>
@@ -616,9 +739,25 @@
       <img src="https://raw.githubusercontent.com/sashee/aws-svg-icons/ddf2928b65d8f18c20c6a792740ec934804e7a25/docs/Resource-Icons_07302021/Res_Database/Res_48_Light/Res_Amazon-ElastiCache_ElastiCache-for-Redis_48_Light.svg" alt="">
     </td>
     <td class="content">
-      <h2></h2>
-      <ul>
-      </ul>
+      <h2>AWS Elasticache for Redis</h2>
+        <ul>
+        <li>Amazon ElastiCache for Redis is based on the open source Redis in-memory data store.</li>
+        <li>It provides:
+            <ul>
+            <li>Advanced data structures</li>
+            <li>Pub/sub messaging</li>
+            <li>Geospatial capabilities</li>
+            <li>Point-in-time snapshot support</li>
+            </ul>
+        </li>
+        <li>Redis has a replication feature not available in Memcached.</li>
+        <li>For high availability using data replication, enable the cluster mode in Redis to have:
+            <ul>
+            <li>Multiple primary nodes</li>
+            <li>Replicas across two or more availability zones</li>
+            </ul>
+        </li>
+        </ul>
     </td>
   </tr>
   <tr>
@@ -627,8 +766,12 @@
     </td>
     <td class="content">
       <h2></h2>
-      <ul>
-      </ul>
+        <ul>
+        <li><strong>Amazon ElastiCache for Memcached:</strong> Based on the open source Memcached in-memory data store.</li>
+        <li><strong>Use Case:</strong> Suitable for building a simple and scalable caching layer for data-intensive applications.</li>
+        <li><strong>Multi-threaded:</strong> Memcached can utilize multiple processing cores, which helps handle more operations by scaling up your computing capacity.</li>
+        <li><strong>Downside:</strong> Lack of data replication capability, which can affect the availability of your cache layer.</li>
+        </ul>
     </td>
   </tr>
   <tr>
@@ -636,9 +779,12 @@
       <img src="https://raw.githubusercontent.com/sashee/aws-svg-icons/ddf2928b65d8f18c20c6a792740ec934804e7a25/docs/Architecture-Service-Icons_07302021/Arch_Database/64/Arch_Amazon-Keyspaces_64.svg" alt="">
     </td>
     <td class="content">
-      <h2></h2>
-      <ul>
-      </ul>
+      <h2>AWS KeySpaces</h2>
+        <ul>
+            <li>Amazon Keyspaces is a scalable, highly available managed Apache Cassandra-compatible database service.</li>
+            <li>Apache Cassandra is an open-source wide column data store designed to handle large amounts of data.</li>
+            <li>With Amazon Keyspaces, you can run Cassandra workloads on AWS without having to provision, patch, or manage servers.</li>
+        </ul>
     </td>
   </tr>
   <tr>
@@ -646,9 +792,12 @@
       <img src="https://raw.githubusercontent.com/sashee/aws-svg-icons/ddf2928b65d8f18c20c6a792740ec934804e7a25/docs/Architecture-Service-Icons_07302021/Arch_Database/64/Arch_Amazon-Neptune_64.svg" alt="">
     </td>
     <td class="content">
-      <h2></h2>
-      <ul>
-      </ul>
+      <h2>AWS Neptune</h2>
+        <ul>
+            <li>AWS Neptune makes it easy for you to build and run applications that work with highly connected datasets.</li>
+            <li>It allows you to store billions of relationships and query your data graphs with milliseconds latency.</li>
+            <li>Uses nodes to store data entities and edges to store relationships between entities.</li>
+        </ul>
     </td>
   </tr>
   <tr>
@@ -656,9 +805,19 @@
       <img src="https://raw.githubusercontent.com/sashee/aws-svg-icons/ddf2928b65d8f18c20c6a792740ec934804e7a25/docs/Architecture-Service-Icons_07302021/Arch_Database/64/Arch_Amazon-Timestream_64.svg" alt="">
     </td>
     <td class="content">
-      <h2></h2>
-      <ul>
-      </ul>
+      <h2>AWS TimeStream</h2>
+        <ul>
+            <li>A fast, scalable, and serverless time series database service</li>
+            <li>Primarily used for Internet-of-Things and operational applications</li>
+            <li>Track the changes of your data</li>
+            <li>Can be used to track:
+                <ul>
+                    <li>Stock prices</li>
+                    <li>Temperature measurements</li>
+                    <li>CPU utilization of an EC2 instance over a specific amount of time</li>
+                </ul>
+            </li>
+        </ul>
     </td>
   </tr>
 </table>
