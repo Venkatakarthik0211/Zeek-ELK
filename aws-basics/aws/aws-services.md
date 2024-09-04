@@ -1423,9 +1423,27 @@
       <img src="https://raw.githubusercontent.com/sashee/aws-svg-icons/ddf2928b65d8f18c20c6a792740ec934804e7a25/docs/Architecture-Service-Icons_07302021/Arch_App-Integration/Arch_64/Arch_Amazon-API-Gateway_64.svg" alt="">
     </td>
     <td class="content">
-      <h2></h2>
-      <ul>
-      </ul>
+      <h2>AWS API Gateway</h2>
+        <ul>
+        <li>Amazon API Gateway is a fully managed service that allows you to publish, maintain, monitor, and secure your RESTful APIs.</li>
+        <li>Supports WebSockets for real-time message communication to your clients.</li>
+        <li>Acts as a front door for backend services running on:
+            <ul>
+            <li>AWS Lambda</li>
+            <li>Amazon EC2</li>
+            <li>Amazon ECS</li>
+            <li>AWS Elastic Beanstalk</li>
+            <li>Any web application</li>
+            </ul>
+        </li>
+        <li>Amazon API Gateway can be thought of as a web proxy service, similar to:
+            <ul>
+            <li>APIGEE</li>
+            <li>MuleSoft</li>
+            <li>Other web proxies</li>
+            </ul>
+        </li>
+        </ul>
     </td>
   </tr>
   <tr>
@@ -1433,9 +1451,28 @@
       <img src="https://raw.githubusercontent.com/sashee/aws-svg-icons/ddf2928b65d8f18c20c6a792740ec934804e7a25/docs/Architecture-Service-Icons_07302021/Arch_App-Integration/Arch_64/Arch_Amazon-Simple-Queue-Service_64.svg" alt="">
     </td>
     <td class="content">
-      <h2></h2>
-      <ul>
-      </ul>
+      <h2>AWS SQS</h2>
+        <ul>
+        <li>Amazon Simple Queue Service (SQS) is a fully managed queuing service.</li>
+        <li>SQS provides a queue where incoming messages can line up and be processed by consumers like EC2 instances, Lambda functions, ECS tasks, etc.</li>
+        <li>SQS can replace traditional message-oriented middleware without the need to maintain or manage underlying resources.</li>
+        <li>There are two types of message queues in SQS:
+            <ul>
+            <li>Standard Queue: Offers at least once delivery with best effort ordering, providing higher throughput but may deliver duplicate messages.</li>
+            <li>FIFO (First In, First Out) Queue: Guarantees exactly once delivery and preserves the order of messages, but offers less throughput.</li>
+            </ul>
+        </li>
+        <li>The visibility timeout of messages in the queue can be changed using the ChangeMessageVisibility API or through the web console, but it does not guarantee against receiving a message twice.</li>
+        <li>FIFO queues are ideal for applications requiring exact once processing and preserving the order of messages.</li>
+        <li>SQS can scale EC2 instances based on message age, depth, or number in the queue, and can configure auto-scaling groups accordingly.</li>
+        <li>You can configure an auto-scaling group with a target tracking policy based on the age of the oldest message in the queue.</li>
+        <li>SQS integrates with other AWS services like Amazon SNS, Amazon ECS, and others for various functions, such as:
+            <ul>
+            <li>Receiving notifications when a new object is created in an S3 bucket.</li>
+            <li>Sending messages between ECS microservices.</li>
+            </ul>
+        </li>
+        </ul>
     </td>
   </tr>
   <tr>
@@ -1443,9 +1480,20 @@
       <img src="https://raw.githubusercontent.com/sashee/aws-svg-icons/ddf2928b65d8f18c20c6a792740ec934804e7a25/docs/Architecture-Service-Icons_07302021/Arch_App-Integration/Arch_64/Arch_Amazon-Simple-Notification-Service_64.svg" alt="">
     </td>
     <td class="content">
-      <h2></h2>
-      <ul>
-      </ul>
+      <h2>AWS SNS</h2>
+        <ul>
+            <li>Amazon Simple Notification Service (Amazon SNS) is a fully managed messaging and notification service.</li>
+            <li>Amazon SNS enables communication between systems through publish/subscribe (pub/sub) patterns.</li>
+            <li>It facilitates messaging between decoupled microservice applications or directly to users via mobile push, email, or SMS.</li>
+            <li>The main resource in Amazon SNS is a topic, which can be subscribed to by applications or other AWS services.</li>
+            <li>Example: Amazon CloudWatch can use an SNS topic to send notifications (e.g., email or Slack) for activities in an autoscaling group.</li>
+            <li>One or more Amazon SQS queues can subscribe to a single SNS topic.</li>
+            <li>Amazon SNS supports message filtering, allowing specific subscribers to receive only a subset of messages by assigning a filter policy to the topic subscription.</li>
+            <li>Message filtering allows one SNS topic to publish specific messages to multiple SQS queues based on message type.</li>
+            <li>This approach is known as fan-out event notification, where messages are pushed to multiple subscribers, avoiding the need for periodic checks or queue polling.</li>
+            <li>Example: One SNS topic with various insurance code types (e.g., car insurance, home insurance, pet insurance) can publish messages to specific SQS queues based on the type.</li>
+            <li>A backend application server needs to be configured to consume messages from the queue corresponding to a particular type.</li>
+        </ul>
     </td>
   </tr>
   <tr>
@@ -1453,9 +1501,15 @@
       <img src="https://raw.githubusercontent.com/sashee/aws-svg-icons/ddf2928b65d8f18c20c6a792740ec934804e7a25/docs/Architecture-Service-Icons_07302021/Arch_App-Integration/Arch_64/Arch_AWS-Step-Functions_64.svg" alt="">
     </td>
     <td class="content">
-      <h2></h2>
-      <ul>
-      </ul>
+      <h2>AWS Step Function</h2>
+        <ul>
+            <li>AWS Step Functions is a serverless function orchestrator for AWS Lambda.</li>
+            <li>It allows you to orchestrate or sequence multiple AWS Lambda functions to achieve a specific workflow.</li>
+            <li>Step Functions enables the creation of a state machine using a visual workflow.</li>
+            <li>The visual workflow contains a combination of steps, activities, and service tasks.</li>
+            <li>Step Functions help coordinate multiple components and configure each step in your workflow using Lambda functions.</li>
+            <li>The name "Step Functions" comes from its ability to define and manage each step of the workflow.</li>
+        </ul>
     </td>
   </tr>
   <tr>
@@ -1463,9 +1517,24 @@
       <img src="https://raw.githubusercontent.com/sashee/aws-svg-icons/ddf2928b65d8f18c20c6a792740ec934804e7a25/docs/Architecture-Service-Icons_07302021/Arch_App-Integration/Arch_64/Arch_Amazon-MQ_64.svg" alt="">
     </td>
     <td class="content">
-      <h2></h2>
-      <ul>
-      </ul>
+      <h2>AWS MQ</h2>
+        <ul>
+            <li>Amazon MQ is a managed message broker service in AWS that uses the open-source Apache ActiveMQ program.</li>
+            <li>MQ stands for Message Queue, which is a form of asynchronous communication used in distributed systems, serverless applications, or microservices architectures.</li>
+            <li>Messages in Amazon MQ are stored in the queue until they're processed and deleted by a consumer.</li>
+            <li>Amazon MQ is similar to Amazon SQS, but the main difference is its capability to support different types of messaging protocols.</li>
+            <li>Amazon MQ provides compatibility with common messaging APIs, such as:
+                <ul>
+                    <li>Java Message Service (JMS)</li>
+                    <li>.NET Message Service (NMS)</li>
+                    <li>AMQP</li>
+                    <li>MQTT</li>
+                    <li>WebSockets</li>
+                    <li>Many others</li>
+                </ul>
+            </li>
+            <li>Amazon EventBridge is a serverless event bus that makes it easy to connect applications using data from your own applications, software as a service (SaaS) applications, and other AWS services.</li>
+        </ul>
     </td>
   </tr>
   <tr>
@@ -1473,9 +1542,14 @@
       <img src="https://raw.githubusercontent.com/sashee/aws-svg-icons/ddf2928b65d8f18c20c6a792740ec934804e7a25/docs/Architecture-Service-Icons_07302021/Arch_App-Integration/Arch_64/Arch_Amazon-EventBridge_64.svg" alt="">
     </td>
     <td class="content">
-      <h2></h2>
-      <ul>
-      </ul>
+      <h2>AWS EventBridge</h2>
+        <ul>
+        <li>Amazon EventBridge is a service based on CloudWatch Events with more advanced features.</li>
+        <li>EventBridge uses the same service API, endpoint, and underlying service infrastructure as CloudWatch Events.</li>
+        <li>It is designed for use with your own applications, third-party Software-as-a-Service (SaaS) apps, and other external sources.</li>
+        <li>EventBridge complements the data provided by AWS services.</li>
+        <li>It is used for building event-driven applications that manage event ingestion, delivery, security, authorization, and error handling.</li>
+        </ul>
     </td>
   </tr>
   <tr>
@@ -1483,9 +1557,25 @@
       <img src="https://raw.githubusercontent.com/sashee/aws-svg-icons/ddf2928b65d8f18c20c6a792740ec934804e7a25/docs/Architecture-Service-Icons_07302021/Arch_App-Integration/Arch_64/Arch_AWS-AppSync_64.svg" alt="">
     </td>
     <td class="content">
-      <h2></h2>
-      <ul>
-      </ul>
+      <h2>AWS AppSync</h2>
+        <ul>
+        <li>AWS AppSync is a managed service that uses GraphQL for efficient data querying.</li>
+        <li>GraphQL allows querying REST APIs exposed as a schema.</li>
+        <li>Schemas in GraphQL can be:
+            <ul>
+            <li>Query schema for reading data</li>
+            <li>Mutation schema for writing data</li>
+            <li>Subscription schema for receiving or uploading data</li>
+            </ul>
+        </li>
+        <li>Traditional REST APIs return all data by default when performing an HTTP GET operation.</li>
+        <li>REST APIs often return more data than necessary, which may not be used by applications.</li>
+        <li>Filtering data in REST APIs using query string parameters is limited to a single resource or schema.</li>
+        <li>GraphQL allows combining multiple resources in a single API call, retrieving only the needed data.</li>
+        <li>A resolver in GraphQL is a function that resolves or publishes data in the schema.</li>
+        <li>AWS AppSync facilitates the integration and management of GraphQL in applications.</li>
+        <li>AppSync simplifies application development by creating flexible APIs to securely access, manipulate, and combine data from multiple data sources.</li>
+        </ul>
     </td>
   </tr>
   <tr>
@@ -1493,13 +1583,19 @@
       <img src="https://raw.githubusercontent.com/sashee/aws-svg-icons/ddf2928b65d8f18c20c6a792740ec934804e7a25/docs/Architecture-Service-Icons_07302021/Arch_App-Integration/Arch_64/Arch_Amazon-AppFlow_64.svg" alt="">
     </td>
     <td class="content">
-      <h2></h2>
-      <ul>
-      </ul>
+      <h2>AWS AppFlow</h2>
+        <ul>
+        <li>Amazon AppFlow is a fully managed integration service.</li>
+        <li>It enables secure data transfer between SaaS applications and AWS services.</li>
+        <li>Supports SaaS applications such as Salesforce, Marketo, Slack, and ServiceNow.</li>
+        <li>Integrates with AWS services like Amazon S3, Amazon Redshift, and others.</li>
+        <li>Data flows can be run on demand or scheduled.</li>
+        <li>Data flows can also be triggered by business events.</li>
+        <li>Provides powerful data transformation capabilities including filtering and validation.</li>
+        <li>Generates rich, ready-to-use data for custom applications.</li>
+        </ul>
     </td>
   </tr>
-
-
 </table>
 
 
@@ -1511,9 +1607,48 @@
       <img src="https://raw.githubusercontent.com/sashee/aws-svg-icons/ddf2928b65d8f18c20c6a792740ec934804e7a25/docs/Architecture-Service-Icons_07302021/Arch_Security-Identity-Compliance/64/Arch_AWS-WAF_64.svg" alt="">
     </td>
     <td class="content">
-      <h2></h2>
-      <ul>
-      </ul>
+      <h2>AWS WAF</h2>
+        <ul>
+            <li>AWS Web Application Firewall Service (AWS WAF) is a web application firewall service in AWS.</li>
+            <li>It protects web applications from common web exploits that could:
+                <ul>
+                    <li>Affect application availability</li>
+                    <li>Compromise security</li>
+                    <li>Consume excessive resources</li>
+                </ul>
+            </li>
+            <li>Custom rules can be created to block common attack patterns such as:
+                <ul>
+                    <li>SQL injection</li>
+                    <li>Cross-site scripting attacks</li>
+                </ul>
+            </li>
+            <li>AWS WAF can be integrated with:
+                <ul>
+                    <li>Amazon CloudFront</li>
+                    <li>Application Load Balancer</li>
+                    <li>Amazon API Gateway</li>
+                </ul>
+            </li>
+            <li>IP match condition feature allows blocking of malicious requests from specific IP addresses.</li>
+            <li>Rate-limiting rule can protect against illegitimate requests from external systems by:
+                <ul>
+                    <li>Creating a rate-based web access control list (Web ACL)</li>
+                    <li>Attaching it to a CloudFront distribution</li>
+                </ul>
+            </li>
+            <li>This helps minimize the effects of DDoS attacks.</li>
+            <li>AWS WAF is suitable for applications that:
+                <ul>
+                    <li>Need to be accessed only from a specific country</li>
+                </ul>
+            </li>
+            <li>Geo Match condition allows blocking or allowing access based on:
+                <ul>
+                    <li>Specific countries</li>
+                </ul>
+            </li>
+        </ul>
     </td>
   </tr>
 
@@ -1522,20 +1657,64 @@
       <img src="https://raw.githubusercontent.com/sashee/aws-svg-icons/ddf2928b65d8f18c20c6a792740ec934804e7a25/docs/Architecture-Service-Icons_07302021/Arch_Security-Identity-Compliance/64/Arch_AWS-Firewall-Manager_64.svg" alt="">
     </td>
     <td class="content">
-      <h2></h2>
-      <ul>
-      </ul>
+      <h2>AWS Firewall Manager</h2>
+        <ul>
+        <li><strong>AWS Firewall Manager</strong>: A security management service designed to centrally configure and manage AWS WAF rules across your accounts and applications.</li>
+        <li>Using AWS Firewall Manager, you can:
+            <ul>
+            <li>Easily roll out custom rules for Application Load Balancers, API Gateways, and Amazon CloudFront distributions.</li>
+            <li>Apply rules across accounts in an AWS organization.</li>
+            </ul>
+        </li>
+        <li><strong>AWS Shield</strong>: A managed DDoS protection service that safeguards applications running on AWS.</li>
+        <li>AWS Shield provides:
+            <ul>
+            <li>Detection and automatic mitigations to minimize application downtime and latency.</li>
+            <li>Mitigation against different types of flood attacks, such as:
+                <ul>
+                <li>UDP reflection</li>
+                <li>SYN flood</li>
+                <li>DNS Query flood</li>
+                <li>HTTP flood attacks</li>
+                </ul>
+            </li>
+            </ul>
+        </li>
+        </ul>
     </td>
   </tr>
-
   <tr>
     <td class="image">
       <img src="https://raw.githubusercontent.com/sashee/aws-svg-icons/ddf2928b65d8f18c20c6a792740ec934804e7a25/docs/Architecture-Service-Icons_07302021/Arch_Security-Identity-Compliance/64/Arch_AWS-Shield_64.svg" alt="">
     </td>
     <td class="content">
-      <h2></h2>
-      <ul>
-      </ul>
+    <h2>AWS Shield</h2>
+        <ul>
+            <li>AWS Shield protects applications using:
+                <ul>
+                    <li>Amazon EC2</li>
+                    <li>Elastic Load Balancers</li>
+                    <li>CloudFront distributions</li>
+                    <li>AWS Global Accelerators</li>
+                    <li>Route 53 Edge locations</li>
+                </ul>
+            </li>
+            <li>AWS Shield has two tiers:
+                <ul>
+                    <li>Standard: Built-in, no extra charge</li>
+                    <li>Advanced: Paid version, includes real-time DDoS attack notifications and access to the DDoS Response Team (DRT)</li>
+                </ul>
+            </li>
+            <li>Amazon GuardDuty is a managed threat detection service that identifies:
+                <ul>
+                    <li>Malicious or unauthorized activities in AWS accounts and workloads</li>
+                    <li>Unusual API calls</li>
+                    <li>Cryptocurrency mining</li>
+                    <li>Potentially unauthorized deployments</li>
+                </ul>
+            </li>
+            <li>GuardDuty detects potentially compromised EC2 instances and produces security reports called Findings, which represent potential security issues within your network.</li>
+        </ul>
     </td>
   </tr>
 
@@ -1544,9 +1723,29 @@
       <img src="https://raw.githubusercontent.com/sashee/aws-svg-icons/ddf2928b65d8f18c20c6a792740ec934804e7a25/docs/Architecture-Service-Icons_07302021/Arch_Security-Identity-Compliance/64/Arch_Amazon-GuardDuty_64.svg" alt="">
     </td>
     <td class="content">
-      <h2></h2>
-      <ul>
-      </ul>
+      <h2>AWS GuardDuty</h2>
+        <ul>
+        <li>Amazon GuardDuty is a managed threat detection service.</li>
+        <li>It helps identify malicious or unauthorized activities in AWS accounts and workloads.</li>
+        <li>Monitors activities such as:
+            <ul>
+            <li>Unusual API calls</li>
+            <li>Cryptocurrency mining</li>
+            <li>Potentially unauthorized deployments</li>
+            </ul>
+        </li>
+        <li>Detects possible account compromises.</li>
+        <li>Can detect potentially compromised EC2 Instances.</li>
+        <li>Produces security reports called "Findings" that indicate potential security issues.</li>
+        <li>GuardDuty can send notifications using CloudWatch Events when changes occur in security Findings.</li>
+        <li>This service is used solely for threat detection.</li>
+        <li>It is not capable of making resource changes such as:
+            <ul>
+            <li>Rate Limiting Protection</li>
+            <li>DDoS attack mitigation</li>
+            </ul>
+        </li>
+        </ul>
     </td>
   </tr>
   <tr>
@@ -1554,9 +1753,18 @@
       <img src="https://raw.githubusercontent.com/sashee/aws-svg-icons/ddf2928b65d8f18c20c6a792740ec934804e7a25/docs/Architecture-Service-Icons_07302021/Arch_Security-Identity-Compliance/64/Arch_AWS-CloudHSM_64.svg" alt="">
     </td>
     <td class="content">
-      <h2></h2>
-      <ul>
-      </ul>
+      <h2>AWS CloudHSM</h2>
+        <ul>
+        <li>AWS CloudHSM is a fully managed cloud-based hardware security module (HSM).</li>
+        <li>CloudHSM allows you to easily generate and use your own encryption keys (128-bit or 256-bit).</li>
+        <li>HSM is a physical hardware device that performs cryptographic operations and securely stores cryptographic key material.</li>
+        <li>Key material in CloudHSM is a random Base64 or hexadecimal string in a binary format used by your encryption key.</li>
+        <li>The CloudHSM cluster is deployed in your Amazon VPC and can be accessed or managed using CloudHSM clients installed on your Amazon EC2 instances.</li>
+        <li>Clients communicate with the HSM cluster using Elastic Network Interfaces (ENIs) of the HSMs.</li>
+        <li>The CloudHSM cluster is a single-tenant service, meaning you have exclusive control over it.</li>
+        <li>CloudHSM can be used for offloading SSL processing of web servers, enabling Transparent Data Encryption (TDE) for Oracle databases, and protecting private keys for an Issuing Certificate Authority (CA).</li>
+        <li>You can integrate CloudHSM with AWS KMS to create a custom key store.</li>
+        </ul>
     </td>
   </tr>
   <tr>
@@ -1564,9 +1772,20 @@
       <img src="https://raw.githubusercontent.com/sashee/aws-svg-icons/ddf2928b65d8f18c20c6a792740ec934804e7a25/docs/Architecture-Service-Icons_07302021/Arch_Security-Identity-Compliance/64/Arch_AWS-Key-Management-Service_64.svg" alt="">
     </td>
     <td class="content">
-      <h2></h2>
-      <ul>
-      </ul>
+      <h2>AWS KMS</h2>
+        <ul>
+        <li>AWS Key Management Service (KMS) is a managed service that functions similarly to CloudHSM.</li>
+        <li>KMS uses hardware security modules (HSMs) under the hood to create and control encryption keys.</li>
+        <li>Unlike CloudHSM, KMS is multi-tenant, meaning you share the HSM with other AWS customers.</li>
+        <li>You cannot launch an HSM to your Amazon VPC or EC2 Instances; the HSM is fully managed by AWS.</li>
+        <li>KMS can be integrated with other AWS services, such as Amazon EBS, Amazon S3, and Amazon RDS, to protect your data.</li>
+        <li>KMS uses envelope encryption, encrypting plain text data with a data key, which is then encrypted with a master key.</li>
+        <li>The primary resource in KMS is the Customer Master Key (CMK), which represents the master key that encrypts your data key.</li>
+        <li>KMS allows you to store and automatically rotate your CMKs to meet encryption requirements.</li>
+        <li>You can create a custom key store in KMS using CloudHSM, giving you complete control over the encryption key lifecycle.</li>
+        <li>This custom key store allows you to remove the key material of your encryption keys.</li>
+        <li>You can audit key usage independently of AWS CloudTrail and KMS itself using the custom key store.</li>
+        </ul>
     </td>
   </tr>
   <tr>
@@ -1574,9 +1793,16 @@
       <img src="https://raw.githubusercontent.com/sashee/aws-svg-icons/ddf2928b65d8f18c20c6a792740ec934804e7a25/docs/Architecture-Service-Icons_07302021/Arch_Security-Identity-Compliance/64/Arch_AWS-Secrets-Manager_64.svg" alt="">
     </td>
     <td class="content">
-      <h2></h2>
-      <ul>
-      </ul>
+      <h2>AWS Secrets Manager</h2>
+        <ul>
+            <li>AWS Secrets Manager helps protect secrets needed to access your applications, services, and IT resources.</li>
+            <li>Enables easy rotation, management, and retrieval of secrets throughout their lifecycle.</li>
+            <li>Secrets can include database passwords, API keys, authentication tokens, or other sensitive data.</li>
+            <li>Eliminates the need to hard code sensitive information in plain text for Lambda functions or custom applications.</li>
+            <li>Offers secret rotation with built-in integration for Amazon RDS, Amazon Redshift, Amazon DocumentDB, and other services.</li>
+            <li>Enables control of access to secrets using fine-grained permissions and centralized auditing of secrets.</li>
+            <li>Does not use HSM (Hardware Security Module), so encryption keys or key materials should not be stored here.</li>
+        </ul>
     </td>
   </tr>
   <tr>
@@ -1584,9 +1810,15 @@
       <img src="https://raw.githubusercontent.com/sashee/aws-svg-icons/ddf2928b65d8f18c20c6a792740ec934804e7a25/docs/Architecture-Service-Icons_07302021/Arch_Security-Identity-Compliance/64/Arch_AWS-Certificate-Manager_64.svg" alt="">
     </td>
     <td class="content">
-      <h2></h2>
-      <ul>
-      </ul>
+      <h2>AWS Certificate Manager</h2>
+        <ul>
+        <li>AWS Certificate Manager (ACM) is a service that allows you to create and manage SSL certificates.</li>
+        <li>ACM enables easy provisioning, management, and deployment of public and private SSL/TLS certificates.</li>
+        <li>These certificates can be used with AWS services and internal connected resources.</li>
+        <li>ACM allows the creation of private certificates for internal resources.</li>
+        <li>ACM enables centralized management of the certificate lifecycle.</li>
+        <li>Public and private certificates provisioned through ACM are free for use with certain AWS services.</li>
+        </ul>
     </td>
   </tr>
   <tr>
@@ -1594,9 +1826,24 @@
       <img src="https://raw.githubusercontent.com/sashee/aws-svg-icons/ddf2928b65d8f18c20c6a792740ec934804e7a25/docs/Architecture-Service-Icons_07302021/Arch_Security-Identity-Compliance/64/Arch_Amazon-Macie_64.svg" alt="">
     </td>
     <td class="content">
-      <h2></h2>
-      <ul>
-      </ul>
+      <h2>AWS Macie</h2>
+        <ul>
+            <li>Amazon Macie is a fully managed security service.</li>
+            <li>Automatically recognizes and classifies sensitive data or intellectual property on AWS.</li>
+            <li>Uses machine learning to discover, classify, and protect sensitive data.</li>
+            <li>Focuses on data stored in Amazon S3 buckets and other AWS services.</li>
+            <li>Recognizes personally identifiable information (PII), such as:
+                <ul>
+                    <li>Names</li>
+                    <li>Social security numbers</li>
+                    <li>Driver's license numbers</li>
+                    <li>Bank account numbers</li>
+                    <li>Password numbers</li>
+                    <li>Email addresses</li>
+                </ul>
+            </li>
+            <li>Provides dashboards and alerts for visibility into how sensitive data is accessed or moved.</li>
+        </ul>
     </td>
   </tr>
   <tr>
@@ -1604,9 +1851,14 @@
       <img src="https://raw.githubusercontent.com/sashee/aws-svg-icons/ddf2928b65d8f18c20c6a792740ec934804e7a25/docs/Architecture-Service-Icons_07302021/Arch_Security-Identity-Compliance/64/Arch_Amazon-Inspector_64.svg" alt="">
     </td>
     <td class="content">
-      <h2></h2>
-      <ul>
-      </ul>
+      <h2>AWS Inspector</h2>
+        <ul>
+        <li>Amazon Inspector is an automated security assessment service for improving security and compliance of applications deployed on AWS.</li>
+        <li>Automatically assesses applications for vulnerabilities or deviations from best practices.</li>
+        <li>Produces a detailed list of security findings prioritized by level of security after performing an assessment.</li>
+        <li>Provides an automated security assessment report identifying unintended network access and vulnerabilities in Amazon EC2 instances.</li>
+        <li>Findings can be reviewed directly or as part of detailed assessment reports, available via the Amazon Inspector Console or API.</li>
+        </ul>
     </td>
   </tr>
   <tr>
@@ -1614,14 +1866,24 @@
       <img src="https://raw.githubusercontent.com/sashee/aws-svg-icons/ddf2928b65d8f18c20c6a792740ec934804e7a25/docs/Architecture-Service-Icons_07302021/Arch_Security-Identity-Compliance/64/Arch_Amazon-Detective_64.svg" alt="">
     </td>
     <td class="content">
-      <h2></h2>
-      <ul>
-      </ul>
+      <h2>AWS Detective</h2>
+        <ul>
+            <li>Amazon Detective is a service primarily used for security investigations and analysis.</li>
+            <li>It simplifies the process of analyzing, investigating, and quickly identifying the root cause of potential security issues or suspicious activities.</li>
+            <li>Amazon Detective automatically collects log data from AWS resources.</li>
+            <li>It gathers logs from various AWS services, including:
+                <ul>
+                    <li>AWS CloudTrail</li>
+                    <li>Amazon VPC Flow Logs</li>
+                    <li>Amazon GuardDuty findings</li>
+                    <li>Other AWS services</li>
+                </ul>
+            </li>
+            <li>Uses machine learning to analyze logs and conduct security investigations.</li>
+        </ul>
     </td>
   </tr>
-
 </table>
-
 
 ## <a id="aws-management-and-governance-services"></a> $${\color{lime}AWS\ management\ and\ governance\ services}$$
 
@@ -1631,9 +1893,13 @@
       <img src="https://raw.githubusercontent.com/sashee/aws-svg-icons/ddf2928b65d8f18c20c6a792740ec934804e7a25/docs/Architecture-Service-Icons_07302021/Arch_Management-Governance/64/Arch_AWS-Management-Console_64.svg" alt="">
     </td>
     <td class="content">
-      <h2></h2>
-      <ul>
-      </ul>
+      <h2>AWS Management Console</h2>
+        <ul>
+            <li>AWS Management Console is a web interface for AWS accessible via web browsers like Google Chrome, Mozilla Firefox, Safari, etc.</li>
+            <li>You can securely log into the AWS Management Console using your IAM username and password.</li>
+            <li>For added security, enable Multi-Factor Authentication (MFA), which requires an authentication code from your MFA device before login.</li>
+            <li>Access the AWS Management Console by visiting the URL: <a href="https://console.aws.amazon.com">console.aws.amazon.com</a>.</li>
+        </ul>
     </td>
   </tr>
 
@@ -1642,9 +1908,13 @@
       <img src="https://raw.githubusercontent.com/sashee/aws-svg-icons/ddf2928b65d8f18c20c6a792740ec934804e7a25/docs/Architecture-Service-Icons_07302021/Arch_Developer-Tools/64/Arch_AWS-Command-Line-Interface_64.svg" alt="">
     </td>
     <td class="content">
-      <h2></h2>
-      <ul>
-      </ul>
+      <h2>AWS CLI</h2>
+        <ul>
+            <li>AWS Command Line Interface (AWS CLI) is a command line interface for interacting with AWS services.</li>
+            <li>On MacBook or Linux OS, you can use the terminal program to run the AWS CLI.</li>
+            <li>On Windows, you can use the command prompt or Windows PowerShell to run the AWS CLI.</li>
+            <li>Shell scripts can be developed to invoke different AWS CLI commands for managing resources.</li>
+        </ul>
     </td>
   </tr>
   <tr>
@@ -1652,9 +1922,21 @@
       <img src="https://raw.githubusercontent.com/sashee/aws-svg-icons/ddf2928b65d8f18c20c6a792740ec934804e7a25/docs/Architecture-Service-Icons_07302021/Arch_App-Integration/Arch_64/Arch_AWS-Console-Mobile-Application_64.svg" alt="">
     </td>
     <td class="content">
-      <h2></h2>
-      <ul>
-      </ul>
+      <h2>AWS Console Mobile Application</h2>
+        <ul>
+            <li>The AWS Console Mobile Application is the official mobile app provided by Amazon Web Services.</li>
+            <li>Allows you to monitor your resources through a dedicated dashboard.</li>
+            <li>View configuration details, metrics, and alarms of select AWS services.</li>
+            <li>The dashboard provides:
+                <ul>
+                    <li>An overview of the account status.</li>
+                    <li>Real-time CloudWatch metrics.</li>
+                    <li>Your personal health dashboard.</li>
+                    <li>AWS billing information.</li>
+                </ul>
+            </li>
+            <li>There are limitations compared to the Amazon Management Console or the AWS CLI.</li>
+        </ul>
     </td>
   </tr>
   <tr>
@@ -1662,9 +1944,22 @@
       <img src="https://raw.githubusercontent.com/sashee/aws-svg-icons/ddf2928b65d8f18c20c6a792740ec934804e7a25/docs/Architecture-Service-Icons_07302021/Arch_Security-Identity-Compliance/64/Arch_AWS-Resource-Access-Manager_64.svg" alt="">
     </td>
     <td class="content">
-      <h2></h2>
-      <ul>
-      </ul>
+      <h2>AWS Resource Manager</h2>
+        <ul>
+            <li>AWS Resource Access Manager (RAM) is a service for sharing AWS resources.</li>
+            <li>You can share resources with any AWS account or within your AWS organization.</li>
+            <li>Resources you can share include:
+                <ul>
+                    <li>AWS Trusted Gateways</li>
+                    <li>Subnets</li>
+                    <li>AWS License Manager configurations</li>
+                    <li>Route 53 Resolver rules</li>
+                    <li>Other resources</li>
+                </ul>
+            </li>
+            <li>AWS RAM eliminates the need for duplicate resources across multiple accounts.</li>
+            <li>This reduces the operational overhead of managing resources in every single account.</li>
+        </ul>
     </td>
   </tr>
   <tr>
@@ -1672,9 +1967,26 @@
       <img src="https://raw.githubusercontent.com/sashee/aws-svg-icons/ddf2928b65d8f18c20c6a792740ec934804e7a25/docs/Architecture-Service-Icons_07302021/Arch_Management-Governance/64/Arch_AWS-Systems-Manager_64.svg" alt="">
     </td>
     <td class="content">
-      <h2></h2>
-      <ul>
-      </ul>
+      <h2>AWS Systems Manager</h2>
+        <ul>
+        <li><strong>AWS Systems Manager (SSM)</strong>: A suite of services providing visibility and control of cloud and on-premises infrastructure.</li>
+        <li><strong>Features of SSM:</strong>
+            <ul>
+            <li>Session Manager</li>
+            <li>State Manager</li>
+            <li>Patch Manager</li>
+            <li>Automation</li>
+            <li>Maintenance Window</li>
+            <li>Run Command</li>
+            <li>Parameter Store</li>
+            <li>Other sub-modules</li>
+            </ul>
+        </li>
+        <li><strong>SSM Agent:</strong> Similar to CloudWatch Agent or DataSync Agent; manages both Amazon EC2 instances and on-premises servers.</li>
+        <li><strong>Patch Manager:</strong> Automates the process of patching operating systems using predefined or custom patch baselines. Supports scheduled maintenance windows to reduce operational impact.</li>
+        <li><strong>State Manager:</strong> Controls configuration details or state of resources, such as server configurations, virtualized hardware, and firewall settings. Supports association of accessible playbooks, Chef recipes, PowerShell modules, and other SSM documents.</li>
+        <li><strong>Parameter Store:</strong> Provides centralized storage and management of parameters, including passwords, database strings, AMI IDs, license codes, environment variables, and other sensitive parameters. Supports secure string data type for automatic encryption using a customer master key (CMK) in AWS KMS.</li>
+        </ul>
     </td>
   </tr>
   <tr>
@@ -1682,9 +1994,24 @@
       <img src="https://raw.githubusercontent.com/sashee/aws-svg-icons/ddf2928b65d8f18c20c6a792740ec934804e7a25/docs/Architecture-Service-Icons_07302021/Arch_Management-Governance/64/Arch_AWS-Config_64.svg" alt="">
     </td>
     <td class="content">
-      <h2></h2>
-      <ul>
-      </ul>
+      <h2>AWS Config</h2>
+        <ul>
+        <li>AWS Config is a service that enables you to assess, audit, and evaluate the configurations of your AWS resources.</li>
+        <li>It automates the compliance assessment of your internal policies and regulatory standards by providing visibility on the existing configurations of your various AWS services and third-party resources.</li>
+        <li>AWS Config allows you to identify changes made to a specific resource over time.</li>
+        <li>It continuously assesses changes in your resource configuration and compares them against your specified criteria.</li>
+        <li>You can create rules to detect:
+            <ul>
+            <li>EC2 instances running on an unapproved AMI</li>
+            <li>Publicly accessible S3 buckets</li>
+            <li>Noncompliance services</li>
+            <li>And more</li>
+            </ul>
+        </li>
+        <li>The evaluation can be triggered either periodically or by an actual configuration change of your AWS resource.</li>
+        <li>You can integrate AWS Config with CloudWatch events and AWS Lambda to keep you updated on resource changes in near real-time and to execute custom actions.</li>
+        <li>Remediating noncompliant AWS resources can be automated by associating an AWS Config rule with an AWS Systems Manager automation document.</li>
+        </ul>
     </td>
   </tr>
   <tr>
@@ -1692,9 +2019,16 @@
       <img src="https://raw.githubusercontent.com/sashee/aws-svg-icons/ddf2928b65d8f18c20c6a792740ec934804e7a25/docs/Architecture-Service-Icons_07302021/Arch_Management-Governance/64/Arch_AWS-Organizations_64.svg" alt="">
     </td>
     <td class="content">
-      <h2></h2>
-      <ul>
-      </ul>
+      <h2>AWS Organizations</h2>
+        <ul>
+        <li>The AWS Organization Service enables you to consolidate and centrally manage multiple AWS accounts.</li>
+        <li>It provides consolidated billing, access control, compliance, and security.</li>
+        <li>Allows sharing resources across AWS accounts.</li>
+        <li>Consolidated Billing helps combine multiple AWS accounts with separate billing, taking advantage of volume discounts.</li>
+        <li>Service Control Policies (SCPs) can ensure that only authorized users can execute actions meeting your policy requirements.</li>
+        <li>Central logging can be implemented using AWS CloudTrail to monitor all activities across your organization.</li>
+        <li>Data from all AWS config rules can be aggregated to quickly audit your environment for compliance.</li>
+        </ul>
     </td>
   </tr>
   <tr>
@@ -1702,9 +2036,15 @@
       <img src="https://raw.githubusercontent.com/sashee/aws-svg-icons/ddf2928b65d8f18c20c6a792740ec934804e7a25/docs/Architecture-Service-Icons_07302021/Arch_Management-Governance/64/Arch_AWS-Service-Catalog_64.svg" alt="">
     </td>
     <td class="content">
-      <h2></h2>
-      <ul>
-      </ul>
+      <h2>AWS Service Catalog</h2>
+
+<ul>
+  <li>AWS Service Catalog empowers you to set up and centrally manage catalogs of approved IT services that you specify on AWS.</li>
+  <li>You can manage IT services, referred to as products in Service Catalog, and then group them in a portfolio.</li>
+  <li>In AWS Service Catalog, a product can be a machine image, application server, program, tool, database, or other services that you use for your cloud architecture.</li>
+  <li>AWS Service Catalog assists you in meeting your compliance requirements.</li>
+  <li>It enforces granular access control that allows only the deployment of approved IT services through AWS Cloud.</li>
+</ul>
     </td>
   </tr>
   <tr>
@@ -1712,13 +2052,16 @@
       <img src="https://raw.githubusercontent.com/sashee/aws-svg-icons/ddf2928b65d8f18c20c6a792740ec934804e7a25/docs/Architecture-Service-Icons_07302021/Arch_Management-Governance/64/Arch_AWS-Control-Tower_64.svg" alt="">
     </td>
     <td class="content">
-      <h2></h2>
-      <ul>
-      </ul>
+      <h2>AWS Control Tower</h2>
+        <ul>
+        <li>AWS Control Tower is a service that helps you set up and govern a secure multi-account AWS environment.</li>
+        <li>It automates the setup of your multi-account architecture with just a few clicks.</li>
+        <li>The setup uses blueprints that follow AWS best practices for security and management.</li>
+        <li>Control Tower provides mandatory high-level rules, called guardrails, that help enforce policies using Service Control Policies (SCPs) or detect policy violations using AWS Config rules.</li>
+        </ul>
     </td>
   </tr>
 </table>
-
 
 ## <a id="aws-identity-services"></a> $${\color{navy}AWS\ identity\ services}$$
 
@@ -1728,9 +2071,21 @@
       <img src="https://raw.githubusercontent.com/sashee/aws-svg-icons/ddf2928b65d8f18c20c6a792740ec934804e7a25/docs/Architecture-Service-Icons_07302021/Arch_Security-Identity-Compliance/64/Arch_AWS-Identity-and-Access-Management_64.svg" alt="">
     </td>
     <td class="content">
-      <h2></h2>
-      <ul>
-      </ul>
+      <h2>AWS IAM</h2>
+        <ul>
+        <li>AWS Identity and Access Management (IAM) is the primary identity service in AWS.</li>
+        <li>IAM enables you to manage access to various AWS services and resources securely.</li>
+        <li>With IAM, you can:
+            <ul>
+            <li>Create and manage AWS users and groups, known as IAM users and IAM groups respectively.</li>
+            <li>An IAM user has long-term credentials, such as a password or a set of access keys.</li>
+            <li>Create a policy called an IAM policy that contains permissions to allow access to AWS resources.</li>
+            <li>Attach IAM policies to IAM users and IAM groups.</li>
+            <li>Create a role-based entity called an IAM role, which has a set of permissions.</li>
+            <li>IAM roles allow an IAM user, another AWS account, or other AWS services to perform defined functions.</li>
+            </ul>
+        </li>
+        </ul>
     </td>
   </tr>
   <tr>
@@ -1738,9 +2093,13 @@
       <img src="https://raw.githubusercontent.com/sashee/aws-svg-icons/ddf2928b65d8f18c20c6a792740ec934804e7a25/docs/Architecture-Service-Icons_07302021/Arch_Security-Identity-Compliance/64/Arch_AWS-Single-Sign-On_64.svg" alt="">
     </td>
     <td class="content">
-      <h2></h2>
-      <ul>
-      </ul>
+      <h2>AWS SSO</h2>
+        <ul>
+        <li>AWS Single Sign-On (SSO) is an authentication mechanism that allows users to log in with a single ID and password to access multiple and independent software systems.</li>
+        <li>With SSO, users only need to remember and use one set of credentials to log in across different systems.</li>
+        <li>AWS SSO provides a user portal within AWS where users can access the roles they can assume in their assigned AWS accounts or business applications from a single location.</li>
+        <li>AWS SSO offers pre-configured SAML integrations with many business applications such as Salesforce, Office 365, and other apps.</li>
+        </ul>
     </td>
   </tr>
   <tr>
@@ -1748,9 +2107,18 @@
       <img src="https://raw.githubusercontent.com/sashee/aws-svg-icons/ddf2928b65d8f18c20c6a792740ec934804e7a25/docs/Architecture-Service-Icons_07302021/Arch_Security-Identity-Compliance/64/Arch_Amazon-Cognito_64.svg" alt="">
     </td>
     <td class="content">
-      <h2></h2>
-      <ul>
-      </ul>
+      <h2>AWS Cognito</h2>
+        <ul>
+        <li>Amazon Cognito is an identity service for adding user sign-up, sign-in, and access control features to web or mobile apps.</li>
+        <li>Users can log in with social media accounts such as Facebook, Google, Amazon, or other providers.</li>
+        <li>Supports enterprise identity providers, such as Microsoft Active Directory via Security Assertion Markup Language (SAML).</li>
+        <li>Amazon Cognito offers two types of pools:
+            <ul>
+            <li><strong>User Pools:</strong> For authentication; allows users to sign in through their social identity providers.</li>
+            <li><strong>Identity Pools:</strong> For authorization; provides temporary and limited-privilege AWS credentials to access other AWS services.</li>
+            </ul>
+        </li>
+        </ul>
     </td>
   </tr>
   <tr>
@@ -1758,9 +2126,14 @@
       <img src="https://raw.githubusercontent.com/sashee/aws-svg-icons/ddf2928b65d8f18c20c6a792740ec934804e7a25/docs/Architecture-Service-Icons_07302021/Arch_Security-Identity-Compliance/64/Arch_AWS-Directory-Service_64.svg" alt="">
     </td>
     <td class="content">
-      <h2></h2>
-      <ul>
-      </ul>
+      <h2>AWS Directory Service</h2>
+        <ul>
+        <li>AWS Directory Service is essentially a managed Microsoft Active Directory (AD).</li>
+        <li>This service is built on actual Microsoft AD and does not require synchronization or replication of data from an existing Active Directory to the cloud.</li>
+        <li>With AWS Directory Service, there is no need to install and manage an Active Directory domain controller on an Amazon EC2 instance.</li>
+        <li>It improves the security of your architecture and reduces the administrative burden on IT staff.</li>
+        <li>Allows assignment of IAM roles to Active Directory users and groups in AWS, as well as in existing on-premises Microsoft Active Directory using an AD Connector.</li>
+        </ul>
     </td>
   </tr>
 </table>
@@ -1774,9 +2147,23 @@
       <img src="https://raw.githubusercontent.com/sashee/aws-svg-icons/ddf2928b65d8f18c20c6a792740ec934804e7a25/docs/Architecture-Service-Icons_07302021/Arch_Machine-Learning/64/Arch_Amazon-SageMaker_64.svg" alt="">
     </td>
     <td class="content">
-      <h2></h2>
-      <ul>
-      </ul>
+      <h2>AWS SageMaker</h2>
+        <ul>
+            <li><strong>Amazon SageMaker:</strong> A full-fledged machine learning platform in AWS with extensive services, features, and components.</li>
+            <li>Not just a simple ML service, but a fully managed cloud platform with many modules.</li>
+            <li>Capabilities include building, training, and deploying ML models for any use case with managed infrastructure, tools, and workflows.</li>
+            <li>Removes manual tasks from each step of the ML process to facilitate high-quality model development.</li>
+            <li>Includes various modules such as:</li>
+            <ul>
+                <li>Amazon SageMaker Canvas</li>
+                <li>SageMaker Studio Lab</li>
+                <li>SageMaker Data Wrangler</li>
+                <li>SageMaker Autopilot</li>
+                <li>SageMaker Jumpstart</li>
+                <li>SageMaker Clarify</li>
+                <li>And more...</li>
+            </ul>
+        </ul>
     </td>
   </tr>
   <tr>
@@ -1784,9 +2171,15 @@
       <img src="https://raw.githubusercontent.com/sashee/aws-svg-icons/ddf2928b65d8f18c20c6a792740ec934804e7a25/docs/Architecture-Service-Icons_07302021/Arch_Machine-Learning/64/Arch_Amazon-Rekognition_64.svg" alt="">
     </td>
     <td class="content">
-      <h2></h2>
-      <ul>
-      </ul>
+      <h2>AWS Rekognition</h2>
+        <ul>
+        <li>Amazon Rekognition provides pre-trained and customizable computer vision capabilities to extract information and insights from images and videos.</li>
+        <li>It can recognize certain objects, faces, texts, scenes, labels, and other attributes from media files or streaming videos.</li>
+        <li>The service is particularly effective for facial recognition, detecting specific people or well-known celebrities.</li>
+        <li>It can determine if someone is wearing personal protective equipment such as masks, helmets, or gloves.</li>
+        <li>It can detect objects in an image, such as identifying a face, a guitar, and a sofa in a single image.</li>
+        <li>Amazon Rekognition custom Labels allows you to build a machine learning model to classify custom components or products from your dataset.</li>
+        </ul>
     </td>
   </tr>
   <tr>
@@ -1794,9 +2187,31 @@
       <img src="https://raw.githubusercontent.com/sashee/aws-svg-icons/ddf2928b65d8f18c20c6a792740ec934804e7a25/docs/Architecture-Service-Icons_07302021/Arch_Machine-Learning/64/Arch_Amazon-Lookout-for-Vision_64.svg" alt="">
     </td>
     <td class="content">
-      <h2></h2>
-      <ul>
-      </ul>
+      <h2>AWS Lookout for Vision</h2>
+        <ul>
+        <li>Amazon Lookout is a suite of services that includes:
+            <ul>
+            <li>Amazon Lookout for Equipment</li>
+            <li>Amazon Lookout for Metrics</li>
+            <li>Amazon Lookout for Vision
+                <ul>
+                <li>Uses computer vision to detect defects on industrial products at scale</li>
+                <li>Primarily used in factories and manufacturing lines</li>
+                <li>Can identify defects such as dents, cracks, and scratches</li>
+                <li>Dataset can be in the form of product images stored in an Amazon S3 bucket</li>
+                <li>Requires a couple of baseline images of defect-free products</li>
+                <li>Automatically builds a model within a few hours</li>
+                </ul>
+            </li>
+            </ul>
+        </li>
+        <li>Amazon Textract:
+            <ul>
+            <li>Service name is a combination of the words text and extract</li>
+            <li>Used to extract text from scanned documents, notes, and images</li>
+            </ul>
+        </li>
+        </ul>
     </td>
   </tr>
   <tr>
@@ -1804,9 +2219,34 @@
       <img src="https://raw.githubusercontent.com/sashee/aws-svg-icons/ddf2928b65d8f18c20c6a792740ec934804e7a25/docs/Architecture-Service-Icons_07302021/Arch_Machine-Learning/64/Arch_AWS-Panorama_64.svg" alt="">
     </td>
     <td class="content">
-      <h2></h2>
-      <ul>
-      </ul>
+      <h2>AWS Panorma</h2>
+        <ul>
+        <li><strong>AWS Panorama:</strong> A service that brings computer vision to your on-premises camera network.</li>
+        <li><strong>Installation:</strong> Install the AWS Panorama Appliance or another compatible device in your datacenter.</li>
+        <li><strong>Registration:</strong> Register the appliance with AWS Panorama.</li>
+        <li><strong>Deployment:</strong> Deploy computer vision applications from the cloud using AWS Panorama.</li>
+        <li><strong>Camera Compatibility:</strong> Works with existing real-time streaming protocol (RTSP) network cameras.</li>
+        <li><strong>AWS Panorama Appliance:</strong>
+            <ul>
+            <li>Compact edge appliance optimized for machine learning workloads.</li>
+            <li>Runs multiple computer vision models against multiple video streams in parallel.</li>
+            <li>Outputs results in real-time.</li>
+            <li>Designed for commercial and industrial settings.</li>
+            <li>Rated for dust and liquid protection (IP-62).</li>
+            </ul>
+        </li>
+        <li><strong>Edge Processing:</strong> Enables running self-contained computer vision applications at the edge without sending images to the AWS Cloud.</li>
+        <li><strong>Integration with AWS Services:</strong> 
+            <ul>
+            <li><strong>Analyze Traffic Patterns:</strong> Use AWS SDK to record data in Amazon DynamoDB, analyze data over time with a serverless application, detect anomalies, and predict future behavior.</li>
+            <li><strong>Receive Site Safety Alerts:</strong> Monitor off-limits areas, upload images to Amazon S3, and send notifications to Amazon SNS for corrective action.</li>
+            <li><strong>Improve Quality Control:</strong> Monitor assembly line output, identify nonconforming parts, highlight images, and display them for review by the quality control team.</li>
+            <li><strong>Collect Training and Test Data:</strong> Upload images where the model couldn't identify or had borderline confidence, create a queue of images needing tagging, tag them, and use them to retrain the model in Amazon SageMaker.</li>
+            </ul>
+        </li>
+        <li><strong>AWS Panorama Integration:</strong> Uses other AWS services to manage the appliance, access models and code, and deploy applications.</li>
+        <li><strong>Service Interaction:</strong> AWS Panorama does as much as possible without requiring interaction with other services, but knowledge of the following services can be helpful.</li>
+        </ul>
     </td>
   </tr>
   <tr>
@@ -1814,9 +2254,13 @@
       <img src="https://raw.githubusercontent.com/sashee/aws-svg-icons/ddf2928b65d8f18c20c6a792740ec934804e7a25/docs/Architecture-Service-Icons_07302021/Arch_Machine-Learning/64/Arch_Amazon-Textract_64.svg" alt="">
     </td>
     <td class="content">
-      <h2></h2>
-      <ul>
-      </ul>
+      <h2>AWS Textract</h2>
+        <ul>
+        <li>Amazon Textract is a service that uses optical character recognition to automatically extract text from various scanned files such as PDFs, documents, handwritten notes, receipts, passports, and IDs.</li>
+        <li>The service can generate results in table form or as a CSV file.</li>
+        <li>It includes a query feature that allows extraction of specific fields using natural language questions. For example, querying "What's the first name?" on a driver's license will return the first name.</li>
+        <li>You can batch upload documents to S3, where the text analysis process can be automated.</li>
+        </ul>
     </td>
   </tr>
   <tr>
@@ -1824,9 +2268,20 @@
       <img src="https://raw.githubusercontent.com/sashee/aws-svg-icons/ddf2928b65d8f18c20c6a792740ec934804e7a25/docs/Architecture-Service-Icons_07302021/Arch_Machine-Learning/64/Arch_Amazon-Augmented-AI-A2I_64.svg" alt="">
     </td>
     <td class="content">
-      <h2></h2>
-      <ul>
-      </ul>
+      <h2>AWS A2I</h2>
+        <ul>
+        <li>Amazon Augmented AI (A2I) provides human review workflows for common machine learning use cases.</li>
+        <li>A human review involves a person reviewing the output generated by your machine learning model before proceeding to the next step in the workflow.</li>
+        <li>The service augments your AI to ensure prediction accuracy and aids in continuous improvements to your machine learning model.</li>
+        <li>Direct integration is possible with Amazon Rekognition and Amazon Textract.</li>
+        <li>Examples of integration:
+            <ul>
+            <li>Human review of key-value pairs extracted by Amazon Textract.</li>
+            <li>Image moderation through human review of unsafe content, such as explicit or violent content, from Amazon Rekognition.</li>
+            </ul>
+        </li>
+        <li>Custom machine learning workflows can also be used with Amazon Augmented AI for human review.</li>
+        </ul>
     </td>
   </tr>
   <tr>
@@ -1834,9 +2289,24 @@
       <img src="https://raw.githubusercontent.com/sashee/aws-svg-icons/ddf2928b65d8f18c20c6a792740ec934804e7a25/docs/Architecture-Service-Icons_07302021/Arch_Machine-Learning/64/Arch_Amazon-Comprehend_64.svg" alt="">
     </td>
     <td class="content">
-      <h2></h2>
-      <ul>
-      </ul>
+      <h2>AWS Comprehend</h2>
+        <ul>
+        <li>Amazon Comprehend is a natural language processing service in AWS that can find insights and relationships in a text.</li>
+        <li>It performs text analytics that can automatically:
+            <ul>
+            <li>Extract key phrases</li>
+            <li>Analyze sentiment</li>
+            <li>Identify language</li>
+            <li>Analyze syntax</li>
+            <li>Identify topics</li>
+            <li>Detect personally identifiable information (PII)</li>
+            </ul>
+        </li>
+        <li>Amazon Comprehend works with unstructured data.</li>
+        <li>Amazon Comprehend cannot read text from scanned documents; it requires raw text data.</li>
+        <li>Amazon Comprehend is different from Amazon Textract, which can read text from scanned documents.</li>
+        <li>Moving on to the language AI section.</li>
+        </ul>
     </td>
   </tr>
   <tr>
@@ -1844,9 +2314,13 @@
       <img src="https://raw.githubusercontent.com/sashee/aws-svg-icons/ddf2928b65d8f18c20c6a792740ec934804e7a25/docs/Architecture-Service-Icons_07302021/Arch_Machine-Learning/64/Arch_Amazon-Lex_64.svg" alt="">
     </td>
     <td class="content">
-      <h2></h2>
-      <ul>
-      </ul>
+      <h2>AWS Lex</h2>
+        <ul>
+            <li>Amazon Lex is a machine learning service for developing chatbots.</li>
+            <li>You can build both voice-based and text-based chatbots with Amazon Lex.</li>
+            <li>Amazon Lex is useful for creating self-service bots or virtual agents for various applications, including conversational interactive voice response systems and corporate websites.</li>
+            <li>Using Amazon Lex can help reduce the cost of maintaining contact centers for companies.</li>
+        </ul>
     </td>
   </tr>
   <tr>
@@ -1854,9 +2328,16 @@
       <img src="https://raw.githubusercontent.com/sashee/aws-svg-icons/ddf2928b65d8f18c20c6a792740ec934804e7a25/docs/Architecture-Service-Icons_07302021/Arch_Machine-Learning/64/Arch_Amazon-Transcribe_64.svg" alt="">
     </td>
     <td class="content">
-      <h2></h2>
-      <ul>
-      </ul>
+      <h2>AWS Transcribe</h2>
+        <ul>
+        <li>Amazon Transcribe is a speech-to-text transcription service.</li>
+        <li>The word "transcribe" means to make a written record of speech, a phone call, or any spoken language.</li>
+        <li>Amazon Transcribe generates written records of spoken language.</li>
+        <li>It is useful in contact centers to generate call transcripts and provide conversation insights.</li>
+        <li>Amazon Transcribe helps improve customer experience and agent productivity.</li>
+        <li>It offers real-time transcription, generating transcripts of speech immediately when talking to its endpoint.</li>
+        <li>Another service related to language AI is Amazon Polly.</li>
+        </ul>
     </td>
   </tr>
   <tr>
@@ -1864,9 +2345,14 @@
       <img src="https://raw.githubusercontent.com/sashee/aws-svg-icons/ddf2928b65d8f18c20c6a792740ec934804e7a25/docs/Architecture-Service-Icons_07302021/Arch_Machine-Learning/64/Arch_Amazon-Polly_64.svg" alt="">
     </td>
     <td class="content">
-      <h2></h2>
-      <ul>
-      </ul>
+      <h2>AWS Polly</h2>
+        <ul>
+        <li>Amazon Polly converts text into speech, whereas Amazon Transcribe converts speech into text.</li>
+        <li>Inputting text into Amazon Polly generates lifelike speech in various voices (e.g., male, female, kid's voice).</li>
+        <li>Customizable pronunciation for specific words and phrases can be achieved by uploading lexicon files.</li>
+        <li>A lexicon is a vocabulary of a particular language, useful for non-English text-to-speech conversion.</li>
+        <li>The topic is in the customer experience improvement category.</li>
+        </ul>
     </td>
   </tr>
   <tr>
@@ -1874,9 +2360,27 @@
       <img src="https://raw.githubusercontent.com/sashee/aws-svg-icons/ddf2928b65d8f18c20c6a792740ec934804e7a25/docs/Architecture-Service-Icons_07302021/Arch_Machine-Learning/64/Arch_Amazon-Kendra_64.svg" alt="">
     </td>
     <td class="content">
-      <h2></h2>
-      <ul>
-      </ul>
+      <h2>AWS Kendra</h2>
+        <ul>
+            <li>Amazon Kendra is an intelligent search service in AWS.</li>
+            <li>It can search across multiple data sources, both structured and unstructured.</li>
+            <li>Amazon Kendra intelligently analyzes content before providing search results.</li>
+            <li>The service supports natural language processing (NLP).</li>
+            <li>Users can ask questions in everyday language (e.g., "Who is the founder of Star Trek?").</li>
+            <li>Amazon Kendra searches across various data sources, including:
+                <ul>
+                    <li>SQL databases</li>
+                    <li>Amazon FSx file systems</li>
+                    <li>Amazon RDS databases</li>
+                    <li>AWS repositories</li>
+                    <li>JIRA</li>
+                    <li>Slack</li>
+                    <li>SharePoint</li>
+                    <li>Other data sources</li>
+                </ul>
+            </li>
+            <li>It uses machine learning to provide context through search results.</li>
+        </ul>
     </td>
   </tr>
   <tr>
@@ -1884,9 +2388,14 @@
       <img src="https://raw.githubusercontent.com/sashee/aws-svg-icons/ddf2928b65d8f18c20c6a792740ec934804e7a25/docs/Architecture-Service-Icons_07302021/Arch_Machine-Learning/64/Arch_Amazon-Personalize_64.svg" alt="">
     </td>
     <td class="content">
-      <h2></h2>
-      <ul>
-      </ul>
+      <h2>AWS Personalize</h2>
+        <ul>
+        <li>Amazon Personalize is a service that provides personalized recommendations based on customer past activity and behavior.</li>
+        <li>It functions similarly to the recommendation features in Amazon Prime or Netflix.</li>
+        <li>For example, if a user watches a lot of Sci-Fi movies, Amazon Personalize will recommend more Sci-Fi shows on their profile.</li>
+        <li>This personalization improves customer experience by aligning recommendations with the customer's actual interests and purchase behavior.</li>
+        <li>Personalized content tends to convert more effectively as it matches what customers are likely to do and buy.</li>
+        </ul>
     </td>
   </tr>
   <tr>
@@ -1894,9 +2403,16 @@
       <img src="https://raw.githubusercontent.com/sashee/aws-svg-icons/ddf2928b65d8f18c20c6a792740ec934804e7a25/docs/Architecture-Service-Icons_07302021/Arch_Machine-Learning/64/Arch_Amazon-Translate_64.svg" alt="">
     </td>
     <td class="content">
-      <h2></h2>
-      <ul>
-      </ul>
+      <h2>AWS Translate</h2>
+        <ul>
+        <li>Amazon Translate is a real-time translation service in AWS.</li>
+        <li>It functions similarly to Google Translate, allowing you to input text in one language and translate it to a chosen language.</li>
+        <li>You can create custom terminology to tailor the translation output based on specific vocabulary.</li>
+        <li>Custom terms can be used in translations; for example, you can define the acronym "TD" as "Towards Death."</li>
+        <li>Amazon Translate can incorporate these custom terms in translations. For instance, translating "Magandang umaga, TD" from Tagalog to English will yield "Good Morning Towards Death."</li>
+        <li>The formality option controls whether the translation output uses a formal tone.</li>
+        <li>Amazon Translate can mask profane words or phrases, which is useful for customer-facing applications.</li>
+        </ul>
     </td>
   </tr>
   <tr>
@@ -1904,9 +2420,17 @@
       <img src="https://raw.githubusercontent.com/sashee/aws-svg-icons/ddf2928b65d8f18c20c6a792740ec934804e7a25/docs/Architecture-Service-Icons_07302021/Arch_Machine-Learning/64/Arch_Amazon-Forecast_64.svg" alt="">
     </td>
     <td class="content">
-      <h2></h2>
-      <ul>
-      </ul>
+      <h2>AWS Forecast</h2>
+        <ul>
+            <li>Amazon Forecast is a machine learning service in AWS.</li>
+            <li>It helps forecast future outcomes based on historical records and other relevant data.</li>
+            <li>You can import or stream your time series data to Amazon Forecast.</li>
+            <li>It can forecast various metrics such as sales, web traffic, inventory, revenue, cloud resource capacity, or actual weather.</li>
+            <li>It can predict your future AWS bill.</li>
+            <li>Amazon Forecast includes built-in data sets like weather index and national holidays for various countries.</li>
+            <li>The service uses a machine learning model called a predictor.</li>
+            <li>The predictor uses an algorithm to analyze time series data and generate predictions.</li>
+        </ul>
     </td>
   </tr>
   <tr>
@@ -1914,9 +2438,13 @@
       <img src="https://raw.githubusercontent.com/sashee/aws-svg-icons/ddf2928b65d8f18c20c6a792740ec934804e7a25/docs/Architecture-Service-Icons_07302021/Arch_Machine-Learning/64/Arch_Amazon-Fraud-Detector_64.svg" alt="">
     </td>
     <td class="content">
-      <h2></h2>
-      <ul>
-      </ul>
+      <h2>AWS Fraud Detector</h2>
+        <ul>
+        <li>Amazon Fraud Detector is a machine learning service for automating fraud detection.</li>
+        <li>It can identify potential fraudulent activities, fake reviews, and spam account creation in near real-time.</li>
+        <li>For example, it can handle situations where a visitor's IP address has a history of malicious activities such as spamming, hacking attempts, and DDoS attacks.</li>
+        <li>Amazon Fraud Detector can be used to block visitors who use offending IP addresses, email domains, or any other defined attributes.</li>
+        </ul>
     </td>
   </tr>
   <tr>
@@ -1924,9 +2452,14 @@
       <img src="https://raw.githubusercontent.com/sashee/aws-svg-icons/ddf2928b65d8f18c20c6a792740ec934804e7a25/docs/Architecture-Service-Icons_07302021/Arch_Machine-Learning/64/Arch_Amazon-Lookout-for-Metrics_64.svg" alt="">
     </td>
     <td class="content">
-      <h2></h2>
-      <ul>
-      </ul>
+      <h2>AWS Lookout for Metrics</h2>
+        <ul>
+        <li>Amazon Lookout for Metrics is a service in the Amazon Lookout family.</li>
+        <li>It detects anomalies in business metrics.</li>
+        <li>An anomaly could be a sudden drop in sales revenue or an unexpected decline in customer acquisition rates.</li>
+        <li>The service identifies unusual variances in business metrics.</li>
+        <li>It provides immediate alerts to help you take appropriate action.</li>
+        </ul>
     </td>
   </tr>
   <tr>
@@ -1934,9 +2467,15 @@
       <img src="https://raw.githubusercontent.com/sashee/aws-svg-icons/ddf2928b65d8f18c20c6a792740ec934804e7a25/docs/Architecture-Service-Icons_07302021/Arch_Machine-Learning/64/Arch_Amazon-DevOps-Guru_64.svg" alt="">
     </td>
     <td class="content">
-      <h2></h2>
-      <ul>
-      </ul>
+      <h2>AWS DevOps Guru</h2>
+        <ul>
+            <li>Amazon DevOps Guru detects abnormal behavior in your application or AWS sources that may cause unexpected downtimes or operational issues in the near future.</li>
+            <li>It can monitor applications in AWS resources within your own account or on all accounts across your AWS organization.</li>
+            <li>It uses machine learning to identify operational defects long before they impact you and your customers.</li>
+            <li>Amazon DevOps Guru can analyze your RDS databases and automatically determine an unusually high DB load that is more than three times or five times its normal value.</li>
+            <li>It can detect issues in your serverless stack, such as an extremely high number of invocations in your Lambda function beyond the currently provisioned concurrency.</li>
+            <li>It can also detect an over-provisioned red capacity on your DynamoDB tables.</li>
+        </ul>
     </td>
   </tr>
   <tr>
@@ -1944,22 +2483,41 @@
       <img src="https://raw.githubusercontent.com/sashee/aws-svg-icons/ddf2928b65d8f18c20c6a792740ec934804e7a25/docs/Architecture-Service-Icons_07302021/Arch_Machine-Learning/64/Arch_Amazon-CodeGuru_64.svg" alt="">
     </td>
     <td class="content">
-      <h2></h2>
-      <ul>
-      </ul>
+      <h2>AWS CodeGuru</h2>
+        <ul>
+        <li>Amazon CodeGuru is a suite of development services in AWS.</li>
+        <li>It includes tools and features such as:
+            <ul>
+            <li>Amazon CodeGuru Reviewer</li>
+            <li>Amazon CodeGuru Profiler</li>
+            <li>Bug Bust</li>
+            <li>And many more</li>
+            </ul>
+        </li>
+        <li>The primary function of Amazon CodeGuru Reviewer is to:
+            <ul>
+            <li>Provide intelligent recommendations for improving application performance, efficiency, and code quality.</li>
+            <li>Scan code and detect various code defects, including:
+                <ul>
+                <li>Bad exception handling</li>
+                <li>Insecure course policy</li>
+                <li>Path reversal</li>
+                <li>Hardcoded credentials</li>
+                <li>And more</li>
+                </ul>
+            </li>
+            <li>Integrate with CI/CD workflow for code reviews and recommendations.</li>
+            </ul>
+        </li>
+        <li>Amazon CodeGuru Profiler:
+            <ul>
+            <li>Collects CPU data and analyzes runtime performance data from live applications.</li>
+            <li>Helps identify expensive lines of code that inefficiently use the CPU, causing CPU bottlenecks.</li>
+            </ul>
+        </li>
+        </ul>
     </td>
   </tr>
-  <tr>
-    <td class="image">
-      <img src="" alt="">
-    </td>
-    <td class="content">
-      <h2></h2>
-      <ul>
-      </ul>
-    </td>
-  </tr>
-  
 </table>
 
 
@@ -1972,8 +2530,6 @@
     </td>
     <td class="content">
       <h2></h2>
-      <ul>
-      </ul>
     </td>
   </tr>
   <tr>
@@ -1982,8 +2538,6 @@
     </td>
     <td class="content">
       <h2></h2>
-      <ul>
-      </ul>
     </td>
   </tr>
   <tr>
@@ -1992,8 +2546,6 @@
     </td>
     <td class="content">
       <h2></h2>
-      <ul>
-      </ul>
     </td>
   </tr>
   <tr>
@@ -2002,8 +2554,6 @@
     </td>
     <td class="content">
       <h2></h2>
-      <ul>
-      </ul>
     </td>
   </tr>
   <tr>
@@ -2012,8 +2562,6 @@
     </td>
     <td class="content">
       <h2></h2>
-      <ul>
-      </ul>
     </td>
   </tr>
   <tr>
@@ -2022,8 +2570,6 @@
     </td>
     <td class="content">
       <h2></h2>
-      <ul>
-      </ul>
     </td>
   </tr>
   <tr>
@@ -2032,8 +2578,6 @@
     </td>
     <td class="content">
       <h2></h2>
-      <ul>
-      </ul>
     </td>
   </tr>
   <tr>
@@ -2042,8 +2586,6 @@
     </td>
     <td class="content">
       <h2></h2>
-      <ul>
-      </ul>
     </td>
   </tr>
 </table>
@@ -2058,8 +2600,6 @@
     </td>
     <td class="content">
       <h2></h2>
-      <ul>
-      </ul>
     </td>
   </tr>
   <tr>
@@ -2068,8 +2608,6 @@
     </td>
     <td class="content">
       <h2></h2>
-      <ul>
-      </ul>
     </td>
   </tr>
   <tr>
@@ -2078,8 +2616,6 @@
     </td>
     <td class="content">
       <h2></h2>
-      <ul>
-      </ul>
     </td>
   </tr>
   <tr>
@@ -2088,8 +2624,6 @@
     </td>
     <td class="content">
       <h2></h2>
-      <ul>
-      </ul>
     </td>
   </tr>
   <tr>
@@ -2098,8 +2632,6 @@
     </td>
     <td class="content">
       <h2></h2>
-      <ul>
-      </ul>
     </td>
   </tr>
   <tr>
@@ -2108,8 +2640,6 @@
     </td>
     <td class="content">
       <h2></h2>
-      <ul>
-      </ul>
     </td>
   </tr>
   <tr>
@@ -2118,8 +2648,6 @@
     </td>
     <td class="content">
       <h2></h2>
-      <ul>
-      </ul>
     </td>
   </tr>
   <tr>
@@ -2128,8 +2656,6 @@
     </td>
     <td class="content">
       <h2></h2>
-      <ul>
-      </ul>
     </td>
   </tr>
   <tr>
@@ -2138,8 +2664,6 @@
     </td>
     <td class="content">
       <h2></h2>
-      <ul>
-      </ul>
     </td>
   </tr>
   <tr>
@@ -2148,8 +2672,6 @@
     </td>
     <td class="content">
       <h2></h2>
-      <ul>
-      </ul>
     </td>
   </tr>
   <tr>
@@ -2158,8 +2680,6 @@
     </td>
     <td class="content">
       <h2></h2>
-      <ul>
-      </ul>
     </td>
   </tr>
 </table>
