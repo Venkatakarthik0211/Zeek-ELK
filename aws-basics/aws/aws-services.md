@@ -2557,7 +2557,6 @@
             <li>Devices are owned and managed by AWS, integrating with AWS security, monitoring, and computing capabilities</li>
             </ul>
         </li>
-
         <li><strong>Snowcone</strong>
             <ul>
             <li>Smallest member of the Snow Family</li>
@@ -2570,7 +2569,6 @@
             <li>For pricing details, see <a href="https://aws.amazon.com/snowcone/pricing">AWS Snowcone Pricing</a></li>
             </ul>
         </li>
-
         <li><strong>Snowball</strong>
             <ul>
             <li>Data migration and edge computing device with two options: Compute Optimized and Storage Optimized</li>
@@ -2584,7 +2582,6 @@
             <li>For pricing details, see <a href="https://aws.amazon.com/snowball/pricing">AWS Snowball Pricing</a></li>
             </ul>
         </li>
-
         <li><strong>Snowmobile</strong>
             <ul>
             <li>Largest member of the Snow Family</li>
