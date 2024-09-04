@@ -2529,7 +2529,8 @@
       <img src="https://raw.githubusercontent.com/sashee/aws-svg-icons/ddf2928b65d8f18c20c6a792740ec934804e7a25/docs/Architecture-Service-Icons_07302021/Arch_Migration-Transfer/64/Arch_AWS-DataSync_64.svg" alt="">
     </td>
     <td class="content">
-      <h2></h2>
+      <h2A>AWS DataSync</h2>
+        <ul> <li><strong>AWS DataSync Overview:</strong> An online data transfer and discovery service that simplifies and secures data migration between various storage services.</li> <li><strong>On-Premises Storage Transfers:</strong> <ul> <li>Network File System (NFS)</li> <li>Server Message Block (SMB)</li> <li>Hadoop Distributed File Systems (HDFS)</li> <li>Object storage</li> </ul> </li> <li><strong>AWS Storage Transfers:</strong> <ul> <li>Amazon S3</li> <li>Amazon EFS</li> <li>Amazon FSx for Windows File Server</li> <li>Amazon FSx for Lustre</li> <li>Amazon FSx for OpenZFS</li> <li>Amazon FSx for NetApp ONTAP</li> </ul> </li> <li><strong>Other Cloud Storage Transfers:</strong> <ul> <li>Google Cloud Storage</li> <li>Microsoft Azure Blob Storage</li> <li>Microsoft Azure Files</li> <li>Wasabi Cloud Storage</li> <li>DigitalOcean Spaces</li> <li>Oracle Cloud Infrastructure Object Storage</li> <li>Cloudflare R2 Storage</li> <li>Backblaze B2 Cloud Storage</li> <li>NAVER Cloud Object Storage</li> <li>Alibaba Cloud Object Storage Service</li> <li>IBM Cloud Object Storage</li> <li>Seagate Lyve Cloud</li> </ul> </li> <li><strong>Edge Storage Transfers:</strong> <ul> <li>Amazon S3 compatible storage on AWS Snowball Edge</li> <li>AWS Snowcone</li> </ul> </li> <li><strong>Use Cases:</strong> <ul> <li>Discover data – Gain visibility into on-premises storage performance and get migration recommendations.</li> <li>Migrate data – Rapidly transfer active datasets to AWS with encryption and integrity validation.</li> <li>Archive cold data – Move cold data to long-term storage classes like S3 Glacier to free up on-premises storage.</li> <li>Replicate data – Copy data to Amazon S3 storage classes or other AWS storage services for standby or backup.</li> <li>Transfer data for timely in-cloud processing – Accelerate hybrid cloud workflows for various industries.</li> </ul> </li> <li><strong>Benefits:</strong> <ul> <li>Simplify migration planning – Automated data collection and recommendations to minimize migration costs and effort.</li> <li>Automate data movement – Easier data transfer with automated management and high performance infrastructure.</li> <li>Transfer data securely – End-to-end security with encryption, integrity validation, and optional VPC endpoints.</li> <li>Move data faster – Accelerated transfers using a purpose-built network protocol and parallel architecture.</li> <li>Reduce operational costs – Flat per-gigabyte pricing and avoidance of custom scripts or costly tools.</li> </ul> </li> </ul>
     </td>
   </tr>
   <tr>
@@ -2537,7 +2538,8 @@
       <img src="https://raw.githubusercontent.com/sashee/aws-svg-icons/ddf2928b65d8f18c20c6a792740ec934804e7a25/docs/Architecture-Service-Icons_07302021/Arch_Migration-Transfer/64/Arch_AWS-Transfer-Family_64.svg" alt="">
     </td>
     <td class="content">
-      <h2></h2>
+      <h2>AWS Transfer Family</h2>
+        <ul> <li><strong>AWS Transfer Family Overview:</strong> A secure, fully managed service for transferring files into and out of AWS storage services (Amazon S3 and Amazon EFS). It supports SFTP, FTPS, FTP, and AS2 protocols.</li> <li><strong>Protocols Supported:</strong> <ul> <li>SFTP (version 3)</li> <li>FTPS</li> <li>FTP</li> <li>AS2</li> </ul> </li> <li><strong>Port Range for FTP and FTPS:</strong> 8192–8200</li> <li><strong>Use Cases:</strong> <ul> <li>Data lakes with third-party uploads</li> <li>Subscription-based data distribution</li> <li>Internal organizational transfers</li> <li>Data distribution and supply chain management</li> <li>Compliance and security workflows (AS2)</li> <li>Business-to-business transactions</li> </ul> </li> <li><strong>Benefits:</strong> <ul> <li>Fully managed and scalable in real-time</li> <li>No need to modify applications or manage infrastructure</li> <li>Integration with AWS services for processing and analytics</li> <li>Elastic and fully managed file system with Amazon EFS</li> <li>Serverless File Transfer Workflow service for automation and monitoring</li> <li>No upfront costs; pay-as-you-go</li> </ul> </li> <li><strong>Transfer Family Managed File Transfer Workflows (MFTW):</strong> Automates processing steps such as copying, tagging, scanning, filtering, and encrypting/decrypting data. Provides end-to-end visibility for tracking and auditability.</li> <li><strong>Supported File Transfer Protocol Clients:</strong> <ul> <li>OpenSSH (Mac/Linux)</li> <li>WinSCP (Windows)</li> <li>Cyberduck (Linux/Mac/Windows)</li> <li>FileZilla (Linux/Mac/Windows)</li> </ul> </li> <li><strong>Workshops Offered:</strong> <ul> <li>Building a file transfer solution with SFTP/FTPS and Amazon Cognito/DynamoDB</li> <li>Creating an AS2-enabled endpoint with Transfer Family AS2 connector</li> <li>Developing a scalable and secure file transfer architecture on AWS</li> </ul> </li> </ul>    
     </td>
   </tr>
   <tr>
@@ -2545,7 +2547,55 @@
       <img src="https://raw.githubusercontent.com/sashee/aws-svg-icons/ddf2928b65d8f18c20c6a792740ec934804e7a25/docs/Architecture-Service-Icons_07302021/Arch_Storage/64/Arch_AWS-Snowmobile_64.svg" alt="">
     </td>
     <td class="content">
-      <h2></h2>
+      <h2>AWS Snow Family</h2>
+        <ul>
+        <li><strong>AWS Snow Family</strong>
+            <ul>
+            <li>Comprises of AWS Snowcone, Snowball, and AWS Snowmobile</li>
+            <li>Physical devices for data transfer and edge computing</li>
+            <li>Helps with operations in non-data center environments and locations with inconsistent network connectivity</li>
+            <li>Devices are owned and managed by AWS, integrating with AWS security, monitoring, and computing capabilities</li>
+            </ul>
+        </li>
+
+        <li><strong>Snowcone</strong>
+            <ul>
+            <li>Smallest member of the Snow Family</li>
+            <li>Portable, rugged, and secure</li>
+            <li>Used for collecting, processing, and moving data to AWS</li>
+            <li>Data transfer options: offline by shipping or online with AWS DataSync</li>
+            <li>Costs: Pay per device use and data transfer out of AWS; no transfer fees for offline data transfer</li>
+            <li>Service fee per job includes five days of device use; additional daily fees or monthly rental options available</li>
+            <li>For high-volume deployments, contact AWS sales team</li>
+            <li>For pricing details, see <a href="https://aws.amazon.com/snowcone/pricing">AWS Snowcone Pricing</a></li>
+            </ul>
+        </li>
+
+        <li><strong>Snowball</strong>
+            <ul>
+            <li>Data migration and edge computing device with two options: Compute Optimized and Storage Optimized</li>
+            <li>Snowball Edge Storage Optimized: 40 vCPUs, 80 TB of storage</li>
+            <li>Snowball Edge Compute Optimized: 52 vCPUs, 42 TB of storage, optional GPU</li>
+            <li>Used for local storage, large-scale data transfer, ML, and processing in intermittent connectivity or remote locations</li>
+            <li>Pricing elements: usage, device type, and term of use</li>
+            <li>On-demand use: Service fee per data transfer job, including 10 days of device usage; additional daily fees after 10 days</li>
+            <li>One-year or three-year commitments: Contact AWS sales team</li>
+            <li>Data transferred into AWS does not incur transfer fees; standard pricing applies for data stored in AWS</li>
+            <li>For pricing details, see <a href="https://aws.amazon.com/snowball/pricing">AWS Snowball Pricing</a></li>
+            </ul>
+        </li>
+
+        <li><strong>Snowmobile</strong>
+            <ul>
+            <li>Largest member of the Snow Family</li>
+            <li>Designed for massive-scale data transfer (up to exabytes)</li>
+            <li>Used for large data migrations and moving data to AWS from on-premises or other data centers</li>
+            <li>Provides a secure, rugged, and portable solution for extremely large datasets</li>
+            <li>Data transfer fees: Pay per job and storage costs apply; contact AWS sales team for detailed pricing</li>
+            <li>For pricing details, see <a href="https://aws.amazon.com/snowmobile/pricing">AWS Snowmobile Pricing</a></li>
+            </ul>
+        </li>
+        </ul>
     </td>
   </tr>
   <tr>
@@ -2553,7 +2603,8 @@
       <img src="https://raw.githubusercontent.com/sashee/aws-svg-icons/ddf2928b65d8f18c20c6a792740ec934804e7a25/docs/Architecture-Service-Icons_07302021/Arch_Migration-Transfer/64/Arch_AWS-Application-Discovery-Service_64.svg" alt="">
     </td>
     <td class="content">
-      <h2></h2>
+      <h2>AWS Application Discovery Service</h2>
+        <ul> <li><strong>AWS Application Discovery Service</strong> helps plan migration to AWS cloud by collecting data about on-premises servers and databases.</li> <li><strong>Integration:</strong> Works with AWS Migration Hub and AWS Database Migration Service Fleet Advisor. <ul> <li><strong>AWS Migration Hub:</strong> Aggregates migration status information into a single console, allowing tracking of migration status.</li> <li><strong>DMS Fleet Advisor:</strong> Assesses migration options for database workloads.</li> </ul> </li> <li><strong>Data Storage:</strong> Discovered data is stored in the Migration Hub home Region; must set home Region before discovery and migration activities.</li> <li><strong>Data Export:</strong> Data can be exported for analysis in Microsoft Excel or AWS tools like Amazon Athena and Amazon QuickSight.</li> <li><strong>Discovery Methods:</strong> <ul> <li><strong>Agentless Discovery:</strong> Deploys the Application Discovery Service Agentless Collector (OVA file) via VMware vCenter. Collects static configuration and utilization data for VMs.</li> <li><strong>Agent-Based Discovery:</strong> Deploys AWS Application Discovery Agent on VMs and physical servers. Collects static configuration data, time-series performance data, network connections, and running processes.</li> </ul> </li> <li><strong>Third-Party Integration:</strong> Supports integration with AWS Partner Network (APN) solutions, allowing data import into Migration Hub using public APIs.</li> <li><strong>VMware Discovery:</strong> Agentless Collector captures data from VMware VMs; cannot capture detailed internal data. Can use both Agentless Collector and Discovery Agent simultaneously.</li> <li><strong>Database Discovery:</strong> Agentless Collector discovers and inventories database servers, captures performance metrics, and uses LDAP for gathering data. Supports database and analytics server performance collection.</li> <li><strong>Comparison:</strong> <ul> <li><strong>Agentless Collector:</strong> <ul> <li>Supported server types: VMware virtual machines.</li> <li>Deployment: Per vCenter.</li> <li>Collected data: Static server and database configuration, VM and database utilization metrics.</li> <li>Supported OS: Any OS in VMware vCenter V5.5+.</li> <li>Supported databases: Oracle, SQL Server, MySQL, PostgreSQL.</li> </ul> </li> <li><strong>Discovery Agent:</strong> <ul> <li>Supported server types: VMware virtual machines and physical servers.</li> <li>Deployment: Per server.</li> <li>Collected data: Static server and database configuration, time series performance data, network connections, running processes.</li> <li>Supported OS: Specific Linux and Windows operating systems.</li> <li>Supported databases: None.</li> </ul> </li> </ul> </li> <li><strong>Assumptions:</strong> Requires AWS account, selected Migration Hub home Region, and use of the selected home Region for discovery and planning data.</li> </ul>
     </td>
   </tr>
   <tr>
@@ -2561,7 +2612,29 @@
       <img src="https://raw.githubusercontent.com/sashee/aws-svg-icons/ddf2928b65d8f18c20c6a792740ec934804e7a25/docs/Resource-Icons_07302021/Res_Database/Res_48_Light/Res_AWS-Database-Migration-Service_Database-migration-workflow-job_48_Light.svg" alt="">
     </td>
     <td class="content">
-      <h2></h2>
+      <h2>AWS DMS</h2>
+        <ul>
+            <li><strong>AWS Database Migration Service (AWS DMS)</strong>:
+                <ul>
+                    <li>A cloud service for migrating relational databases, data warehouses, NoSQL databases, and other data stores.</li>
+                    <li>Supports migrating data into the AWS Cloud or between cloud and on-premises setups.</li>
+                    <li>Allows for one-time migrations and ongoing replication to keep sources and targets in sync.</li>
+                    <li>Use the AWS Schema Conversion Tool (AWS SCT) to translate database schema for migration to different database engines.</li>
+                </ul>
+            </li>
+            <li><strong>Issues with AWS DMS:</strong>
+                <ul>
+                    <li>Check if the version and edition of source and target databases are supported by DMS for both full load and Change Data Capture (CDC).</li>
+                    <li>Some database versions are supported only by certain versions of DMS.</li>
+                    <li>Example: CDC is not supported for SQL Server 2012 Standard edition using AWS DMS.</li>
+                </ul>
+            </li>
+            <li><strong>SQL Server DMS Version Support:</strong>
+                <ul>
+                    <li>Support for Microsoft SQL Server version 2019 as a source is available in AWS DMS versions 3.3.2 and later.</li>
+                </ul>
+            </li>
+        </ul>
     </td>
   </tr>
   <tr>
@@ -2569,7 +2642,17 @@
       <img src="https://raw.githubusercontent.com/sashee/aws-svg-icons/ddf2928b65d8f18c20c6a792740ec934804e7a25/docs/Architecture-Service-Icons_07302021/Arch_Migration-Transfer/64/Arch_AWS-Server-Migration-Service_64.svg" alt="">
     </td>
     <td class="content">
-      <h2></h2>
+      <h2>AWS Server Migration Service</h2>
+        <ul>
+        <li><strong>AWS Application Migration Service (MGN):</strong> A highly automated lift-and-shift (rehost) solution for migrating applications to AWS.</li>
+        <li><strong>Purpose:</strong> Simplifies, expedites, and reduces the cost of migrating applications.</li>
+        <li><strong>Compatibility:</strong> Allows migration of physical, virtual, or cloud servers without compatibility issues or performance disruption.</li>
+        <li><strong>Replication:</strong> Replicates source servers into your AWS account.</li>
+        <li><strong>Automation:</strong> Automatically converts and launches servers on AWS.</li>
+        <li><strong>Benefits:</strong> Provides cost savings, productivity, resilience, and agility of the Cloud.</li>
+        <li><strong>Post-Migration:</strong> Enables replatforming or refactoring of applications using AWS services and capabilities.</li>
+        <li><strong>Modernization:</strong> Lift-and-shift is a fast route to modernization.</li>
+        </ul>
     </td>
   </tr>
   <tr>
@@ -2577,15 +2660,33 @@
       <img src="https://raw.githubusercontent.com/sashee/aws-svg-icons/ddf2928b65d8f18c20c6a792740ec934804e7a25/docs/Architecture-Service-Icons_07302021/Arch_Migration-Transfer/64/Arch_AWS-Migration-Hub_64.svg" alt="">
     </td>
     <td class="content">
-      <h2></h2>
-    </td>
-  </tr>
-  <tr>
-    <td class="image">
-      <img src="https://raw.githubusercontent.com/sashee/aws-svg-icons/ddf2928b65d8f18c20c6a792740ec934804e7a25/docs/Architecture-Service-Icons_07302021/Arch_Migration-Transfer/64/Arch_AWS-Migration-Evaluator_64.svg" alt="">
-    </td>
-    <td class="content">
-      <h2></h2>
+      <h2>AWS Migration Hub</h2>
+        <ul>
+            <li><strong>AWS Migration Hub</strong>: Provides a guided end-to-end migration and modernization journey through discovery, assessment, planning, and execution.</li>
+            <li><strong>Features</strong>:
+                <ul>
+                    <li>Access to the latest guidance and tools from one location.</li>
+                    <li>Automated recommendations and prescriptive plans.</li>
+                    <li>Cross-team collaboration and tracking to accelerate transformation.</li>
+                    <li>Simplifies rehost, refactor, and replatform of applications.</li>
+                </ul>
+            </li>
+            <li><strong>Benefits</strong>:
+                <ul>
+                    <li><strong>Simplified experience</strong>: Discover, Assess, Analyze, Plan, Execute, and Manage from a single location.</li>
+                    <li><strong>Expert guidance</strong>: Accelerate migration and modernization with prescriptive journey templates.</li>
+                    <li><strong>Proven tools</strong>: Leverage specialized services designed to meet transformation goals.</li>
+                    <li><strong>Free Service</strong>: Get started for free to plan or track migration to AWS.</li>
+                </ul>
+            </li>
+            <li><strong>Use Cases</strong>:
+                <ul>
+                    <li><strong>Migration Assessment & Planning</strong>: Discover applications for migration and modernization, and define execution strategies.</li>
+                    <li><strong>Migration Execution</strong>: Use guided migration journey templates and specialized services, while collaborating across teams to meet migration goals.</li>
+                    <li><strong>Modernization</strong>: Fast-track application refactoring, simplify development, and manage applications and microservices as one.</li>
+                </ul>
+            </li>
+        </ul>
     </td>
   </tr>
 </table>
@@ -2599,7 +2700,8 @@
       <img src="https://raw.githubusercontent.com/sashee/aws-svg-icons/ddf2928b65d8f18c20c6a792740ec934804e7a25/docs/Architecture-Service-Icons_07302021/Arch_Analytics/Arch_64/Arch_Amazon-Kinesis_64.svg" alt="">
     </td>
     <td class="content">
-      <h2></h2>
+      <h2>AWS Kinesis</h2>
+        <ul> <li><strong>Amazon Kinesis</strong>: Suite of services for analyzing data streams in real-time.</li> <li><strong>Data Streams:</strong> <ul> <li>Data is available within milliseconds, enabling near-instantaneous processing.</li> <li>Used for various real-time applications such as website clickstreams, IoT telemetry, and financial transactions.</li> <li>Maintains order of records and allows concurrent consumption by multiple applications.</li> <li>Similar to Amazon SQS but with real-time capabilities and record ordering.</li> <li>Amazon Kinesis Data Streams is suitable for: <ul> <li>Clickstream data analysis</li> <li>Mobile game score updates</li> <li>Predictive maintenance for IoT systems</li> <li>Financial transactions processing</li> </ul> </li> </ul> </li> <li><strong>Amazon Kinesis Data Firehose:</strong> <ul> <li>Fully managed service to transform and load streaming data into data stores.</li> <li>Delivers data to Amazon S3, Amazon Redshift, Amazon Elasticsearch Service, or HTTP endpoints.</li> <li>Transforms data before delivery using Lambda functions.</li> <li>Useful for sending data streams directly to specified destinations without custom applications.</li> </ul> </li> <li><strong>Amazon Kinesis Video Streams:</strong> <ul> <li>Secures streaming video from devices to AWS.</li> <li>Used for video analytics, machine learning, and video playback.</li> <li>Automatically provisions and scales infrastructure to handle video data.</li> <li>Provides APIs for video data access.</li> </ul> </li> <li><strong>Amazon Kinesis Data Analytics:</strong> <ul> <li>Serverless service for analyzing streaming data and acquiring actionable insights.</li> <li>Uses Apache Flink for processing and analyzing data.</li> <li>Reduces complexity by eliminating server management and integration overhead.</li> <li>Supports SQL queries and real-time dashboards.</li> <li>Integrates with other AWS services like Amazon S3 and Amazon Redshift.</li> <li>Use cases include: <ul> <li>Real-time data processing and querying</li> <li>Time series analytics</li> <li>Real-time metrics</li> </ul> </li> </ul> </li> </ul>
     </td>
   </tr>
   <tr>
@@ -2607,7 +2709,34 @@
       <img src="https://raw.githubusercontent.com/sashee/aws-svg-icons/ddf2928b65d8f18c20c6a792740ec934804e7a25/docs/Architecture-Service-Icons_07302021/Arch_Analytics/Arch_64/Arch_Amazon-Athena_64.svg" alt="">
     </td>
     <td class="content">
-      <h2></h2>
+      <h2>AWS Athena</h2>
+        <ul>
+            <li>Amazon Athena:
+                <ul>
+                    <li>An interactive query service for data stored in Amazon S3.</li>
+                    <li>Simplifies data analysis in S3 using standard SQL.</li>
+                    <li>Can query a subset of S3 data using S3 Select with simple SQL statements, but Athena is more powerful.</li>
+                    <li>Serverless, meaning you only pay for the specific queries you run.</li>
+                    <li>Example use case: Identifying the number of items sold in each region for the previous month from 250 gigabytes of transactional data stored in S3.</li>
+                    <li>Alternative AWS services for similar tasks: Amazon Redshift, Amazon EMR, and Amazon ES cluster, but they are not serverless and may have higher operating costs.</li>
+                    <li>Can integrate with other AWS services:
+                        <ul>
+                            <li>Uses AWS Glue Data Catalog to store and achieve table metadata for S3 data.</li>
+                            <li>Provides data visualization using Amazon QuickSight.</li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li>Amazon Elasticsearch Service:
+                <ul>
+                    <li>A fully managed Elasticsearch service.</li>
+                    <li>Elasticsearch is a search engine based on the Apache Lucene library.</li>
+                    <li>Distributed, multi-tenant capable full-text search engine.</li>
+                    <li>Stores data as schemaless JSON documents.</li>
+                    <li>Features an HTTP web interface.</li>
+                </ul>
+            </li>
+        </ul>
     </td>
   </tr>
   <tr>
@@ -2615,7 +2744,27 @@
       <img src="https://raw.githubusercontent.com/sashee/aws-svg-icons/ddf2928b65d8f18c20c6a792740ec934804e7a25/docs/Architecture-Service-Icons_07302021/Arch_Analytics/Arch_64/Arch_Amazon-Elasticsearch-Service_64.svg" alt="">
     </td>
     <td class="content">
-      <h2></h2>
+      <h2>AWS ES</h2>
+            <ul>
+            <li>Amazon Elasticsearch Service (Amazon ES) abstracts the underlying technology, provisions the necessary infrastructure, and manages resources automatically.</li>
+            <li>It allows you to launch an ELK stack in AWS.</li>
+            <li>An ELK stack consists of three open-source products:
+                <ul>
+                <li>Elasticsearch</li>
+                <li>Logstash: A server-side data processing pipeline</li>
+                <li>Kibana: A user interface for visualizing Elasticsearch data</li>
+                </ul>
+            </li>
+            <li>Amazon ES provides support for:
+                <ul>
+                <li>Open source Elasticsearch APIs</li>
+                <li>Managed Kibana</li>
+                <li>Integration with Logstash</li>
+                <li>Other AWS services</li>
+                </ul>
+            </li>
+            <li>Amazon ES follows a pay-as-you-go model, meaning there are no upfront costs or usage requirements.</li>
+            </ul>
     </td>
   </tr>
   <tr>
@@ -2623,7 +2772,61 @@
       <img src="https://raw.githubusercontent.com/sashee/aws-svg-icons/ddf2928b65d8f18c20c6a792740ec934804e7a25/docs/Architecture-Service-Icons_07302021/Arch_Analytics/Arch_64/Arch_Amazon-EMR_64.svg" alt="">
     </td>
     <td class="content">
-      <h2></h2>
+      <h2>AWS EMR</h2>
+        <ul>
+        <li><strong>Amazon Elastic MapReduce (Amazon EMR)</strong>
+            <ul>
+            <li>Managed big data platform for processing large amounts of data.</li>
+            <li>Supports open source tools such as:
+                <ul>
+                <li>Apache Hadoop</li>
+                <li>Flink</li>
+                <li>HBase</li>
+                <li>HCatalog</li>
+                <li>Hive</li>
+                <li>Hudi</li>
+                <li>Hue</li>
+                <li>Jupyter</li>
+                <li>Livy</li>
+                <li>MXNet</li>
+                <li>Oozie</li>
+                <li>Phoenix</li>
+                <li>Pig</li>
+                <li>Presto</li>
+                <li>Spark</li>
+                <li>Sqoop</li>
+                <li>TensorFlow</li>
+                <li>Text</li>
+                <li>Zeppelin</li>
+                <li>ZooKeeper</li>
+                </ul>
+            </li>
+            <li>Runs on Amazon EC2 instances, Amazon EKS clusters, or on-premises via AWS Outposts.</li>
+            <li>Deployed in a VPC and grouped as an Amazon EMR cluster.</li>
+            <li>Direct access and control of the underlying EC2 instances is possible.</li>
+            <li>Not serverless; automates server provisioning and management.</li>
+            <li>Can interact with other AWS data stores such as:
+                <ul>
+                <li>Amazon S3</li>
+                <li>Amazon DynamoDB</li>
+                </ul>
+            </li>
+            </ul>
+        </li>
+        <li><strong>Amazon QuickSight</strong>
+            <ul>
+            <li>Scalable, serverless business intelligence service.</li>
+            <li>Provides interactive dashboards that can be accessed from:
+                <ul>
+                <li>Different browsers</li>
+                <li>Mobile devices</li>
+                </ul>
+            </li>
+            <li>Supports embedding dashboards in applications.</li>
+            <li>Machine learning powered for advanced analytics.</li>
+            </ul>
+        </li>
+        </ul>
     </td>
   </tr>
   <tr>
@@ -2631,7 +2834,32 @@
       <img src="https://raw.githubusercontent.com/sashee/aws-svg-icons/ddf2928b65d8f18c20c6a792740ec934804e7a25/docs/Architecture-Service-Icons_07302021/Arch_Analytics/Arch_64/Arch_Amazon-QuickSight_64.svg" alt="">
     </td>
     <td class="content">
-      <h2></h2>
+      <h2>AWS QuickSight</h2>
+        <ul>
+        <li><strong>Amazon QuickSight:</strong>
+            <ul>
+            <li>Highly scalable</li>
+            <li>Scales up to thousands of users</li>
+            <li>No software installation needed</li>
+            <li>No servers to deploy</li>
+            <li>No infrastructure to manage</li>
+            </ul>
+        </li>
+        <li><strong>Amazon CloudSearch:</strong>
+            <ul>
+            <li>Managed search service in AWS</li>
+            <li>Useful for implementing search features in applications</li>
+            <li>Capabilities include:
+                <ul>
+                <li>Retrieve contents of selected fields</li>
+                <li>Provide facet information for result categorization</li>
+                <li>Statistics for numeric field values</li>
+                <li>Highlight search hits in field data</li>
+                <li>Autocomplete suggestions</li>
+                <li>Geospatial search</li>
+                </ul>
+            </li>
+        </ul>
     </td>
   </tr>
   <tr>
@@ -2639,7 +2867,25 @@
       <img src="https://raw.githubusercontent.com/sashee/aws-svg-icons/ddf2928b65d8f18c20c6a792740ec934804e7a25/docs/Architecture-Service-Icons_07302021/Arch_Analytics/Arch_64/Arch_Amazon-CloudSearch_64.svg" alt="">
     </td>
     <td class="content">
-      <h2></h2>
+      <h2>AWS CloudSearch</h2>
+        <ul>
+            <li>Amazon CloudSearch is a managed search service in AWS.</li>
+            <li>Helpful for implementing a search feature in applications.</li>
+            <li>Features include:
+                <ul>
+                    <li>Retrieving contents of selected fields</li>
+                    <li>Providing facet information to categorize results</li>
+                    <li>Statistics for numeric fields</li>
+                    <li>Highlights showing search hits in field data</li>
+                    <li>Autocomplete suggestions</li>
+                    <li>Geospatial search</li>
+                </ul>
+            </li>
+            <li>Allows creation of a search domain, specification of an index, and uploading of data as documents.</li>
+            <li>CloudSearch provisions and manages all underlying servers and resources for building and deploying search indexes.</li>
+            <li>Users need to upload data to a search domain and integrate it into applications.</li>
+            <li>CloudSearch serves as both a database service and an analytic service in AWS.</li>
+        </ul>
     </td>
   </tr>
   <tr>
@@ -2647,7 +2893,31 @@
       <img src="https://raw.githubusercontent.com/sashee/aws-svg-icons/ddf2928b65d8f18c20c6a792740ec934804e7a25/docs/Architecture-Service-Icons_07302021/Arch_Analytics/Arch_64/Arch_Amazon-Redshift_64.svg" alt="">
     </td>
     <td class="content">
-      <h2></h2>
+      <h2>AWS RedShift</h2>
+        <ul>
+            <li>Amazon Redshift:
+                <ul>
+                    <li>A fast, scalable data warehouse for analyzing data across data warehouses and data lakes.</li>
+                    <li>Delivers 10 times faster performance than other data warehouses using:
+                        <ul>
+                            <li>Machine learning</li>
+                            <li>Massively parallel query execution</li>
+                            <li>Columnar storage on high-performance disks</li>
+                        </ul>
+                    </li>
+                    <li>Can run queries across petabytes of data in Redshift and analyze exabytes in Amazon S3 data lake.</li>
+                    <li>Primarily used for Online Analytical Processing (OLAP) applications and reporting tools.</li>
+                    <li>Runs on internal Amazon EC2 instances configured as nodes. Node type and instance size can be selected.</li>
+                    <li>Not a serverless service; costs are associated with the EC2 instances used.</li>
+                    <li>Features Redshift Spectrum:
+                        <ul>
+                            <li>Allows querying data from Amazon S3 without loading all data into Redshift tables.</li>
+                            <li>Uses massive parallelism to quickly execute large data sets at a fraction of the cost.</li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+        </ul>
     </td>
   </tr>
   <tr>
@@ -2655,7 +2925,21 @@
       <img src="https://raw.githubusercontent.com/sashee/aws-svg-icons/ddf2928b65d8f18c20c6a792740ec934804e7a25/docs/Architecture-Service-Icons_07302021/Arch_Analytics/Arch_64/Arch_AWS-Data-Pipeline_64.svg" alt="">
     </td>
     <td class="content">
-      <h2></h2>
+      <h2>AWS DataPipeLine</h2>
+        <ul>
+            <li>AWS Data Pipeline is a service for processing and moving data between AWS compute and storage services.</li>
+            <li>It allows you to process and move data at specified intervals defined by you.</li>
+            <li>Data can be transferred to and from on-premises data centers.</li>
+            <li>You can regularly access, transform, and process data at scale.</li>
+            <li>The service supports transferring and storing results to various AWS services, including:
+                <ul>
+                    <li>Amazon S3</li>
+                    <li>Amazon RDS</li>
+                    <li>Amazon DynamoDB</li>
+                    <li>Amazon EMR</li>
+                </ul>
+            </li>
+        </ul>
     </td>
   </tr>
   <tr>
@@ -2663,7 +2947,15 @@
       <img src="https://raw.githubusercontent.com/sashee/aws-svg-icons/ddf2928b65d8f18c20c6a792740ec934804e7a25/docs/Architecture-Service-Icons_07302021/Arch_Analytics/Arch_64/Arch_AWS-Glue_64.svg" alt="">
     </td>
     <td class="content">
-      <h2></h2>
+      <h2>AWS Glue</h2>
+        <ul>
+        <li>AWS Glue is a fully managed and serverless service.</li>
+        <li>It is primarily used for Extract, Transform, and Load (ETL) workloads.</li>
+        <li>AWS Glue simplifies the process of preparing and loading data for analytics workloads.</li>
+        <li>In AWS Glue, you can create a data catalog to specify and search your data stored on Amazon S3 and other AWS services.</li>
+        <li>AWS Glue can automatically discover your data and store the associated metadata in the AWS Glue Data Catalog.</li>
+        <li>Once metadata is stored, your data becomes immediately searchable, queryable, and available for ETL.</li>
+        </ul>
     </td>
   </tr>
   <tr>
@@ -2671,7 +2963,18 @@
       <img src="https://raw.githubusercontent.com/sashee/aws-svg-icons/ddf2928b65d8f18c20c6a792740ec934804e7a25/docs/Architecture-Service-Icons_07302021/Arch_Analytics/Arch_64/Arch_Amazon-Managed-Streaming-for-Apache-Kafka_64.svg" alt="">
     </td>
     <td class="content">
-      <h2></h2>
+      <h2>AWS Managed Streaming for Apache Kafka</h2>
+        <ul>
+            <li>Amazon Managed Streaming for Apache Kafka is a fully managed Apache Kafka service in AWS.</li>
+            <li>Apache Kafka is an open source platform for building real-time streaming data pipelines and applications.</li>
+            <li>With Amazon Managed Streaming for Apache Kafka, you can:
+                <ul>
+                    <li>Use Apache Kafka APIs to stream changes to and from different databases.</li>
+                    <li>Populate your Amazon S3 data lakes.</li>
+                    <li>Empower machine learning and analytics applications.</li>
+                </ul>
+            </li>
+        </ul>
     </td>
   </tr>
   <tr>
@@ -2679,7 +2982,16 @@
       <img src="https://raw.githubusercontent.com/sashee/aws-svg-icons/ddf2928b65d8f18c20c6a792740ec934804e7a25/docs/Architecture-Service-Icons_07302021/Arch_Analytics/Arch_64/Arch_AWS-Lake-Formation_64.svg" alt="">
     </td>
     <td class="content">
-      <h2></h2>
+      <h2>AWS Lake Formation</h2>
+        <ul>
+        <li>AWS Lake Formation simplifies the setup of a secure data lake.</li>
+        <li>A data lake is a centralized, curated, and secured repository for storing all types of data, whether structured or raw.</li>
+        <li>Like AWS Glue, Lake Formation helps create data catalogs for external data sources.</li>
+        <li>The service collects and catalogs data from various sources and transfers it into an Amazon S3 data lake.</li>
+        <li>It classifies and processes data using machine learning algorithms.</li>
+        <li>Lake Formation secures access to sensitive data.</li>
+        <li>Data in the data lake can be queried and analyzed using services like Amazon Athena, Amazon Redshift, Amazon EMR, and others.</li>
+        </ul>
     </td>
   </tr>
 </table>
