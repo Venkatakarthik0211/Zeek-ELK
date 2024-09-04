@@ -830,9 +830,25 @@
       <img src="https://raw.githubusercontent.com/sashee/aws-svg-icons/ddf2928b65d8f18c20c6a792740ec934804e7a25/docs/Architecture-Service-Icons_07302021/Arch_Management-Governance/64/Arch_AWS-CloudFormation_64.svg" alt="">
     </td>
     <td class="content">
-      <h2></h2>
-      <ul>
-      </ul>
+      <h2>AWS Cloudformation</h2>
+        <ul>
+        <li>AWS CloudFormation enables provisioning and management of AWS resources using custom code templates.</li>
+        <li>Templates can be written in YAML or JSON format.</li>
+        <li>Supports provisioning various AWS resources such as EC2 instances, FSX file systems, Aurora databases, and more.</li>
+        <li>Includes CloudFormation Designer, a drag-and-drop tool for creating and modifying templates.</li>
+        <li>Functions as an Infrastructure as Code (IaC) service, similar to Terraform, Ansible, Chef, and Puppet.</li>
+        <li>Resources are deployed in groups called stacks, which can represent entire architectures or subsets.</li>
+        <li>Allows for creating multiple templates for different architecture layers (e.g., presentation, application, data layers).</li>
+        <li>Supports nested stacks to manage related stacks more easily and independently.</li>
+        <li>Enables provisioning, modification, and scaling of resources, with a dry run mode called change sets to preview changes before deployment.</li>
+        <li>Change sets show how changes impact running resources, allowing for planning before updates.</li>
+        <li>Stacks are usually scoped to a single AWS account, but stacksets allow management across multiple accounts and regions.</li>
+        <li>Stacksets let you create, update, or delete stacks across multiple accounts with a single operation.</li>
+        <li>Extended by AWS Cloud Development Kit (CDK) for programmatic infrastructure modeling in various programming languages.</li>
+        <li>AWS Serverless Application Model (SAM) simplifies development of serverless applications with an extension of CloudFormation templates.</li>
+        <li>AWS SAM templates include components for easier work with serverless services like Lambda, DynamoDB, and API Gateway.</li>
+        <li>Serverless apps can be published and shared via the AWS Serverless Application Repository.</li>
+        </ul>
     </td>
   </tr>
 
@@ -841,9 +857,37 @@
       <img src="https://raw.githubusercontent.com/sashee/aws-svg-icons/ddf2928b65d8f18c20c6a792740ec934804e7a25/docs/Architecture-Service-Icons_07302021/Arch_Compute/64/Arch_AWS-Elastic-Beanstalk_64.svg" alt="">
     </td>
     <td class="content">
-      <h2></h2>
-      <ul>
-      </ul>
+      <h2>AWS Elastic BeanStalk</h2>
+        <ul>
+        <li>AWS Elastic Beanstalk is a managed platform that allows you to upload your application code in AWS and provision the required cloud environment easily.</li>
+        <li>You only need to upload your application package that is written in:
+            <ul>
+            <li>Java</li>
+            <li>.NET</li>
+            <li>PHP</li>
+            <li>Node.js</li>
+            <li>Python</li>
+            <li>Ruby</li>
+            <li>Go</li>
+            <li>Docker</li>
+            </ul>
+        </li>
+        <li>Elastic Beanstalk will deploy the necessary resources to run your application.</li>
+        <li>You can either run:
+            <ul>
+            <li>A web server environment, which runs a static website, a web app, or a web API that serves HTTP requests.</li>
+            <li>A worker environment, which:
+                <ul>
+                <li>Runs a worker application that processes long running workloads on demand.</li>
+                <li>Performs tasks on a schedule that you define.</li>
+                <li>Can be integrated with the Amazon SQS queue.</li>
+                </ul>
+            </li>
+            </ul>
+        </li>
+        <li>AWS Elastic Beanstalk uses a configuration file similar to CloudFormation to automatically deploy and configure your applications.</li>
+        <li>These configuration files in Elastic Beanstalk are stored in the .ebextensions folder.</li>
+        </ul>
     </td>
   </tr>
 
@@ -852,20 +896,43 @@
       <img src="https://raw.githubusercontent.com/sashee/aws-svg-icons/ddf2928b65d8f18c20c6a792740ec934804e7a25/docs/Architecture-Service-Icons_07302021/Arch_Developer-Tools/64/Arch_AWS-CodeDeploy_64.svg" alt="">
     </td>
     <td class="content">
-      <h2></h2>
-      <ul>
-      </ul>
+      <h2>AWS CodeDeploy</h2>
+        <ul>
+            <li>AWS CodeDeploy is a fully managed deployment service that automates your application deployments in AWS.</li>
+            <li>You can deploy your applications to:
+                <ul>
+                    <li>Amazon EC2 instances</li>
+                    <li>Amazon ECS clusters</li>
+                    <li>AWS Lambda functions</li>
+                    <li>Other computing services in AWS</li>
+                    <li>Applications on your on-premises network</li>
+                </ul>
+            </li>
+            <li>AWS CodeDeploy is different from:
+                <ul>
+                    <li>AWS CloudFormation</li>
+                    <li>AWS SAM</li>
+                    <li>Elastic Beanstalk</li>
+                </ul>
+            </li>
+            <li>AWS CodeDeploy only deploys applications to existing compute resources.</li>
+            <li>AWS CodeDeploy does not create AWS resources on your behalf.</li>
+            <li>AWS CodeDeploy is intended for application deployments only.</li>
+        </ul>
     </td>
   </tr>
 
   <tr>
     <td class="image">
-      <img src="https://raw.githubusercontent.com/sashee/aws-svg-icons/ddf2928b65d8f18c20c6a792740ec934804e7a25/docs/Architecture-Service-Icons_07302021/Arch_Containers/64/Arch_Amazon-Elastic-Container-Service_64.svg" alt="">
+      <img src="https://raw.githubusercontent.com/sashee/aws-svg-icons/ddf2928b65d8f18c20c6a792740ec934804e7a25/docs/Resource-Icons_07302021/Res_Containers/Res_48_Light/Res_Amazon-Elastic-Container-Service_ECS-Anywhere_48_Light.svg" alt="">
     </td>
     <td class="content">
       <h2></h2>
-      <ul>
-      </ul>
+        <ul>
+        <li>Amazon ECS Anywhere allows you to run and manage container workloads on your on-premises infrastructure.</li>
+        <li>Amazon ECS Anywhere provides the same cluster management, workload scheduling, monitoring, and support features as in the cloud.</li>
+        <li>Using Amazon ECS Anywhere helps meet compliance requirements and scale hybrid architectures without undermining previous investments in on-premises hardware.</li>
+        </ul>
     </td>
   </tr>
 
@@ -874,9 +941,20 @@
       <img src="https://raw.githubusercontent.com/sashee/aws-svg-icons/ddf2928b65d8f18c20c6a792740ec934804e7a25/docs/Architecture-Service-Icons_07302021/Arch_Containers/64/Arch_Amazon-EKS-Anywhere_64.svg" alt="">
     </td>
     <td class="content">
-      <h2></h2>
-      <ul>
-      </ul>
+      <h2>AWS EKS Anywhere</h2>
+        <ul>
+        <li>Amazon Elastic Kubernetes Service (Amazon EKS) is a managed service for running Kubernetes on AWS.</li>
+        <li>Amazon EKS automates the installation, operation, and maintenance of Kubernetes control plane, pods, and nodes.</li>
+        <li>Deployment options for Kubernetes clusters on AWS:
+            <ul>
+            <li>Amazon EKS with managed or self-managed Amazon EC2 nodes, allowing for customization and control.</li>
+            <li>Amazon EKS on AWS Outposts, using physical AWS Outpost tracks on-premises, offering more control compared to running exclusively in AWS.</li>
+            <li>Amazon EKS Anywhere, which allows running Kubernetes clusters on-premises with control over all components, similar to Amazon ECS Anywhere, with official support from AWS.</li>
+            <li>Amazon EKS Distro, an open source distribution of the Kubernetes software deployed by Amazon EKS, available for deployment on your own computer or onsite environment without AWS support services.</li>
+            </ul>
+        </li>
+        <li>Amazon EKS allows deploying Kubernetes containers to various environments including AWS Fargate for serverless and cost-effective clusters.</li>
+        </ul>
     </td>
   </tr>
 
@@ -885,15 +963,39 @@
       <img src="https://raw.githubusercontent.com/sashee/aws-svg-icons/ddf2928b65d8f18c20c6a792740ec934804e7a25/docs/Architecture-Service-Icons_07302021/Arch_Management-Governance/64/Arch_AWS-OpsWorks_64.svg" alt="">
     </td>
     <td class="content">
-      <h2></h2>
-      <ul>
-      </ul>
+      <h2>AWS OpsWork</h2>
+        <ul>
+        <li>AWS OpsWorks is a configuration management service that provides managed instances for your Chef and Puppet-based automation platforms.</li>
+        <li>Chef and Puppet are Infrastructure as Code (IaC) platforms that automate the manual task of provisioning and configuring your servers.</li>
+        <li>AWS OpsWorks automates how your services are provisioned, configured, and managed across your Amazon EC2 instances or your own physical servers situated in your corporate building.</li>
+        <li>AWS OpsWorks has three offerings:
+            <ul>
+            <li>AWS OpsWorks for Chef Automate</li>
+            <li>AWS OpsWorks for Puppet Enterprise</li>
+            <li>AWS OpsWorks Stacks</li>
+            </ul>
+        </li>
+        <li>AWS Proton is a service that automates container and serverless deployments in AWS.</li>
+        <li>AWS Proton empowers your platform teams and developers to have consistent development standards and best practices.</li>
+        <li>This service is particularly useful if you have a large number of developers in your organization.</li>
+        </ul>
     </td>
   </tr>
   <tr>
     <td class="image">
       <img src="https://raw.githubusercontent.com/sashee/aws-svg-icons/ddf2928b65d8f18c20c6a792740ec934804e7a25/docs/Architecture-Service-Icons_07302021/Arch_Management-Governance/64/Arch_AWS-Proton_64.svg" alt="">
     </td>
+    <td class="content">
+      <h2>AWS Proton</h2>
+        <ul>
+            <li>AWS Proton enables developers to deploy container and serverless applications using pre-approved stacks managed by the platform team.</li>
+            <li>It balances control and flexibility by allowing developers to innovate within set guardrails implemented by the platform team.</li>
+            <li>AWS Proton offers a self-service portal for developers, which contains AWS Proton templates that they can use and deploy.</li>
+            <li>A Proton template includes all information required to deploy custom environments and services.</li>
+            <li>You can create AWS Proton components to provide flexibility to service templates.</li>
+            <li>Components in AWS Proton offer platform themes by extending core infrastructure patterns and defining guardrails for developers.</li>
+        </ul>
+  </tr>
 
 </table>
 
@@ -905,9 +1007,38 @@
       <img src="https://raw.githubusercontent.com/sashee/aws-svg-icons/ddf2928b65d8f18c20c6a792740ec934804e7a25/docs/Architecture-Service-Icons_07302021/Arch_Management-Governance/64/Arch_Amazon-CloudWatch_64.svg" alt="">
     </td>
     <td class="content">
-      <h2></h2>
-      <ul>
-      </ul>
+        <h2> AWS CloudWatch Logs</h2>
+            <ul>
+                <li>AWS CloudTrail is a service used for IT audits.</li>
+                <li>Tracks user activity and API usage in your AWS account.</li>
+                <li>Stores data in an Amazon S3 bucket owned by your AWS account or by others.</li>
+                <li>Enables risk auditing by monitoring and logging account activities such as:
+                    <ul>
+                        <li>User actions in the AWS Management Console</li>
+                        <li>AWS SDKs</li>
+                        <li>APIs</li>
+                        <li>AWS CLI</li>
+                    </ul>
+                </li>
+                <li>There are two types of events logged in AWS CloudTrail:
+                    <ul>
+                        <li>Management events (control plane operations):
+                            <ul>
+                                <li>Provide information about management operations performed on resources in your AWS account</li>
+                                <li>Examples: attaching an IAM role, creating a VPC, creating a subnet</li>
+                            </ul>
+                        </li>
+                        <li>Data events (data plane operations):
+                            <ul>
+                                <li>Provide information about resource operations performed on or in a resource</li>
+                                <li>Examples: Amazon S3 object-level API activities, invoking an AWS Lambda function</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <li>CloudTrail log files can be received from multiple AWS accounts by granting cross-account permissions to CloudTrail.</li>
+                <li>Each account can deliver the log files to an S3 bucket in your central account.</li>
+            </ul>
     </td>
   </tr>
 
@@ -916,9 +1047,16 @@
       <img src="https://raw.githubusercontent.com/sashee/aws-svg-icons/ddf2928b65d8f18c20c6a792740ec934804e7a25/docs/Architecture-Service-Icons_07302021/Arch_Management-Governance/64/Arch_AWS-Personal-Health-Dashboard_64.svg" alt="">
     </td>
     <td class="content">
-      <h2></h2>
-      <ul>
-      </ul>
+      <h2>AWS Personal Health Dashboard</h2>
+        <ul>
+        <li>AWS Personal Health Dashboard provides a personalized view of the AWS services you are using.</li>
+        <li>It only shows the status of services that you are actively using in your account.</li>
+        <li>It displays AWS Health events that might affect your applications, such as scheduled maintenance or infrastructure changes.</li>
+        <li>You can create alerts and notifications triggered by changes in the health of your AWS resources.</li>
+        <li>AWS Health API provides programmatic access to the information in your AWS Personal Health Dashboard.</li>
+        <li>The AWS Health API is a RESTful web service accessible via HTTPS, returning responses in JSON format.</li>
+        <li>This service is not available by default; you must have a business or enterprise support plan to use it.</li>
+        </ul>
     </td>
   </tr>
 </table>
@@ -931,9 +1069,22 @@
       <img src="https://raw.githubusercontent.com/sashee/aws-svg-icons/ddf2928b65d8f18c20c6a792740ec934804e7a25/docs/Architecture-Service-Icons_07302021/Arch_Management-Governance/64/Arch_AWS-CloudTrail_64.svg" alt="">
     </td>
     <td class="content">
-      <h2></h2>
-      <ul>
-      </ul>
+      <h2>AWS CloudTrail</h2>
+        <ul>
+        <li>AWS CloudTrail is a service used primarily for IT audits.</li>
+        <li>Tracks user activity and API usage in your AWS account.</li>
+        <li>Stores data in an Amazon S3 bucket owned by your AWS account or other accounts.</li>
+        <li>Enables risk auditing by continuously monitoring and logging account activities.</li>
+        <li>Logs user actions in the AWS Management Console, AWS SDKs, APIs, or AWS CLI.</li>
+        <li>There are two types of events logged in AWS CloudTrail:
+            <ul>
+            <li><strong>Management events:</strong> Provide information about management operations on resources (e.g., attaching an IAM role, creating a VPC, or creating a subnet).</li>
+            <li><strong>Data events:</strong> Provide information about resource operations (e.g., Amazon S3 object-level API activities, or invoking an AWS Lambda function).</li>
+            </ul>
+        </li>
+        <li>CloudTrail log files can be received from multiple AWS accounts by granting cross-account permissions to CloudTrail.</li>
+        <li>Each account can deliver log files to an S3 bucket in a central account.</li>
+        </ul>
     </td>
   </tr>
 
@@ -942,9 +1093,26 @@
       <img src="https://raw.githubusercontent.com/sashee/aws-svg-icons/ddf2928b65d8f18c20c6a792740ec934804e7a25/docs/Architecture-Service-Icons_07302021/Arch_Security-Identity-Compliance/64/Arch_AWS-Artifact_64.svg" alt="">
     </td>
     <td class="content">
-      <h2></h2>
-      <ul>
-      </ul>
+      <h2>AWS Artifact</h2>
+        <ul>
+        <li>AWS Artifact is a service that provides on-demand AWS security and compliance reports.</li>
+        <li>It acts as a self-service portal to find compliance-related information and reports about AWS.</li>
+        <li>Reports available include:
+            <ul>
+            <li>ISO reports</li>
+            <li>Payment Card Industry (PCI) reports</li>
+            <li>Service Organization Control (SOC) reports</li>
+            <li>Certifications from accreditation bodies across the globe</li>
+            </ul>
+        </li>
+        <li>Users can download AWS Security and compliance documents such as:
+            <ul>
+            <li>SOC 1 reports</li>
+            <li>ISO certifications</li>
+            <li>Other reports</li>
+            </ul>
+        </li>
+        </ul>
     </td>
   </tr>
 
@@ -953,9 +1121,29 @@
       <img src="https://raw.githubusercontent.com/sashee/aws-svg-icons/ddf2928b65d8f18c20c6a792740ec934804e7a25/docs/Architecture-Service-Icons_07302021/Arch_Security-Identity-Compliance/64/Arch_AWS-Security-Hub_64.svg" alt="">
     </td>
     <td class="content">
-      <h2></h2>
-      <ul>
-      </ul>
+      <h2>AWS Security Hub
+      </h2>
+        <ul>
+        <li>AWS Security Hub provides a centralized and comprehensive view of the security posture of your cloud infrastructure across multiple AWS accounts.</li>
+        <li>It helps you comply with specific security standards and best practices required by your organization.</li>
+        <li>The service collects security alerts and findings from multiple AWS services, including:
+            <ul>
+            <li>Amazon GuardDuty</li>
+            <li>Amazon Inspector</li>
+            <li>Amazon Macie</li>
+            <li>IAM Access Analyzer</li>
+            <li>AWS Firewall Manager</li>
+            <li>Other sources</li>
+            </ul>
+        </li>
+        <li>You can use AWS Security Hub to comply with:
+            <ul>
+            <li>Payment Card Industry Data Security Standard (PCI DSS)</li>
+            <li>Center for Internet Security (CIS) Benchmarks</li>
+            <li>Many other security standards</li>
+            </ul>
+        </li>
+        </ul>
     </td>
   </tr>
 </table>
@@ -968,9 +1156,37 @@
       <img src="https://raw.githubusercontent.com/sashee/aws-svg-icons/ddf2928b65d8f18c20c6a792740ec934804e7a25/docs/Architecture-Service-Icons_07302021/Arch_Networking-Content-Delivery/64/Arch_Amazon-Virtual-Private-Cloud_64.svg" alt="">
     </td>
     <td class="content">
-      <h2></h2>
-      <ul>    
-      </ul>
+      <h2>AWS VPC</h2>
+        <ul>
+            <li>Amazon Virtual Private Cloud (VPC) is a logical private network within the AWS Cloud.</li>
+            <li>Allows you to launch Amazon EC2 instances and other resources in the virtual network you define.</li>
+            <li>You have complete control over your virtual networking environment:
+                <ul>
+                    <li>Selecting your IP address range.</li>
+                    <li>Creating subnets.</li>
+                    <li>Route table configuration.</li>
+                    <li>Adding gateways for external networks.</li>
+                </ul>
+            </li>
+            <li>You can use both IP version four and IP version six addresses in your VPC for your cloud resources and applications.</li>
+            <li>A VPC can communicate with external networks using a gateway:
+                <ul>
+                    <li>An internet gateway provides internet connectivity to your VPC.</li>
+                    <li>A virtual private gateway allows connection to an on-premises data center or other external networks.</li>
+                    <li>VPC peering allows connection to another VPC.</li>
+                </ul>
+            </li>
+            <li>The term VPC stands for Virtual Private Cloud:
+                <ul>
+                    <li><strong>Virtual</strong>: A virtual entity powered by interconnected physical networking devices.</li>
+                    <li><strong>Private</strong>: By default, a new VPC is private and does not have any gateways to external networks.</li>
+                    <li><strong>Cloud</strong>: No need to manage physical servers; cloud computing provides on-demand delivery of resources via the internet.</li>
+                </ul>
+            </li>
+            <li>Physical components of an Amazon VPC are generated by physical networking devices like network interface cards (NICs).</li>
+            <li>An AWS Outpost Rack uses the same physical networking devices as AWS data centers, allowing you to extend your VPC to your on-premises data center.</li>
+            <li>VPC endpoints allow you to establish a private connection between your VPC and some AWS services without traffic traversing the public internet.</li>
+        </ul>
     </td>
   </tr>
 
@@ -979,9 +1195,21 @@
       <img src="https://raw.githubusercontent.com/sashee/aws-svg-icons/ddf2928b65d8f18c20c6a792740ec934804e7a25/docs/Architecture-Service-Icons_07302021/Arch_Networking-Content-Delivery/64/Arch_Elastic-Load-Balancing_64.svg" alt="">
     </td>
     <td class="content">
-      <h2></h2>
-      <ul>    
-      </ul>
+      <h2>AWS ELB</h2>
+        <ul>
+            <li>Your virtual machines, such as EC2 instances, are usually launched within your VPC.</li>
+            <li>You can establish a private connection between your VPC and some AWS services using a VPC endpoint, keeping traffic private and not traversing the public internet.</li>
+            <li>Elastic Load Balancing (ELB) is a networking service that automatically distributes incoming traffic across multiple targets, such as Amazon EC2 instances, containers, Lambda functions, and other components.</li>
+            <li>ELB is primarily used in load balancing, distributing the incoming traffic load to multiple underlying servers to ensure high availability.</li>
+            <li>An ELB allows you to route traffic to healthy resources running in different availability zones.</li>
+            <li>There are different types of Elastic Load Balancers:</li>
+            <ul>
+                <li><strong>Application Load Balancer (ALB)</strong>: Suitable for load balancing HTTP and HTTPS traffic to your application servers, microservices, and containers.</li>
+                <li><strong>Network Load Balancer (NLB)</strong>: Recommended for load balancing TCP, UDP, and TLS traffic to your applications, capable of handling billions of requests per second with ultra-low latencies.</li>
+                <li><strong>Gateway Load Balancer (GWLB)</strong>: Used for deploying, scaling, and running third-party virtual appliances such as custom firewalls, deep packet inspection systems, or intrusion detection and prevention systems in AWS. It passes OSI layer three traffic using IP to its registered targets.</li>
+                <li><strong>Classic Load Balancer (CLB)</strong>: Intended for applications built within the old EC2 Classic Network, still used today for applications with custom security policies and TCP passthrough configurations.</li>
+            </ul>
+        </ul>
     </td>
   </tr>
 
@@ -990,9 +1218,42 @@
       <img src="https://raw.githubusercontent.com/sashee/aws-svg-icons/ddf2928b65d8f18c20c6a792740ec934804e7a25/docs/Architecture-Service-Icons_07302021/Arch_Networking-Content-Delivery/64/Arch_Amazon-Route-53_64.svg" alt="">
     </td>
     <td class="content">
-      <h2></h2>
-      <ul>    
-      </ul>
+      <h2>AWS Route 53</h2>
+        <ul>
+            <li>Amazon Route 53 is a Domain Name System (DNS) web service that routes traffic to various targets.</li>
+            <li>A DNS is a system that routes a domain name to a particular IP address.</li>
+            <li>Route 53 allows you to map domain names to:
+                <ul>
+                    <li>Elastic IP addresses</li>
+                    <li>EC2 instances</li>
+                    <li>Static S3 websites</li>
+                    <li>Elastic Load Balancer</li>
+                    <li>CloudFront Distributions</li>
+                    <li>Other AWS resources</li>
+                </ul>
+            </li>
+            <li>Route 53 also allows you to purchase and manage custom web domains.</li>
+            <li>For example, if you have a website called <em>tutorialsdojo.com</em>, you can route the traffic to:
+                <ul>
+                    <li>An EC2 server</li>
+                    <li>An S3 static website</li>
+                    <li>A load balancer</li>
+                    <li>Any AWS resource that you prefer</li>
+                </ul>
+            </li>
+            <li>Route 53 allows you to use a route policy to customize how traffic is routed to a specific domain.</li>
+            <li>Different route policies available:
+                <ul>
+                    <li>Simple routing</li>
+                    <li>Failover routing</li>
+                    <li>Geolocation routing</li>
+                    <li>Geoproximity routing</li>
+                    <li>Latency routing</li>
+                    <li>Multi-value answer routing</li>
+                    <li>Weighted routing</li>
+                </ul>
+            </li>
+        </ul>
     </td>
   </tr>
 
@@ -1001,9 +1262,22 @@
       <img src="https://raw.githubusercontent.com/sashee/aws-svg-icons/ddf2928b65d8f18c20c6a792740ec934804e7a25/docs/Architecture-Service-Icons_07302021/Arch_Networking-Content-Delivery/64/Arch_AWS-Global-Accelerator_64.svg" alt="">
     </td>
     <td class="content">
-      <h2></h2>
-      <ul>    
-      </ul>
+      <h2>AWS Global Accelerator</h2>
+        <ul>
+        <li>AWS Global Accelerator is a networking service.</li>
+        <li>It provides a set of static IP addresses as single fixed entry points for clients globally.</li>
+        <li>These static IP addresses can be associated with regional endpoints, such as:
+            <ul>
+            <li>Network Load Balancers (NLBs)</li>
+            <li>Application Load Balancers (ALBs)</li>
+            <li>EC2 instances</li>
+            <li>Elastic IP addresses</li>
+            </ul>
+        </li>
+        <li>Global Accelerator allows connection to multiple AWS resources running in one or more regions using a single endpoint or an endpoint group.</li>
+        <li>The static IP addresses accept incoming traffic onto the AWS global network close to your users.</li>
+        <li>For multiple ALBs in multiple regions, you can create one endpoint to access all your load balancers.</li>
+        </ul>
     </td>
   </tr>
 
@@ -1012,9 +1286,15 @@
       <img src="https://raw.githubusercontent.com/sashee/aws-svg-icons/ddf2928b65d8f18c20c6a792740ec934804e7a25/docs/Architecture-Service-Icons_07302021/Arch_Networking-Content-Delivery/64/Arch_Amazon-CloudFront_64.svg" alt="">
     </td>
     <td class="content">
-      <h2></h2>
-      <ul>    
-      </ul>
+      <h2>AWS Cloudfront</h2>
+        <ul>
+        <li>Amazon CloudFront is a content delivery network (CDN) service.</li>
+        <li>CDNs are globally distributed networks of servers that store or cache files.</li>
+        <li>CloudFront quickly delivers static content and video streams to clients.</li>
+        <li>Using a CDN shortens the time to deliver data, improving application response time.</li>
+        <li>Instead of fetching data from one origin server, clients can retrieve content from multiple edge locations near them.</li>
+        <li>CloudFront distribution can be set up to cache images, videos, media files, and software downloads for websites.</li>
+        </ul>
     </td>
   </tr>
 
@@ -1023,9 +1303,14 @@
       <img src="https://raw.githubusercontent.com/sashee/aws-svg-icons/ddf2928b65d8f18c20c6a792740ec934804e7a25/docs/Architecture-Service-Icons_07302021/Arch_Networking-Content-Delivery/64/Arch_AWS-PrivateLink_64.svg" alt="">
     </td>
     <td class="content">
-      <h2></h2>
-      <ul>    
-      </ul>
+      <h2>AWS PrivateLink</h2>
+        <ul>
+        <li>AWS PrivateLink allows private connectivity to AWS services without using the public internet.</li>
+        <li>It provides a private endpoint, also known as a VPC endpoint, for resources like VPCs, EC2 instances, and S3 buckets.</li>
+        <li>Data sent over an unsecured network is vulnerable to security threats like packet sniffing.</li>
+        <li>Hackers can intercept data as it travels through the routers and networks of the internet.</li>
+        <li>With AWS PrivateLink, data stays within the Amazon network, avoiding unsecured internet lines.</li>
+        </ul>
     </td>
   </tr>
 
@@ -1034,9 +1319,24 @@
       <img src="https://raw.githubusercontent.com/sashee/aws-svg-icons/ddf2928b65d8f18c20c6a792740ec934804e7a25/docs/Architecture-Service-Icons_07302021/Arch_Networking-Content-Delivery/64/Arch_AWS-Client-VPN_64.svg" alt="">
     </td>
     <td class="content">
-      <h2></h2>
-      <ul>    
-      </ul>
+      <h2>AWS VPN</h2>
+        <ul>
+        <li>AWS Virtual Private Network (AWS VPN) enables secure connections between your on-premises network and AWS.</li>
+        <li>AWS VPN is essentially a regular VPN that creates an encrypted connection through the public internet.</li>
+        <li>It uses the IPSec protocol for data authentication and encryption in transit.</li>
+        <li>AWS VPN is comprised of two services:
+            <ul>
+            <li><strong>AWS Site-to-Site VPN:</strong> Creates encrypted tunnels between your network and your Amazon VPCs or AWS Transit Gateways.</li>
+            <li><strong>AWS Client VPN:</strong> Software that allows your users to connect to AWS or on-premises resources.</li>
+            </ul>
+        </li>
+        <li>Each service has a corresponding endpoint to your VPC:
+            <ul>
+            <li>You can create a Site-to-Site VPN endpoint.</li>
+            <li>You can create a Client VPN endpoint.</li>
+            </ul>
+        </li>
+        </ul>
     </td>
   </tr>
 
@@ -1045,9 +1345,15 @@
       <img src="https://raw.githubusercontent.com/sashee/aws-svg-icons/ddf2928b65d8f18c20c6a792740ec934804e7a25/docs/Architecture-Service-Icons_07302021/Arch_Networking-Content-Delivery/64/Arch_AWS-Direct-Connect_64.svg" alt="">
     </td>
     <td class="content">
-      <h2></h2>
-      <ul>    
-      </ul>
+      <h2>AWS Direct Connect</h2>
+        <ul>
+        <li>AWS Direct Connect is a cloud service solution that allows you to establish a dedicated network connection from your on-premises network to AWS.</li>
+        <li>Direct Connect provides a more consistent network experience over internet-based connections such as a VPN.</li>
+        <li>You can create a private virtual interface to enable your on-premises servers to connect to the virtual private gateway of your Amazon VPC.</li>
+        <li>You can group your virtual private gateways and private virtual interfaces using a Direct Connect gateway.</li>
+        <li>You can use a public virtual interface to connect your Amazon S3 buckets and other public resources in AWS.</li>
+        <li>Unlike a VPN, the data being sent over a Direct Connect connection does not pass through the public internet.</li>
+        </ul>
     </td>
   </tr>
 
@@ -1056,9 +1362,13 @@
       <img src="https://raw.githubusercontent.com/sashee/aws-svg-icons/ddf2928b65d8f18c20c6a792740ec934804e7a25/docs/Architecture-Service-Icons_07302021/Arch_Networking-Content-Delivery/64/Arch_AWS-Transit-Gateway_64.svg" alt="">
     </td>
     <td class="content">
-      <h2></h2>
-      <ul>    
-      </ul>
+      <h2>AWS Transit Gateway</h2>
+        <ul>
+        <li>AWS Transit Gateway is a service that connects Amazon VPCs, VPNs, Direct Connect gateways, and on-premises networks to a single gateway.</li>
+        <li>Recommended for large organizations with hundreds of Amazon VPCs, Site-to-Site VPNs, and external networks.</li>
+        <li>Reduces the complexity of infrastructure.</li>
+        <li>Empowers easy scaling.</li>
+        </ul>
     </td>
   </tr>
 
@@ -1067,9 +1377,23 @@
       <img src="https://raw.githubusercontent.com/sashee/aws-svg-icons/ddf2928b65d8f18c20c6a792740ec934804e7a25/docs/Architecture-Service-Icons_07302021/Arch_Networking-Content-Delivery/64/Arch_AWS-App-Mesh_64.svg" alt="">
     </td>
     <td class="content">
-      <h2></h2>
-      <ul>    
-      </ul>
+      <h2>AWS App Mesh</h2>
+        <ul>
+            <li>AWS App Mesh is a service mesh that provides application-level networking for containerized applications.</li>
+            <li>It allows services to communicate easily with each other across various types of computing infrastructure.</li>
+            <li>App Mesh uses an open-source service mesh proxy called Envoy.</li>
+            <li>This Envoy proxy is deployed alongside Microsoft containers.</li>
+            <li>App Mesh standardizes service communication and provides end-to-end network visibility for applications.</li>
+            <li>It can be used with microservices containers managed by:
+                <ul>
+                    <li>Amazon ECS</li>
+                    <li>Amazon EKS</li>
+                    <li>AWS Fargate</li>
+                    <li>Kubernetes running on AWS</li>
+                    <li>Services running on Amazon EC2</li>
+                </ul>
+            </li>
+        </ul>
     </td>
   </tr>
   <tr>
@@ -1077,9 +1401,14 @@
       <img src="https://raw.githubusercontent.com/sashee/aws-svg-icons/ddf2928b65d8f18c20c6a792740ec934804e7a25/docs/Architecture-Service-Icons_07302021/Arch_Networking-Content-Delivery/64/Arch_AWS-Cloud-Map_64.svg" alt="">
     </td>
     <td class="content">
-      <h2></h2>
-      <ul>    
-      </ul>
+      <h2>AWS CloudMap</h2>
+            <ul>
+            <li>AWS Cloud Map is a cloud resource discovery service.</li>
+            <li>Commonly used in microservices and containerized applications with dynamically changing resources.</li>
+            <li>Enables naming of application resources with custom names.</li>
+            <li>Allows applications to discover the most up-to-date locations of resources.</li>
+            <li>Improves the availability of the system.</li>
+            </ul>
     </td>
   </tr>
  
